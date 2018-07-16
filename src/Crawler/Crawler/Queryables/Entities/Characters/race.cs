@@ -1,0 +1,36 @@
+﻿namespace Crawler.Queryables.Entities.Characters
+{
+    public enum Race
+    {
+        Barbarian,
+        Cyclops,
+        DarkElf,
+        Devilspawn,
+        Drawconian,
+        Dwarf,
+        Elf,
+        Gnome,
+        Golem,
+        HalfElf,
+        HalfGiant,
+        HalfOgre,
+        HalfOrc,
+        HalfTitan,
+        HalfTroll,
+        HighElf,
+        Hobbit,
+        Human,
+        Imp,
+        Klackon,
+        Kobold,
+        MindFlayer,
+        Nephilim,
+        Nibelung,
+        Saracen,
+        Skeleton,
+        Sprite,
+        Vampire,
+        Yeek,
+        Zombie
+    }
+}
