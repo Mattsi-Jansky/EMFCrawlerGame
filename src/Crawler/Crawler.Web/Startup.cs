@@ -2,6 +2,7 @@
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Crawler.Web.GameContainers;
 using Crawler.Web.WebSocketsControllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,10 +26,12 @@ namespace Crawler.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //Initialises singleton game instance
+            var dummy = GameContainer.Instance;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -39,9 +42,16 @@ namespace Crawler.Web
                 app.UseHsts();
             }
 
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseWebSockets();
+        }
+
+        private void OnShutdown()
+        {
+            GameContainer.Instance.Dispose();
         }
     }
 }
