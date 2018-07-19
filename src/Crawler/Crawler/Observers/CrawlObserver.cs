@@ -33,6 +33,11 @@ namespace Crawler.Observers
             }
         }
 
+        public Graphic[][][] Observe()
+        {
+            return _representation;
+        }
+
         private void UpdateRepresentation()
         {
             var newRepresentation = new Graphic[_map.Size.X][][];

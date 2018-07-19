@@ -7,5 +7,6 @@ namespace Crawler.Observers
     {
         void Update(IMap map);
         Graphic[] Observe(Point location);
+        Graphic[][][] Observe();
     }
 }

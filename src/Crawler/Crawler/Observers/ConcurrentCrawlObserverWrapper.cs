@@ -32,5 +32,13 @@ namespace Crawler.Observers
                 return _observer.Observe(location);
             }
         }
+
+        public Graphic[][][] Observe()
+        {
+            lock (_lock)
+            {
+                return _observer.Observe();
+            }
+        }
     }
 }
