@@ -32,7 +32,7 @@ namespace Crawler
         {
             _commands = new Dictionary<Guid, ICommand>();
             _map = mapInitialiser.Initialise();
-            Observer = new CrawlObserver();
+            Observer = new ConcurrentCrawlObserverWrapper();
             Observer.Update(_map);
             _commandFactories = new Dictionary<Guid, CommandFactory>();
             _objectResolver = new ObjectResolver();
