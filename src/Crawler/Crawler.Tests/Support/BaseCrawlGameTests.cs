@@ -10,7 +10,7 @@ namespace Crawler.Tests.Support
     public class BaseCrawlGameTests
     {
         protected CrawlGame Game { get; set; }
-        protected CrawlObserver Observer { get; set; }
+        protected ICrawlObserver Observer { get; set; }
         protected BaseMapInitialiser MapInitialiser { get; set; }
 
         protected Guid InitialiseBlankGameWithCharacter()

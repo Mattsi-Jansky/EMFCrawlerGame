@@ -24,8 +24,8 @@ namespace Crawler
         private readonly Dictionary<Guid, CommandFactory> _commandFactories;
         private readonly Object _commandFactoriesLock = new Object();
         private readonly ObjectResolver _objectResolver;
-
-        public CrawlObserver Observer { get; }
+        
+        public ICrawlObserver Observer { get; }
         public AddCharactersService AddCharactersService { get; }
 
         public CrawlGame(BaseMapInitialiser mapInitialiser, IEntityPlacer entityPlacer)

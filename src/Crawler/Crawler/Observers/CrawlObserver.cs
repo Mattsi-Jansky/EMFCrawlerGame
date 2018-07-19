@@ -8,7 +8,7 @@ using Crawler.Queryables.Tiles;
 namespace Crawler.Observers
 {
     //todo make this threadsafe
-    public class CrawlObserver
+    public class CrawlObserver : ICrawlObserver
     {
         private IMap _map;
         private bool _isCached;
