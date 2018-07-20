@@ -51,6 +51,7 @@ namespace Crawler
         public void Tick()
         {
             AddCharactersService.Update();
+            Observer.Update(_map);
 
             IList<ICommand> commands;
             lock (_commandsLock)
