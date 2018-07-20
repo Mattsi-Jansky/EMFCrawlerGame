@@ -47,6 +47,7 @@ namespace Crawler.Web
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseWebSockets();
+            app.UseMiddleware<ObserveGameWebSocketsController>();
         }
 
         private void OnShutdown()
