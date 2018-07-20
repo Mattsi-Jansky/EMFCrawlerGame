@@ -1,4 +1,7 @@
-﻿using System.Net.WebSockets;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.WebSockets;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
 
@@ -10,7 +13,12 @@ namespace Crawler.Web.WebSocketsControllers
         {
         }
 
-        protected override void Tick(string recieved, WebSocket socket, CancellationToken cancellationToken)
+        protected override void Add(Guid clientId)
+        {
+
+        }
+
+        protected override void Tick(Guid clientId, string recieved, WebSocket socket, CancellationToken cancellationToken)
         {
             if (!string.IsNullOrEmpty(recieved))
             {

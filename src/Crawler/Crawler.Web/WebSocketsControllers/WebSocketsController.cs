@@ -36,18 +36,22 @@ namespace Crawler.Web.WebSocketsControllers
 
             CancellationToken cancellationToken = context.RequestAborted;
             WebSocket currentSocket = await context.WebSockets.AcceptWebSocketAsync();
+            Guid clientId = Guid.NewGuid();
+            Add(clientId);
 
             while (currentSocket.State == WebSocketState.Open)
             {
                 var received = await ReceiveStringAsync(currentSocket, cancellationToken);
-                Tick(received, currentSocket,cancellationToken);
+                Tick(clientId, received, currentSocket, cancellationToken);
             }
 
             await currentSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
             currentSocket.Dispose();
         }
 
-        protected abstract void Tick(string recieved, WebSocket socket, CancellationToken cancellationToken);
+        protected abstract void Add(Guid clientId);
+
+        protected abstract void Tick(Guid clientId, string recieved, WebSocket socket, CancellationToken cancellationToken);
 
         private static async Task<string> ReceiveStringAsync(WebSocket socket,
             CancellationToken ct = default(CancellationToken))
