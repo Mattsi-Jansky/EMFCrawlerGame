@@ -18,11 +18,11 @@ namespace Crawler.Web.WebSocketsControllers
 
         }
 
-        protected override void Tick(Guid clientId, string recieved, WebSocket socket, CancellationToken cancellationToken)
+        protected override void Tick(Guid clientId, WebSocketReceiver receiver, WebSocket socket, CancellationToken cancellationToken)
         {
-            if (!string.IsNullOrEmpty(recieved))
+            if (receiver.HasString())
             {
-                SendStringAsync(socket, recieved, cancellationToken);
+                SendStringAsync(socket, receiver.Get(), cancellationToken);
             }
         }
     }

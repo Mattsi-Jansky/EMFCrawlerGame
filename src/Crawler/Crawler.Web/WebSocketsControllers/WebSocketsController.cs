@@ -18,11 +18,13 @@ namespace Crawler.Web.WebSocketsControllers
     {
         private readonly RequestDelegate _next;
         private string _path;
+        private readonly Dictionary<Guid, WebSocketReceiver> _receivers;
 
         public WebSocketsController(RequestDelegate next, string path)
         {
             _next = next;
             _path = path;
+            _receivers = new Dictionary<Guid, WebSocketReceiver>();
         }
 
         public async Task Invoke(HttpContext context)
@@ -38,49 +40,22 @@ namespace Crawler.Web.WebSocketsControllers
             WebSocket currentSocket = await context.WebSockets.AcceptWebSocketAsync();
             Guid clientId = Guid.NewGuid();
             Add(clientId);
+            _receivers[clientId] = new WebSocketReceiver(clientId, currentSocket, cancellationToken);
 
             while (currentSocket.State == WebSocketState.Open)
             {
-                var received = await ReceiveStringAsync(currentSocket, cancellationToken);
-                Tick(clientId, received, currentSocket, cancellationToken);
+                Tick(clientId, _receivers[clientId], currentSocket, cancellationToken);
             }
 
             await currentSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
             currentSocket.Dispose();
+            _receivers[clientId].Dispose();
+            _receivers.Remove(clientId);
         }
 
         protected abstract void Add(Guid clientId);
 
-        protected abstract void Tick(Guid clientId, string recieved, WebSocket socket, CancellationToken cancellationToken);
-
-        private static async Task<string> ReceiveStringAsync(WebSocket socket,
-            CancellationToken ct = default(CancellationToken))
-        {
-            var buffer = new ArraySegment<byte>(new byte[8192]);
-            using (var ms = new MemoryStream())
-            {
-                WebSocketReceiveResult result;
-                do
-                {
-                    ct.ThrowIfCancellationRequested();
-
-                    result = await socket.ReceiveAsync(buffer, ct);
-                    ms.Write(buffer.Array, buffer.Offset, result.Count);
-                }
-                while (!result.EndOfMessage);
-
-                ms.Seek(0, SeekOrigin.Begin);
-                if (result.MessageType != WebSocketMessageType.Text)
-                {
-                    return null;
-                }
-
-                using (var reader = new StreamReader(ms, Encoding.UTF8))
-                {
-                    return await reader.ReadToEndAsync();
-                }
-            }
-        }
+        protected abstract void Tick(Guid clientId, WebSocketReceiver receiver, WebSocket socket, CancellationToken cancellationToken);
 
         protected static Task SendStringAsync(WebSocket socket, string data,
             CancellationToken cancellationToken = default(CancellationToken))

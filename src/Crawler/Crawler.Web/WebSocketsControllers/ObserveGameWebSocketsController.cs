@@ -28,7 +28,7 @@ namespace Crawler.Web.WebSocketsControllers
             _timers[clientId] = timer;
         }
 
-        protected override void Tick(Guid clientId, string recieved, WebSocket socket, CancellationToken cancellationToken)
+        protected override void Tick(Guid clientId, WebSocketReceiver receiver, WebSocket socket, CancellationToken cancellationToken)
         {
             var timer = _timers[clientId];
             if (timer.ElapsedMilliseconds >= GameContainer.TickTime)
