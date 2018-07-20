@@ -15,26 +15,32 @@ namespace Crawler.Web.GameContainers
         private static GameContainer _this;
         public static GameContainer Instance => _this ?? (_this = new GameContainer());
 
-        private const int tickTime = 250;
+        public const int TickTime = 250;
         private readonly Stopwatch _timer;
-        private CrawlGame _game;
-        private Thread _gameLoop;
+        private readonly CrawlGame _game;
+        private readonly Thread _gameLoop;
+        private bool _running;
 
-        public GameContainer()
+        private GameContainer()
         {
+            _running = true;
             _timer = new Stopwatch();
             _timer.Start();
             _game = new CrawlGame(new WalledBlankMapInitialiser(new Point(10,10)), new RandomEntityPlacer());
-            _gameLoop = new Thread(Tick);
+            _gameLoop = new Thread(Loop);
             _gameLoop.Start();
         }
 
-        private void Tick()
+        private void Loop()
         {
-            while (_timer.ElapsedMilliseconds < tickTime)
+            while (_running)
             {
-                _timer.Reset();
-                _game.Tick();
+                if(_timer.ElapsedMilliseconds >= TickTime)
+                {
+                    _timer.Reset();
+                    _game.Tick();
+                    _timer.Start();
+                }
             }
         }
 
@@ -45,6 +51,8 @@ namespace Crawler.Web.GameContainers
 
         public void Dispose()
         {
+            _running = false;
+            Thread.Sleep(GameContainer.TickTime * 2);
             _gameLoop.Join();
         }
     }
