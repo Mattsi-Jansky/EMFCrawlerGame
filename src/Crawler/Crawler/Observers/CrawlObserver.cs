@@ -11,26 +11,17 @@ namespace Crawler.Observers
     public class CrawlObserver : ICrawlObserver
     {
         private IMap _map;
-        private bool _isCached;
         private Graphic[][][] _representation;
 
         public virtual void Update(IMap map)
         {
             _map = map;
-            _isCached = false;
+            UpdateRepresentation();
         }
 
         public Graphic[] Observe(Point location)
         {
-            if (_isCached)
-            {
-                return _representation[location.X][location.Y];
-            }
-            else
-            {
-                UpdateRepresentation();
-                return _representation[location.X][location.Y];
-            }
+            return _representation[location.X][location.Y];
         }
 
         public Graphic[][][] Observe()
@@ -57,7 +48,6 @@ namespace Crawler.Observers
             }
 
             _representation = newRepresentation;
-            _isCached = true;
         }
 
         //todo replace this with a integer-based approach, ie map the enums values
