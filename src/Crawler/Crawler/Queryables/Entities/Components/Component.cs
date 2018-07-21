@@ -10,6 +10,6 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void GetPosition(ref Point? position) { }
         public virtual void SetPosition(Point position) { }
         public virtual string GetDisplayText() { return default(string); }
-        public string GetName() { return default(string); }
+        public virtual string GetName() { return default(string); }
     }
 }

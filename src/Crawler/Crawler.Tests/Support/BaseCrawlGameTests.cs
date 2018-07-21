@@ -22,7 +22,17 @@ namespace Crawler.Tests.Support
         {
             MapInitialiser = new TestBlankMapInitialiser();
             InitialiseGame();
-            return Game.AddCharactersService.Add(new NewCharacterRequest(race, archetype));
+            return Game.AddCharactersService.Add(new NewCharacterRequest(race, archetype, "test character"));
+        }
+
+        protected Guid AddCharacter(Race race, Archetype archetype)
+        {
+            return Game.AddCharactersService.Add(new NewCharacterRequest(race, archetype, "test character"));
+        }
+
+        protected Guid AddCharacter()
+        {
+            return AddCharacter(Race.Human, Archetype.Warrior);
         }
 
         protected void InitialiseBlankGame()

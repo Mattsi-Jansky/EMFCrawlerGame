@@ -13,13 +13,13 @@ namespace Crawler.Tests.UnitTests
         public void WhenAddingCommand_ShouldBeThreadSafe()
         {
             InitialiseBlankGame();
-            Guid character1 = Game.AddCharactersService.Add(new NewCharacterRequest(Race.Human, Archetype.Warrior));
+            Guid character1 = AddCharacter();
             var thread1 = new Thread(() => AddManyCommands(character1));
-            Guid character2 = Game.AddCharactersService.Add(new NewCharacterRequest(Race.Human, Archetype.Warrior));
+            Guid character2 = AddCharacter();
             var thread2 = new Thread(() => AddManyCommands(character2));
-            Guid character3 = Game.AddCharactersService.Add(new NewCharacterRequest(Race.Human, Archetype.Warrior));
+            Guid character3 = AddCharacter();
             var thread3 = new Thread(() => AddManyCommands(character3));
-            Guid character4 = Game.AddCharactersService.Add(new NewCharacterRequest(Race.Human, Archetype.Warrior));
+            Guid character4 = AddCharacter();
             var thread4 = new Thread(() => AddManyCommands(character4));
             Game.Tick();
 
@@ -48,7 +48,7 @@ namespace Crawler.Tests.UnitTests
         public void GivenCommandAlreadyAdded_WhenAddingCommand_ShouldNotCauseException()
         {
             InitialiseBlankGame();
-            var id = Game.AddCharactersService.Add(new NewCharacterRequest(Race.Human, Archetype.Warrior));
+            var id = AddCharacter();
             Game.Tick();
             Game.AddCommand(id, Game.GetCommandFactory(id).Move(new Point(1, 1)));
 
