@@ -72,13 +72,13 @@ namespace Crawler.Queryables
             }
         }
 
-        public string GetName()
+        public string GetDisplayText()
         {
             var name = string.Empty;
 
             foreach (IQueryable queryable in _queryables)
             {
-                name = queryable.GetName();
+                name = queryable.GetDisplayText();
                 if (string.IsNullOrEmpty(name)) break;
             }
 
