@@ -9,5 +9,6 @@ namespace Crawler.Queryables
         void GetGraphics(ref IList<Graphic> graphics);
         void GetPosition(ref Point? position);
         void SetPosition(Point position);
+        string GetName();
     }
 }

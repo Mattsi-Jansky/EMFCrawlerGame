@@ -9,5 +9,6 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void GetGraphics(ref IList<Graphic> graphics) { }
         public virtual void GetPosition(ref Point? position) { }
         public virtual void SetPosition(Point position) { }
+        public virtual string GetName() { return default(string); }
     }
 }

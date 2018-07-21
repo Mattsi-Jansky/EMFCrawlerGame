@@ -71,5 +71,18 @@ namespace Crawler.Queryables
                 queryable.SetPosition(position);
             }
         }
+
+        public string GetName()
+        {
+            var name = string.Empty;
+
+            foreach (IQueryable queryable in _queryables)
+            {
+                name = queryable.GetName();
+                if (string.IsNullOrEmpty(name)) break;
+            }
+
+            return name;
+        }
     }
 }
