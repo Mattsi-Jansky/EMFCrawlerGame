@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
-using System.Threading.Tasks;
 using Crawler.Web.GameContainers;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;

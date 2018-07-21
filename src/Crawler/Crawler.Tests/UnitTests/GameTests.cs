@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Crawler.Commands;
 using Crawler.Models;
 using Crawler.Queryables.Entities.Characters;
 using Crawler.Tests.Support;

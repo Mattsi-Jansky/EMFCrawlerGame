@@ -6,12 +6,8 @@ using Crawler.Factories;
 using Crawler.Maps;
 using Crawler.Maps.EntityPlacers;
 using Crawler.Maps.Initialisers;
-using Crawler.Models;
 using Crawler.ObjectResolvers;
 using Crawler.Observers;
-using Crawler.Queryables.Entities;
-using Crawler.Queryables.Entities.Characters;
-using Crawler.Queryables.Entities.Components;
 using Crawler.Services;
 
 namespace Crawler
