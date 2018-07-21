@@ -25,7 +25,7 @@ namespace Crawler.Observers
             }
         }
 
-        public Graphic[] Observe(Point location)
+        public TileGraphics Observe(Point location)
         {
             lock (_lock)
             {
@@ -33,7 +33,7 @@ namespace Crawler.Observers
             }
         }
 
-        public Graphic[][][] Observe()
+        public TileGraphics[][] Observe()
         {
             lock (_lock)
             {

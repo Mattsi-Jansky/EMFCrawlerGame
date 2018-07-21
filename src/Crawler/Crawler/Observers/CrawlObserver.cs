@@ -7,11 +7,10 @@ using Crawler.Queryables.Tiles;
 
 namespace Crawler.Observers
 {
-    //todo make this threadsafe
     public class CrawlObserver : ICrawlObserver
     {
         private IMap _map;
-        private Graphic[][][] _representation;
+        private TileGraphics[][] _representation;
 
         public virtual void Update(IMap map)
         {
@@ -19,22 +18,22 @@ namespace Crawler.Observers
             UpdateRepresentation();
         }
 
-        public Graphic[] Observe(Point location)
+        public TileGraphics Observe(Point location)
         {
             return _representation[location.X][location.Y];
         }
 
-        public Graphic[][][] Observe()
+        public TileGraphics[][] Observe()
         {
             return _representation;
         }
 
         private void UpdateRepresentation()
         {
-            var newRepresentation = new Graphic[_map.Size.X][][];
+            var newRepresentation = new TileGraphics[_map.Size.X][];
             for (int x = 0; x < _map.Size.X; x++)
             {
-                newRepresentation[x] = new Graphic[_map.Size.Y][];
+                newRepresentation[x] = new TileGraphics[_map.Size.Y];
                 for (int y = 0; y < _map.Size.Y; y++)
                 {
                     IList<Graphic> tileGraphics = new List<Graphic>();
@@ -43,7 +42,7 @@ namespace Crawler.Observers
                     tileGraphics.Add(GetGraphicForTileType(tile.Type));
                     tile.GetGraphics(ref tileGraphics);
 
-                    newRepresentation[x][y] = tileGraphics.ToArray();
+                    newRepresentation[x][y] = new TileGraphics(tileGraphics.ToArray());
                 }
             }
 

@@ -44,7 +44,7 @@ namespace Crawler.Web.GameContainers
             }
         }
 
-        public Graphic[][][] GetGraphicState()
+        public TileGraphics[][] GetGraphicState()
         {
             return _game.Observer.Observe();
         }

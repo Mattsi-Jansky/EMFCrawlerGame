@@ -40,10 +40,10 @@ namespace Crawler.Tests.Support
         public void AssertTileContainsGraphic(Point location, Graphic graphic)
         {
             var tile = ObserveTile(location);
-            Assert.Contains(graphic, tile);
+            Assert.Contains(graphic, tile.Graphics);
         }
 
-        protected Graphic[] ObserveTile(Point location)
+        protected TileGraphics ObserveTile(Point location)
         {
             return Observer.Observe(location);
         }

@@ -16,7 +16,7 @@ namespace Crawler.Tests.UnitTests.Observers
             InitialiseGame();
             var result = ObserveTile(new Point(0, 0));
 
-            Assert.Equal(Graphic.Wall, result[0]);
+            Assert.Equal(Graphic.Wall, result.Graphics[0]);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace Crawler.Tests.UnitTests.Observers
             InitialiseGame();
             var result = ObserveTile(new Point(1, 1));
 
-            Assert.Equal(Graphic.Floor, result[0]);
+            Assert.Equal(Graphic.Floor, result.Graphics[0]);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Crawler.Tests.UnitTests.Observers
             Game.Tick();
             var result = ObserveTile(new Point(5, 5));
 
-            Assert.Equal(Graphic.HumanWarrior, result[1]);
+            Assert.Equal(Graphic.HumanWarrior, result.Graphics[1]);
         }
 
         //todo improve this test once movement command is working
@@ -80,7 +80,7 @@ namespace Crawler.Tests.UnitTests.Observers
                     for (int y = 0; y < 5; y++)
                     {
                         var result = Observer.Observe(new Point(x, y));
-                        Assert.Contains(Graphic.Floor, result);
+                        Assert.Contains(Graphic.Floor, result.Graphics);
                     }
                 }
             }

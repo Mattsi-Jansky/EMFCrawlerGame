@@ -6,7 +6,7 @@ namespace Crawler.Observers
     public interface ICrawlObserver
     {
         void Update(IMap map);
-        Graphic[] Observe(Point location);
-        Graphic[][][] Observe();
+        TileGraphics Observe(Point location);
+        TileGraphics[][] Observe();
     }
 }
