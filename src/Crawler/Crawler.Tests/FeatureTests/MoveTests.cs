@@ -1,5 +1,4 @@
-﻿using Crawler.Commands;
-using Crawler.Models;
+﻿using Crawler.Models;
 using Crawler.Queryables.Entities.Characters;
 using Crawler.Tests.Support;
 using Xunit;
@@ -36,7 +35,6 @@ namespace Crawler.Tests.FeatureTests
         [InlineData(999, 999)]
         [InlineData(-999, -999)]
         [InlineData(-1, -1)]
-        [InlineData(1, 1)]
         [Theory]
         public void GivenTargetPointMoreThan1TileAway_WhenMoving_ShouldDoNothing(int directionX, int directionY)
         {
