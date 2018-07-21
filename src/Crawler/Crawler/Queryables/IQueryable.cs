@@ -10,5 +10,6 @@ namespace Crawler.Queryables
         void GetPosition(ref Point? position);
         void SetPosition(Point position);
         string GetDisplayText();
+        string GetName();
     }
 }

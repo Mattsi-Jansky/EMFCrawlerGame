@@ -79,7 +79,20 @@ namespace Crawler.Queryables
             foreach (IQueryable queryable in _queryables)
             {
                 name = queryable.GetDisplayText();
-                if (string.IsNullOrEmpty(name)) break;
+                if (!string.IsNullOrEmpty(name)) break;
+            }
+
+            return name;
+        }
+
+        public string GetName()
+        {
+            var name = string.Empty;
+
+            foreach (var queryable in _queryables)
+            {
+                name = queryable.GetName();
+                if (!string.IsNullOrEmpty(name)) break;
             }
 
             return name;
