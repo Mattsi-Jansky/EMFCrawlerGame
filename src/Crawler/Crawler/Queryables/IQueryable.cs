@@ -11,5 +11,7 @@ namespace Crawler.Queryables
         void SetPosition(Point position);
         string GetDisplayText();
         string GetName();
+        void AttachParent(IQueryable parent);
+        void Detatchparent();
     }
 }

@@ -7,6 +7,7 @@ namespace Crawler.Queryables
     public class QueryableAggregator<T> : IQueryable where T : IQueryable
     {
         private readonly IList<IQueryable> _queryables;
+        protected IQueryable Parent { get; private set; }
 
         public QueryableAggregator()
         {
@@ -16,8 +17,8 @@ namespace Crawler.Queryables
         public void Add(T queryable)
         {
             _queryables.Add(queryable);
+            queryable.AttachParent(this);
         }
-
 
         public void Remove(T queryable)
         {
@@ -96,6 +97,16 @@ namespace Crawler.Queryables
             }
 
             return name;
+        }
+
+        public void AttachParent(IQueryable parent)
+        {
+            Parent = parent;
+        }
+
+        public void Detatchparent()
+        {
+            Parent = null;
         }
     }
 }
