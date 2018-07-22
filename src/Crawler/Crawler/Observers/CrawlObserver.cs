@@ -41,8 +41,9 @@ namespace Crawler.Observers
                     var tile = _map.Get(new Point(x, y));
                     tileGraphics.Add(GetGraphicForTileType(tile.Type));
                     tile.GetGraphics(ref tileGraphics);
+                    var displayText = tile.GetDisplayText();
 
-                    newRepresentation[x][y] = new TileGraphics(tileGraphics.ToArray());
+                    newRepresentation[x][y] = new TileGraphics(tileGraphics.ToArray(), displayText);
                 }
             }
 

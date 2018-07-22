@@ -33,6 +33,7 @@ namespace Crawler.Services
             entity.Add(new GraphicComponent(newCharacterRequest.Race.GetGraphic(newCharacterRequest.Archetype)));
             entity.Add(new PositionComponent());
             entity.Add(new CharacterComponent(newCharacterRequest.Name));
+            entity.Add(new CharacterNameDisplayTextComponent());
 
             lock (_newCharactersLock)
             {

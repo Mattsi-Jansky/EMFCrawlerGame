@@ -9,6 +9,8 @@ namespace Crawler.Tests.Support
 {
     public class BaseCrawlGameTests
     {
+        protected const string TestCharacterName = "test character";
+
         protected CrawlGame Game { get; set; }
         protected ICrawlObserver Observer { get; set; }
         protected BaseMapInitialiser MapInitialiser { get; set; }
@@ -22,12 +24,12 @@ namespace Crawler.Tests.Support
         {
             MapInitialiser = new TestBlankMapInitialiser();
             InitialiseGame();
-            return Game.AddCharactersService.Add(new NewCharacterRequest(race, archetype, "test character"));
+            return AddCharacter();
         }
 
         protected Guid AddCharacter(Race race, Archetype archetype)
         {
-            return Game.AddCharactersService.Add(new NewCharacterRequest(race, archetype, "test character"));
+            return Game.AddCharactersService.Add(new NewCharacterRequest(race, archetype, TestCharacterName));
         }
 
         protected Guid AddCharacter()
