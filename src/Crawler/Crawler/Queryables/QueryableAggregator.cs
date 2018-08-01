@@ -75,28 +75,24 @@ namespace Crawler.Queryables
 
         public string GetDisplayText()
         {
-            var name = string.Empty;
-
             foreach (IQueryable queryable in _queryables)
             {
-                name = queryable.GetDisplayText();
-                if (!string.IsNullOrEmpty(name)) break;
+                var result = queryable.GetDisplayText();
+                if (!string.IsNullOrEmpty(result)) return result;
             }
 
-            return name;
+            return string.Empty;
         }
 
         public string GetName()
         {
-            var name = string.Empty;
-
             foreach (var queryable in _queryables)
             {
-                name = queryable.GetName();
-                if (!string.IsNullOrEmpty(name)) break;
+                var result = queryable.GetName();
+                if (!string.IsNullOrEmpty(result)) return result;
             }
 
-            return name;
+            return string.Empty;
         }
 
         public void AttachParent(IQueryable parent)
