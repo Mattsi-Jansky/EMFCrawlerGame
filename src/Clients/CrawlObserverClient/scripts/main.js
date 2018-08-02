@@ -8,6 +8,7 @@ game.menu = {};
 game.var = {};
 game.var.colours = {};
 game.graphics = {};
+game.network = {};
 
 game.var.colours.background = 0x000000;
 
@@ -23,7 +24,16 @@ game.var.init = function() {
 
 game.graphics.init = function() {
     PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
-    game.graphics.test = PIXI.utils.TextureCache['assets/graphics/wall.png'];;
+    game.graphics.test = PIXI.utils.TextureCache['assets/graphics/wall.png'];
+};
+
+game.network.init = function() {
+    game.network.socket = new WebSocket("wss://localhost:44349/observe/");
+    game.network.socket.onmessage = game.network.refresh;
+};
+
+game.network.refresh = function(event) {
+    game.var.tiles = JSON.parse(event.data);
 };
 
 game.init = function() {
@@ -39,6 +49,7 @@ game.init = function() {
         roundPixels: true
     });
     game.menu.display.append(game.app.view);
+    game.network.init();
     game.graphics.init();
 
     game.app.ticker.add(function(delta) {
@@ -47,20 +58,24 @@ game.init = function() {
 };
 
 game.updateGame = function() {
-    game.app.stage. removeChildren();
+    game.app.stage.removeChildren();
     game.render();
 };
 
 game.render = function() {
-    for(x = 0; x < 53; x++) {
-        for(y = 0; y < 28; y++) {
+    for(x = 0; x < game.var.tiles.length; x++) {
+        var row = game.var.tiles[x];
+        for(y = 0; y < row.length; y++) {
             var tilePositionX = (x * game.var.scale);
             var tilePositionY = (y * game.var.scale);
-
-            var wall = new PIXI.Sprite(game.graphics.test);
-            wall.x = tilePositionX;
-            wall.y = tilePositionY;
-            game.app.stage.addChild(wall);
+            var tile = row[y];
+            
+            if(tile.Graphics[0] > 390) {
+                var wall = new PIXI.Sprite(game.graphics.test);
+                wall.x = tilePositionX;
+                wall.y = tilePositionY;
+                game.app.stage.addChild(wall);
+            }
         }
     }
 };
