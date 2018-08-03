@@ -46,12 +46,20 @@ namespace Crawler.Web.WebSocketsControllers
 
         private async void UpdateRecieved()
         {
+            //
             while (_socket.State == WebSocketState.Open)
             {
-                var received = await ReceiveStringAsync(_socket, _cancellationToken);
-                lock (_lock)
+                try
                 {
-                    _received.Enqueue(received);
+                    var received = await ReceiveStringAsync(_socket, _cancellationToken);
+                    lock (_lock)
+                    {
+                        _received.Enqueue(received);
+                    }
+                }
+                catch (OperationCanceledException e)
+                {
+                    //Do nothing. While will end as socket state changes due to cancellation.
                 }
             }
         }
