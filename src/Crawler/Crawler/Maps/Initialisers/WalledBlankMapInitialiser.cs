@@ -24,7 +24,7 @@ namespace Crawler.Maps.Initialisers
             for (int y = 0; y < _size.Y; y++)
             {
                 map.Get(new Point(0, y)).Type = TileType.Wall;
-                map.Get(new Point(_size.X - 1, 0)).Type = TileType.Wall;
+                map.Get(new Point(_size.X - 1, y)).Type = TileType.Wall;
             }
 
             return map;
