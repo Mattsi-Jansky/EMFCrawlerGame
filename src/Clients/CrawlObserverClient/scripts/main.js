@@ -3,20 +3,27 @@
  * Silly EMF project
  */
 
+//Aliases
+let Application = PIXI.Application,
+    Container = PIXI.Container,
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    TextureCache = PIXI.utils.TextureCache,
+    Sprite = PIXI.Sprite,
+    Rectangle = PIXI.Rectangle;
+
 game = {};
 game.menu = {};
 game.var = {};
 game.var.colours = {};
-game.var.files = {};
 game.graphics = {};
 game.graphics.keys = {};
 game.network = {};
 
 game.var.colours.background = 0x000000;
-game.var.files.test = 'assets/graphics/wall.png';
-game.graphics.keys.test = "test";
+game.graphics.keys.envSheet = "env";
 game.graphics.addRequest = [
-    { name: game.graphics.keys.test, url: game.var.files.test }
+    { name: game.graphics.keys.envSheet, url: 'assets/graphics/env.png'}
 ];
 
 game.var.init = function() {
@@ -30,7 +37,21 @@ game.var.init = function() {
 
 game.graphics.init = function() {
     PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
-    game.graphics.test = PIXI.utils.TextureCache[game.graphics.keys.test];
+
+    game.graphics.sprites = [];
+    game.graphics.init.environmentTiles();
+};
+
+game.graphics.init.environmentTiles = function() {
+    var start = 390;
+
+    for(var y = 0; y < 16; y++) {
+        for(var x = 0; x < 16; x++) {
+            var texture = TextureCache[game.graphics.keys.envSheet].clone();
+            texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
+            game.graphics[start + (y * 16) + x] = texture;
+        }
+    }
 };
 
 game.network.init = function() {
@@ -78,13 +99,13 @@ game.render = function() {
             var tilePositionX = (x * game.var.scale);
             var tilePositionY = (y * game.var.scale);
             var tile = row[y];
-            
-            if(tile.Graphics[0] > 390) {
-                var wall = new PIXI.Sprite(game.graphics.test);
-                wall.x = tilePositionX;
-                wall.y = tilePositionY;
-                game.app.stage.addChild(wall);
-            }
+
+            tile.Graphics.forEach(function(i) {
+                var graphic = new PIXI.Sprite(game.graphics[i]);
+                graphic.x = tilePositionX;
+                graphic.y = tilePositionY;
+                game.app.stage.addChild(graphic);
+            });
         }
     }
 };
