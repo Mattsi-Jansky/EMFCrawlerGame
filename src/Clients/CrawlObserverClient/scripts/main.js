@@ -17,9 +17,8 @@ game.var.init = function() {
     game.var.ySize = 600;
     game.var.scale = 8;
     game.var.tiles = [];
-    game.var.delta = 0;
-    game.var.timeStep = 1000 / 20;
-    game.var.lastFrameTimestamp = 0;
+    game.var.framerateCounter = 0;
+    game.var.timeStep = 1000 / 30;
 };
 
 game.graphics.init = function() {
@@ -53,7 +52,10 @@ game.init = function() {
     game.graphics.init();
 
     game.app.ticker.add(function(delta) {
-        game.updateGame();
+        game.var.framerateCounter += delta;
+        if(game.var.framerateCounter > game.var.timeStep) {
+            game.updateGame();
+        }
     });
 };
 
