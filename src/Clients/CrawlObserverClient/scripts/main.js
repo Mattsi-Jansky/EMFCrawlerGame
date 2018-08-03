@@ -7,10 +7,12 @@ game = {};
 game.menu = {};
 game.var = {};
 game.var.colours = {};
+game.var.files = {};
 game.graphics = {};
 game.network = {};
 
 game.var.colours.background = 0x000000;
+game.var.files.test = 'assets/graphics/wall.png';
 
 game.var.init = function() {
     game.var.xSize = 900;
@@ -23,7 +25,7 @@ game.var.init = function() {
 
 game.graphics.init = function() {
     PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
-    game.graphics.test = PIXI.utils.TextureCache['assets/graphics/wall.png'];
+    game.graphics.test = PIXI.utils.TextureCache[game.var.files.test];
 };
 
 game.network.init = function() {
@@ -86,6 +88,6 @@ $( document ).ready(function() {
     game.menu.display = $('#display-container');
 
     PIXI.loader
-        .add('assets/graphics/wall.png')
+        .add(game.var.files.test)
         .load(game.init);
 });
