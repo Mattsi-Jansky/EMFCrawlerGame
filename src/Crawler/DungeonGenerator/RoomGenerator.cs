@@ -13,6 +13,7 @@ namespace DungeonGenerators
         private readonly int _maxRoomSize;
         private readonly int _minTotalBufferSize;
         private readonly int _minSectorSizeToSplit;
+        private readonly RoomShuffler _roomShuffler;
 
         public RoomGenerator(Random random, int xSize, int ySize, int minRoomSize, int minTotalBufferSize)
         {
@@ -25,6 +26,7 @@ namespace DungeonGenerators
             _maxRoomSize = GetBiggestSizeDimension(_minRoomSize,
                 GetBiggestSizeDimension(_xSize, _ySize) / 2);
             _minSectorSizeToSplit = (_minRoomSize + _minTotalBufferSize) * 2;
+            _roomShuffler = new RoomShuffler(_random, xSize, ySize);
         }
 
         private int GetBiggestSizeDimension(int a, int b)
@@ -39,6 +41,9 @@ namespace DungeonGenerators
             var initial = SplitSectorIntoQuadrants(root);
             var rooms = RandomiseSectors(initial);
             AddBufferToRooms(rooms);
+            _roomShuffler.ShuffleRooms(rooms);
+            _roomShuffler.ShuffleRooms(rooms);
+            _roomShuffler.ShuffleRooms(rooms);
 
             return rooms;
         }
@@ -97,7 +102,7 @@ namespace DungeonGenerators
         private bool ShouldAddRoom(int counter)
         {
             int modifier = counter > 2 ? 2 : counter;
-            return counter == 0 || _random.Next(4 + modifier) < 3 + modifier;
+            return counter == 0 || _random.Next(6 + modifier) > 2;
         }
 
         private void AddBufferToRooms(IList<Rectangle> rooms)
