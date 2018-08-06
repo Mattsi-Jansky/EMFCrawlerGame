@@ -14,7 +14,6 @@ namespace Crawler.Observers
             this._observer = new CrawlObserver();
         }
 
-
         public void Update(IMap map)
         {
             lock (_lock)
