@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace DungeonGenerators
 {
@@ -45,7 +46,9 @@ namespace DungeonGenerators
             _roomShuffler.ShuffleRooms(rooms);
             _roomShuffler.ShuffleRooms(rooms);
 
-            return rooms;
+
+            if (rooms.Any()) return rooms;
+            else return GenerateRooms();
         }
 
         private IList<Rectangle> RandomiseSectors(IEnumerable<Rectangle> sectors)
