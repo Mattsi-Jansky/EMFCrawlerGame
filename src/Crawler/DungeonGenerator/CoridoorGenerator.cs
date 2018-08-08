@@ -37,13 +37,16 @@ namespace DungeonGenerators
         {
             if (!IsEveryRoomTraversible())
             {
-                AddRandomUniqueCoridoor();
-                _cartographer.DrawCoridoors(_coridoors);
-                EnsureEveryRoomIsTraversible();
+                if (_coridoors.Count < TotalPossibleNumberOfUniqueCoridoors())
+                {
+                    AddRandomUniqueCoridoor();
+                    _cartographer.DrawCoridoors(_coridoors);
+                    EnsureEveryRoomIsTraversible();
+                }
             }
         }
 
-        public bool IsEveryRoomTraversible()
+        private bool IsEveryRoomTraversible()
         {
             var pathChecker = new PathChecker(_cartographer.tiles);
 
@@ -59,6 +62,12 @@ namespace DungeonGenerators
             }
 
             return true;
+        }
+
+        private int TotalPossibleNumberOfUniqueCoridoors()
+        {
+            int n = _rooms.Count - 2;
+            return ((n + 2) * (n + 1)) / 2;
         }
 
         private void AddRandomUniqueCoridoor()
