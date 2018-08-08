@@ -61,6 +61,10 @@ namespace Crawler.Web.WebSocketsControllers
                 {
                     //Do nothing. While will end as socket state changes due to cancellation.
                 }
+                catch (WebSocketException e)
+                {
+                    //Do nothing. While will end as socket state changes due to cancellation.
+                }
             }
         }
 
