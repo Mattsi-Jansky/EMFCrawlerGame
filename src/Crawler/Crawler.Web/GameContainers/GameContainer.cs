@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading;
 using Crawler.Maps.EntityPlacers;
 using Crawler.Maps.Initialisers;
+using Crawler.Maps.Initialisers.DungeonGenerators;
 using Crawler.Models;
 
 namespace Crawler.Web.GameContainers
@@ -23,7 +24,7 @@ namespace Crawler.Web.GameContainers
             _running = true;
             _timer = new Stopwatch();
             _timer.Start();
-            _game = new CrawlGame(new WalledBlankMapInitialiser(new Point(10,10)), new RandomEntityPlacer());
+            _game = new CrawlGame(new SimpleDungeonGenerator(), new RandomEntityPlacer());
             _gameLoop = new Thread(Loop);
             _gameLoop.Start();
         }
