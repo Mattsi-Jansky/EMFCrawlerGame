@@ -57,11 +57,7 @@ namespace Crawler.Web.WebSocketsControllers
                         _received.Enqueue(received);
                     }
                 }
-                catch (OperationCanceledException e)
-                {
-                    //Do nothing. While will end as socket state changes due to cancellation.
-                }
-                catch (WebSocketException e)
+                catch (Exception e)
                 {
                     //Do nothing. While will end as socket state changes due to cancellation.
                 }
