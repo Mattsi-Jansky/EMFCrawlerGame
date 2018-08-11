@@ -53,7 +53,7 @@ namespace DungeonGenerators.Pathfinding
 
         private Func<TileWrapper, int> IndexMap()
         {
-            return tile => (tile.Position.X * _map.Length) + tile.Position.Y;
+            return tile => (tile.Position.X * _map[0].Length) + tile.Position.Y;
         }
 
         public bool CanPathBetween(Point from, Point to)
