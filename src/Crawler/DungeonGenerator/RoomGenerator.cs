@@ -11,7 +11,6 @@ namespace DungeonGenerators
         private readonly int _xSize;
         private readonly int _ySize;
         private readonly int _minRoomSize;
-        private readonly int _maxRoomSize;
         private readonly int _minTotalBufferSize;
         private readonly int _minSectorSizeToSplit;
         private readonly RoomShuffler _roomShuffler;
@@ -24,8 +23,6 @@ namespace DungeonGenerators
             _minRoomSize = minRoomSize;
             _minTotalBufferSize = minTotalBufferSize;
 
-            _maxRoomSize = GetBiggestSizeDimension(_minRoomSize,
-                GetBiggestSizeDimension(_xSize, _ySize) / 2);
             _minSectorSizeToSplit = (_minRoomSize + _minTotalBufferSize) * 2;
             _roomShuffler = new RoomShuffler(_random, xSize, ySize);
         }
@@ -72,9 +69,8 @@ namespace DungeonGenerators
         {
             var result = new List<Rectangle>();
 
-            if ((sector.Width > _maxRoomSize + _minTotalBufferSize || sector.Height > _maxRoomSize + _minTotalBufferSize)
-                || (ShouldSplitRoom(counter) && sector.Width > _minSectorSizeToSplit
-                                         && sector.Height > _minSectorSizeToSplit))
+            if (ShouldSplitRoom(counter) && sector.Width > _minSectorSizeToSplit
+                                         && sector.Height > _minSectorSizeToSplit)
             {
                 var splitQuadrants = SplitSector(sector);
 
