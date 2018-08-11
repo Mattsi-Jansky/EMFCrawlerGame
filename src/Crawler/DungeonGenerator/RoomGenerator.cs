@@ -39,7 +39,7 @@ namespace DungeonGenerators
         public IList<Rectangle> GenerateRooms()
         {
             Rectangle root = new Rectangle(0, 0, _xSize, _ySize);
-            var initial = SplitSectorIntoQuadrants(root);
+            var initial = SplitSector(root);
             var rooms = RandomiseSectors(initial);
             AddBufferToRooms(rooms);
             _roomShuffler.ShuffleRooms(rooms);
@@ -76,7 +76,7 @@ namespace DungeonGenerators
                 || (ShouldSplitRoom(counter) && sector.Width > _minSectorSizeToSplit
                                          && sector.Height > _minSectorSizeToSplit))
             {
-                var splitQuadrants = SplitSectorIntoQuadrants(sector);
+                var splitQuadrants = SplitSector(sector);
 
                 foreach (var quadrant in splitQuadrants)
                 {
@@ -133,14 +133,46 @@ namespace DungeonGenerators
             else return b;
         }
 
+        private Rectangle[] SplitSector(Rectangle parent)
+        {
+            if (_random.Next(2) == 0) return SplitSectorIntoQuadrants(parent);
+            else return SplitSectorIntoHalves(parent);
+        }
+
         private Rectangle[] SplitSectorIntoQuadrants(Rectangle parent)
         {
             Rectangle[] result = new Rectangle[4];
 
-            result[0] = new Rectangle(parent.X, parent.Y, parent.Width / 2, parent.Height /2);
+            result[0] = new Rectangle(parent.X, parent.Y, parent.Width / 2, parent.Height / 2);
             result[1] = new Rectangle(parent.X + parent.Width / 2, parent.Y, parent.Width / 2, parent.Height / 2);
             result[2] = new Rectangle(parent.X, parent.Y + parent.Height / 2, parent.Width / 2, parent.Height / 2);
             result[3] = new Rectangle(parent.X + parent.Width / 2, parent.Y + parent.Height / 2, parent.Width / 2, parent.Height / 2);
+
+            return result;
+        }
+
+        private Rectangle[] SplitSectorIntoHalves(Rectangle parent)
+        {
+            if (_random.Next(2) == 0) return SplitSectorIntoHalvesVertically(parent);
+            else return SplitSectorIntoHalvesHorizontally(parent);
+        }
+
+        private Rectangle[] SplitSectorIntoHalvesVertically(Rectangle parent)
+        {
+            Rectangle[] result = new Rectangle[2];
+
+            result[0] = new Rectangle(parent.X, parent.Y, parent.Width / 2, parent.Height);
+            result[1] = new Rectangle(parent.X + parent.Width / 2, parent.Y, parent.Width / 2, parent.Height);
+
+            return result;
+        }
+
+        private Rectangle[] SplitSectorIntoHalvesHorizontally(Rectangle parent)
+        {
+            Rectangle[] result = new Rectangle[2];
+
+            result[0] = new Rectangle(parent.X, parent.Y, parent.Width, parent.Height / 2);
+            result[1] = new Rectangle(parent.X, parent.Y + parent.Height / 2, parent.Width, parent.Height / 2);
 
             return result;
         }
