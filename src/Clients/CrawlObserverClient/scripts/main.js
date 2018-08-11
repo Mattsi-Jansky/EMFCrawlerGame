@@ -22,6 +22,7 @@ game.network = {};
 
 game.var.colours.background = 0x000000;
 game.graphics.keys.envSheet = "env";
+game.graphics.keys.charSheet = "char";
 game.graphics.addRequest = [
     { name: game.graphics.keys.envSheet, url: 'assets/graphics/env.png'}
 ];
@@ -43,13 +44,25 @@ game.graphics.init = function() {
 };
 
 game.graphics.init.environmentTiles = function() {
-    var start = 390;
+    var start = 403;
 
     for(var y = 0; y < 16; y++) {
         for(var x = 0; x < 16; x++) {
             var texture = TextureCache[game.graphics.keys.envSheet].clone();
             texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
             game.graphics[start + (y * 16) + x] = texture;
+        }
+    }
+};
+
+game.graphics.init.characters = function() {
+    var start = 0;
+
+    for(var y = 0; y < 31; y++) {
+        for(var x = 0; x < 13; x++) {
+            var texture = TextureCache[game.graphics.keys.charSheet].clone();
+            texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
+            game.graphics[start + (y * 31) + x] = texture;
         }
     }
 };
