@@ -90,8 +90,21 @@ namespace DungeonGenerators
             var roomTwo = _rooms[roomTwoIndex];
             var coridoor = new Coridoor(roomOne.Center(), roomTwo.Center());
 
+            EnsureCoridoorHasValidCoordinates(ref coridoor);
             if (DoesCoridoorAlreadyExist(coridoor)) return GenerateRandomUniqueCoridoor();
             else return coridoor;
+        }
+
+        private void EnsureCoridoorHasValidCoordinates(ref Coridoor coridoor)
+        {
+            if (coridoor.StartX == 0) coridoor.StartX = 1;
+            if (coridoor.StartY == 0) coridoor.StartY = 1;
+            if (coridoor.EndX == 0) coridoor.EndX = 1;
+            if (coridoor.EndY == 0) coridoor.EndY = 1;
+            if (coridoor.StartX == _cartographer.tiles.Length - 2) coridoor.StartX = _cartographer.tiles.Length - 3;
+            if (coridoor.StartY == _cartographer.tiles[0].Length - 2) coridoor.StartY = _cartographer.tiles[0].Length - 3;
+            if (coridoor.EndX == _cartographer.tiles.Length - 2) coridoor.EndX = _cartographer.tiles.Length - 3;
+            if (coridoor.EndY == _cartographer.tiles[0].Length - 2) coridoor.EndY = _cartographer.tiles[0].Length - 3;
         }
 
         private int GetRandomRoomsIndex(int previous = -1)

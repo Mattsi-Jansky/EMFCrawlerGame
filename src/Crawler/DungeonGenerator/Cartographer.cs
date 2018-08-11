@@ -53,16 +53,31 @@ namespace DungeonGenerators
         {
             foreach (var coridoor in coridoors)
             {
-                this.DrawCoridoor(new Point(coridoor.StartX,coridoor.StartY),
-                    new Point(coridoor.StartX, coridoor.EndY));
-                this.DrawCoridoor(new Point(coridoor.StartX, coridoor.EndY),
-                    new Point(coridoor.EndX, coridoor.EndY));
+                DrawCoridoor(coridoor);
             }
         }
 
-        public void DrawCoridoor(Point from, Point to)
+        private void DrawCoridoor(Coridoor coridoor)
         {
-            DrawLine(from, to, Tile.Floor);
+            //West wall
+            DrawLine(new Point(coridoor.StartX - 1, coridoor.StartY),
+                new Point(coridoor.StartX - 1, coridoor.EndY), Tile.Floor);
+            //Coridoor
+            DrawLine(new Point(coridoor.StartX, coridoor.StartY),
+                new Point(coridoor.StartX, coridoor.EndY), Tile.Floor);
+            //East wall
+            DrawLine(new Point(coridoor.StartX + 1, coridoor.StartY),
+                new Point(coridoor.StartX + 1, coridoor.EndY), Tile.Floor);
+
+            //North wall
+            DrawLine(new Point(coridoor.StartX, coridoor.EndY - 1),
+                new Point(coridoor.EndX, coridoor.EndY - 1), Tile.Floor);
+            //Coridoor
+            DrawLine(new Point(coridoor.StartX, coridoor.EndY),
+                new Point(coridoor.EndX, coridoor.EndY), Tile.Floor);
+            //South wall
+            DrawLine(new Point(coridoor.StartX, coridoor.EndY + 1),
+                new Point(coridoor.EndX, coridoor.EndY + 1), Tile.Floor);
         }
 
         public void DrawLine(Point from, Point to, Tile tile, Tile? replacement = null)
@@ -96,15 +111,15 @@ namespace DungeonGenerators
             {
                 for (int y = 0; y < tiles[x].Length; y++)
                 {
-                    if (tiles[x][y] == Tile.Nothing)
+                    if (tiles[x][y] == Tile.Floor)
                     {
-                        DrawWallIfTileHasNeighbouringFloor(x, y);
+                        DrawWallIfTileHasNeighbouringNothing(x, y);
                     }
                 }
             }
         }
 
-        private void DrawWallIfTileHasNeighbouringFloor(int x, int y)
+        private void DrawWallIfTileHasNeighbouringNothing(int x, int y)
         {
             IList<Tile> surroundingTiles = new List<Tile>();
             AddTileIfValid(surroundingTiles, x, y - 1);
@@ -116,7 +131,7 @@ namespace DungeonGenerators
             AddTileIfValid(surroundingTiles, x + 1, y + 1);
             AddTileIfValid(surroundingTiles, x - 1, y + 1);
 
-            if (surroundingTiles.Any(t => FloorTiles.Contains(t)))
+            if (surroundingTiles.Any(t => t == Tile.Nothing))
             {
                 tiles[x][y] = Tile.Wall;
             }
