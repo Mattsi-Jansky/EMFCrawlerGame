@@ -11,6 +11,7 @@ namespace DungeonGenerators
         private readonly int _ySize;
         private readonly int _minShuffleSize;
         private readonly int _maxShuffleSize;
+        private readonly int _maxNumberOfShuffleIterations = 30;
 
         public RoomShuffler(Random random, int xSize, int ySize)
         {
@@ -18,8 +19,8 @@ namespace DungeonGenerators
             _xSize = xSize;
             _ySize = ySize;
 
-            _minShuffleSize = xSize / 25;
-            _maxShuffleSize = xSize / 10;
+            _minShuffleSize = 3;
+            _maxShuffleSize = 10;
         }
 
         public void ShuffleRooms(IList<Rectangle> rooms)
@@ -41,10 +42,10 @@ namespace DungeonGenerators
         private Rectangle ShuffleRoom(Rectangle room, IList<Rectangle> rooms, int counter = 0)
         {
             var oldRoom = room;
-            int xDiff = _random.Next(_maxShuffleSize - _minShuffleSize) + _minShuffleSize;
-            int yDiff = _random.Next(_maxShuffleSize - _minShuffleSize) + _minShuffleSize;
-            int widthDiff = _random.Next(3) + 1;
-            int heightDiff = _random.Next(3) + 1;
+            int xDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;
+            int yDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;
+            int widthDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;;
+            int heightDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;;
 
             int x = _random.Next(2) == 0 ? room.X + xDiff : room.X - xDiff;
             int y = _random.Next(2) == 0 ? room.Y + yDiff : room.Y - yDiff;
@@ -58,7 +59,7 @@ namespace DungeonGenerators
 
             if (!IsLegalRoom(room) || IntersectsAnExistingRoom(room, rooms))
             {
-                if (counter > 3) return oldRoom;
+                if (counter > _maxNumberOfShuffleIterations) return oldRoom;
                 else return ShuffleRoom(oldRoom, rooms, counter + 1);
             }
 

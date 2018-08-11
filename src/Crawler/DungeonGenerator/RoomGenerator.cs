@@ -40,9 +40,6 @@ namespace DungeonGenerators
             var rooms = RandomiseSectors(initial);
             AddBufferToRooms(rooms);
             _roomShuffler.ShuffleRooms(rooms);
-            _roomShuffler.ShuffleRooms(rooms);
-            _roomShuffler.ShuffleRooms(rooms);
-
 
             if (rooms.Any()) return rooms;
             else return GenerateRooms();
