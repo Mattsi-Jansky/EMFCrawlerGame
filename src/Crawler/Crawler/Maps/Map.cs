@@ -1,5 +1,8 @@
-﻿using Crawler.Queryables.Entities;
+﻿using Crawler.Models;
+using Crawler.Queryables.Entities;
+using Crawler.Queryables.Entities.Components;
 using Crawler.Queryables.Tiles;
+using Crawler.Services;
 
 namespace Crawler.Maps
 {
@@ -17,7 +20,7 @@ namespace Crawler.Maps
                 tiles[x] = new Tile[Size.Y];
                 for(int y = 0; y < Size.Y; y++)
                 {
-                    tiles[x][y] = new Tile(TileType.Floor);
+                    tiles[x][y] = TileFactory.Floor();
                 }
             }
         }
@@ -35,6 +38,11 @@ namespace Crawler.Maps
         public Tile Get(Point point)
         {
             return tiles[point.X][point.Y];
+        }
+
+        public void Set(Point point, Tile tile)
+        {
+            tiles[point.X][point.Y] = tile;
         }
     }
 }

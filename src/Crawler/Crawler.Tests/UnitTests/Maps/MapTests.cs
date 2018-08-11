@@ -37,7 +37,9 @@ namespace Crawler.Tests.UnitTests.Maps
                 {
                     var tile = map.Get(new Point(x,y));
                     Assert.NotNull(tile);
-                    Assert.Equal(TileType.Floor, tile.Type);
+                    IList<Graphic> graphics = new List<Graphic>();
+                    tile.GetGraphics(ref graphics);
+                    Assert.Contains(Graphic.FloorGray, graphics);
                 }
             }
         }

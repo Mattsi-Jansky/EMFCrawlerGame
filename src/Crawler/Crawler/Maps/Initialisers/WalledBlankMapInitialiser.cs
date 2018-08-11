@@ -1,4 +1,4 @@
-﻿using Crawler.Queryables.Tiles;
+﻿using Crawler.Services;
 
 namespace Crawler.Maps.Initialisers
 {
@@ -17,14 +17,12 @@ namespace Crawler.Maps.Initialisers
 
             for (int x = 0; x < _size.X; x++)
             {
-                map.Get(new Point(x, 0)).Type = TileType.Wall;
-                map.Get(new Point(x, _size.Y-1)).Type = TileType.Wall;
+                map.Set(new Point(x, 0), TileFactory.Wall());
             }
 
             for (int y = 0; y < _size.Y; y++)
             {
-                map.Get(new Point(0, y)).Type = TileType.Wall;
-                map.Get(new Point(_size.X - 1, y)).Type = TileType.Wall;
+                map.Set(new Point(y, 0), TileFactory.Wall());
             }
 
             return map;

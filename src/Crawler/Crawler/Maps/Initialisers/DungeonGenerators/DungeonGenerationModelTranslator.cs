@@ -12,8 +12,9 @@ namespace Crawler.Services.DungeonGenerators
 {
     public class DungeonGenerationModelTranslator : BaseMapInitialiser
     {
-        private IDungeonGenerator _dungeonGenerator;
-        private TileModel[][] mapModel;
+        private readonly IDungeonGenerator _dungeonGenerator;
+        private TileModel[][] _mapModel;
+        private Map _map;
 
         public DungeonGenerationModelTranslator(IDungeonGenerator dungeonGenerator)
         {
@@ -22,35 +23,46 @@ namespace Crawler.Services.DungeonGenerators
 
         public override IMap Initialise()
         {
-            mapModel = _dungeonGenerator.Generate();
-            var size = new Point(mapModel.Length, mapModel[0].Length);
-            var map = new Map(size);
+            _mapModel = _dungeonGenerator.Generate();
+            var size = new Point(_mapModel.Length, _mapModel[0].Length);
+            _map = new Map(size);
 
             for (int x = 0; x < size.X; x++)
             {
                 for (int y = 0; y < size.Y; y++)
                 {
-                    TranslateTile(map.Get(new Point(x, y)), mapModel[x][y]);
+                    TranslateTile(new Point(x, y), _mapModel[x][y]);
                 }
             }
 
-            return map;
+            return _map;
         }
 
-        private void TranslateTile(Tile to, TileModel from)
+        private void TranslateTile(Point to, TileModel from)
         {
             switch (from)
             {
                 case TileModel.Floor:
-                    to.Type = TileType.Floor;
+                    _map.Set(to, TileFactory.Floor());
                     break;
                 case TileModel.Wall:
-                    to.Type = TileType.Wall;
+                    var isNorthWall = this.IsNorthWall(to);
+                    _map.Set(to, TileFactory.Wall(isNorthWall, 0));
                     break;
                 default:
-                    to.Type = TileType.Wall;
+                    _map.Set(to, TileFactory.Wall(14, 0));
                     break;
             }
+        }
+
+        private bool IsNorthWall(Point to)
+        {
+            var south = to.South();
+            if (south.X < 0 || south.Y < 0
+                || south.X >= _mapModel.Length 
+                || south.Y >= _mapModel[0].Length) return false;
+            bool isNorthFacing = _mapModel[south.X][south.Y] != TileModel.Wall;
+            return isNorthFacing;
         }
     }
 }

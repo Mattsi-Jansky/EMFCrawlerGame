@@ -16,7 +16,7 @@ namespace Crawler.Tests.UnitTests.Observers
             InitialiseGame();
             var result = ObserveTile(new Point(0, 0));
 
-            Assert.Equal(Graphic.Wall, result.Graphics[0]);
+            Assert.Equal(Graphic.WallGray, result.Graphics[0]);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace Crawler.Tests.UnitTests.Observers
             InitialiseGame();
             var result = ObserveTile(new Point(1, 1));
 
-            Assert.Equal(Graphic.Floor, result.Graphics[0]);
+            Assert.Equal(Graphic.FloorGray, result.Graphics[0]);
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace Crawler.Tests.UnitTests.Observers
                     for (int y = 0; y < 5; y++)
                     {
                         var result = Observer.Observe(new Point(x, y));
-                        Assert.Contains(Graphic.Floor, result.Graphics);
+                        Assert.Contains(Graphic.FloorGray, result.Graphics);
                     }
                 }
             }

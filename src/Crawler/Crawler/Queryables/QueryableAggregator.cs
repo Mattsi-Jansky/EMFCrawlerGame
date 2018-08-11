@@ -14,10 +14,11 @@ namespace Crawler.Queryables
             _queryables = new List<IQueryable>();
         }
 
-        public void Add(T queryable)
+        public QueryableAggregator<T> Add(T queryable)
         {
             _queryables.Add(queryable);
             queryable.AttachParent(this);
+            return this;
         }
 
         public QueryableAggregator<T> Remove(T queryable)

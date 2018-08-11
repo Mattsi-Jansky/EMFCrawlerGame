@@ -4,11 +4,9 @@ namespace Crawler.Queryables.Tiles
 {
     public class Tile : QueryableAggregator<Entity>
     {
-        public TileType Type { get; set; }
-
-        public Tile(TileType type)
+        public Tile(Entity entity)
         {
-            Type = type;
+            Add(entity);
         }
     }
 }

@@ -39,7 +39,6 @@ namespace Crawler.Observers
                     IList<Graphic> tileGraphics = new List<Graphic>();
 
                     var tile = _map.Get(new Point(x, y));
-                    tileGraphics.Add(GetGraphicForTileType(tile.Type));
                     tile.GetGraphics(ref tileGraphics);
                     var displayText = tile.GetDisplayText();
 
@@ -48,20 +47,6 @@ namespace Crawler.Observers
             }
 
             _representation = newRepresentation;
-        }
-
-        //todo replace this with a integer-based approach, ie map the enums values
-        private Graphic GetGraphicForTileType(TileType tileType)
-        {
-            switch(tileType)
-            {
-                case TileType.Floor:
-                    return Graphic.Floor;
-                case TileType.Wall:
-                    return Graphic.Wall;
-                default:
-                    throw new NotImplementedException("No graphic for tile type");
-            }
         }
     }
 }
