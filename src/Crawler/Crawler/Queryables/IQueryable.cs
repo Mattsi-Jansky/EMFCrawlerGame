@@ -12,6 +12,6 @@ namespace Crawler.Queryables
         string GetDisplayText();
         string GetName();
         void AttachParent(IQueryable parent);
-        void Detatchparent();
+        void DetatchParent();
     }
 }

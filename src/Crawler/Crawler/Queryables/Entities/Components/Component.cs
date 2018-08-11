@@ -18,9 +18,10 @@ namespace Crawler.Queryables.Entities.Components
             Parent = parent;
         }
 
-        public void Detatchparent()
+        public void DetatchParent()
         {
             Parent = null;
         }
+
     }
 }

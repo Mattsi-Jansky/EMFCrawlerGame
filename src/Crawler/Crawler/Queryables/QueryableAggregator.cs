@@ -20,9 +20,11 @@ namespace Crawler.Queryables
             queryable.AttachParent(this);
         }
 
-        public void Remove(T queryable)
+        public QueryableAggregator<T> Remove(T queryable)
         {
             _queryables.Remove(queryable);
+            queryable.DetatchParent();
+            return this;
         }
 
         public virtual bool CanMove()
@@ -100,7 +102,7 @@ namespace Crawler.Queryables
             Parent = parent;
         }
 
-        public void Detatchparent()
+        public void DetatchParent()
         {
             Parent = null;
         }
