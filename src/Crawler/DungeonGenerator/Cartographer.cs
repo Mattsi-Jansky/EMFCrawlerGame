@@ -113,23 +113,20 @@ namespace DungeonGenerators
                 {
                     if (tiles[x][y] == Tile.Floor)
                     {
-                        DrawWallIfTileHasNeighbouringNothing(x, y);
+                        DrawWallIfFloorHasNeighbouringNothing(x, y);
+                        DrawWallIfFloorAtEdgeOfMap(x, y);
                     }
                 }
             }
         }
 
-        private void DrawWallIfTileHasNeighbouringNothing(int x, int y)
+        private void DrawWallIfFloorHasNeighbouringNothing(int x, int y)
         {
             IList<Tile> surroundingTiles = new List<Tile>();
             AddTileIfValid(surroundingTiles, x, y - 1);
             AddTileIfValid(surroundingTiles, x, y + 1);
             AddTileIfValid(surroundingTiles, x + 1, y);
             AddTileIfValid(surroundingTiles, x - 1, y);
-            AddTileIfValid(surroundingTiles, x + 1, y - 1);
-            AddTileIfValid(surroundingTiles, x - 1, y - 1);
-            AddTileIfValid(surroundingTiles, x + 1, y + 1);
-            AddTileIfValid(surroundingTiles, x - 1, y + 1);
 
             if (surroundingTiles.Any(t => t == Tile.Nothing))
             {
@@ -139,10 +136,18 @@ namespace DungeonGenerators
 
         private void AddTileIfValid(IList<Tile> list, int x, int y)
         {
-            if (x > 0 && x < tiles.Length
-                      && y > 0 && y < tiles[x].Length)
+            if (x >= 0 && x < tiles.Length
+                      && y >= 0 && y < tiles[x].Length)
             {
                 list.Add(tiles[x][y]);
+            }
+        }
+
+        private void DrawWallIfFloorAtEdgeOfMap(int x, int y)
+        {
+            if (x == 0 || y == 0 || x == tiles.Length - 1 || y == tiles[0].Length - 1)
+            {
+                tiles[x][y] = Tile.Wall;
             }
         }
     }
