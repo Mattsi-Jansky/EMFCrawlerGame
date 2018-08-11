@@ -21,7 +21,7 @@ namespace DungeonGeneratorTests
         [Fact]
         public void PrintAscii()
         {
-            DungeonGenerator dungeonGenerator = new DungeonGenerator();
+            DungeonGenerator dungeonGenerator = new DungeonGenerator(60, 30, 3, 8);
             var map = dungeonGenerator.Generate();
             PrintAsciiMap(map);
         }
@@ -39,7 +39,7 @@ namespace DungeonGeneratorTests
             {
                 charMap[x] = new char[map[x].Length];
 
-                for(int y = 0; y < map.Count(); y++)
+                for(int y = 0; y < map[x].Count(); y++)
                 {
                     if (map[x][y] == Tile.Floor)
                     {
