@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Crawler.Factories;
 using Crawler.Maps;
 using Crawler.Maps.Initialisers;
 using Crawler.Queryables.Tiles;

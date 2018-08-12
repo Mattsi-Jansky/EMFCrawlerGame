@@ -3,7 +3,7 @@ using Crawler.Queryables.Entities;
 using Crawler.Queryables.Entities.Components;
 using Crawler.Queryables.Tiles;
 
-namespace Crawler.Services
+namespace Crawler.Factories
 {
     public static class TileFactory
     {

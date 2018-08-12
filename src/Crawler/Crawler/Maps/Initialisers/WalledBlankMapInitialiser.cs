@@ -1,4 +1,5 @@
-﻿using Crawler.Services;
+﻿using Crawler.Factories;
+using Crawler.Services;
 
 namespace Crawler.Maps.Initialisers
 {

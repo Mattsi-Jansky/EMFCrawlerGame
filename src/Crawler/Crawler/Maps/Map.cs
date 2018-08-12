@@ -1,4 +1,5 @@
-﻿using Crawler.Models;
+﻿using Crawler.Factories;
+using Crawler.Models;
 using Crawler.Queryables.Entities;
 using Crawler.Queryables.Entities.Components;
 using Crawler.Queryables.Tiles;
