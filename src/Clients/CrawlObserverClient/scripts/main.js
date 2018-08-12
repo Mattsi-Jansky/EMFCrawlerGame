@@ -25,9 +25,11 @@ game.network = {};
 game.var.colours.background = 0x000000;
 game.graphics.keys.envSheet = "env";
 game.graphics.keys.charSheet = "char";
+game.graphics.keys.mobSheet = "mob";
 game.graphics.addRequest = [
     { name: game.graphics.keys.envSheet, url: 'assets/graphics/env.png'},
-    { name: game.graphics.keys.charSheet, url: 'assets/graphics/characters.png'}
+    { name: game.graphics.keys.charSheet, url: 'assets/graphics/characters.png'},
+    { name: game.graphics.keys.mobSheet, url: 'assets/graphics/mobs.png'}
 ];
 
 game.var.init = function() {
@@ -45,6 +47,7 @@ game.graphics.init = function() {
     game.graphics.sprites = [];
     game.graphics.init.environmentTiles();
     game.graphics.init.characters();
+    game.graphics.init.mobs();
 };
 
 game.graphics.init.environmentTiles = function() {
@@ -67,6 +70,18 @@ game.graphics.init.characters = function() {
             var texture = TextureCache[game.graphics.keys.charSheet].clone();
             texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
             game.graphics[start + (y * 13) + x] = texture;
+        }
+    }
+};
+
+game.graphics.init.mobs = function() {
+    var start = 467;
+
+    for(var y = 0; y < 15; y++) {
+        for(var x = 0; x < 16; x++) {
+            var texture = TextureCache[game.graphics.keys.mobSheet].clone();
+            texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
+            game.graphics[start + (y * 16) + x] = texture;
         }
     }
 };
