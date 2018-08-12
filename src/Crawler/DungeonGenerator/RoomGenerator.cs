@@ -27,12 +27,6 @@ namespace DungeonGenerators
             _roomShuffler = new RoomShuffler(_random, xSize, ySize);
         }
 
-        private int GetBiggestSizeDimension(int a, int b)
-        {
-            if (a > b) return a;
-            else return b;
-        }
-
         public IList<Rectangle> GenerateRooms()
         {
             Rectangle root = new Rectangle(0, 0, _xSize, _ySize);
