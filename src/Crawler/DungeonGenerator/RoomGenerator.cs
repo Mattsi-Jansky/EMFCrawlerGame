@@ -172,8 +172,8 @@ namespace DungeonGenerators
             {
                 var room = rooms[i];
 
-                room.Width -= 1;
-                room.Height -= 1;
+                room.Width -= 2;
+                room.Height -= 2;
                 room.X += 1;
                 room.Y += 1;
 
