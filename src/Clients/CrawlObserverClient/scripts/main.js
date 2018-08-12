@@ -36,6 +36,7 @@ game.var.init = function() {
     game.var.xSize = 900;
     game.var.ySize = 600;
     game.var.scale = 8;
+    game.var.resolution = 2;
     game.var.tiles = [];
     game.var.framerateCounter = 0;
     game.var.timeStep = 1000 / 30;
@@ -99,11 +100,11 @@ game.init = function() {
     game.var.init();
     game.menu.display.empty();
 
-    game.app = new PIXI.Application(game.menu.display.width() / 2, game.menu.display.height() / 2, {
+    game.app = new PIXI.Application(game.menu.display.width() / game.var.resolution, game.menu.display.height() / game.var.resolution, {
         backgroundColor : game.var.colours.background,
         transparent: true,
         clearBeforeRender: true,
-        resolution: 2,
+        resolution: game.var.resolution,
         antialias: false,
         roundPixels: true
     });
