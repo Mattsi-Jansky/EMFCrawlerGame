@@ -16,7 +16,7 @@ namespace Crawler.Tests.UnitTests.ObjectResolvers
         {
             ObjectResolver resolver = new ObjectResolver();
             Mock<IMap> mapMock = new Mock<IMap>();
-            resolver.Initialise(mapMock.Object, new TestEntityPlacer());
+            resolver.Initialise(mapMock.Object, new TestEntityPlacer(), new EntitiesCollection());
 
             var result = resolver.Resolve<IMap>();
             Assert.Equal(mapMock.Object, result);
@@ -29,7 +29,7 @@ namespace Crawler.Tests.UnitTests.ObjectResolvers
             Mock<IMap> mapMock = new Mock<IMap>();
             var entity = new Entity();
             var targetPosition = new Point(5, 6);
-            resolver.Initialise(mapMock.Object, new TestEntityPlacer());
+            resolver.Initialise(mapMock.Object, new TestEntityPlacer(), new EntitiesCollection());
 
             var result =
                 resolver.Resolve<MoveCommand>(new Dictionary<string, object>

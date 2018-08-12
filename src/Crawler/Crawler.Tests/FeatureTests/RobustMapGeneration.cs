@@ -1,5 +1,6 @@
 ﻿using System;
 using Crawler.Maps.Initialisers.DungeonGenerators;
+using Crawler.Queryables.Entities;
 using Xunit;
 
 namespace Crawler.Tests.FeatureTests
@@ -12,7 +13,7 @@ namespace Crawler.Tests.FeatureTests
             var initialiser = new DungeonMapInitialiser(new Random());
             for (int i = 0; i < 1000; i++)
             {
-                initialiser.Initialise();
+                initialiser.Initialise(new EntitiesCollection());
             }
         }
     }
