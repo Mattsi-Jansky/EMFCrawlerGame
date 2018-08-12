@@ -21,6 +21,7 @@ namespace Crawler
         private readonly Dictionary<Guid, CommandFactory> _commandFactories;
         private readonly Object _commandFactoriesLock = new Object();
         private readonly ObjectResolver _objectResolver;
+        private readonly MobCommandFetchingService _mobCommandFetchingService;
         
         public ICrawlObserver Observer { get; }
         public AddCharactersService AddCharactersService { get; }
@@ -36,6 +37,7 @@ namespace Crawler
             _objectResolver = new ObjectResolver();
             _objectResolver.Initialise(_map, entityPlacer, entitiesCollection);
             AddCharactersService = _objectResolver.Resolve<AddCharactersService>();
+            _mobCommandFetchingService = _objectResolver.Resolve<MobCommandFetchingService>();
         }
 
         public void AddCommand(Guid id, ICommand command)
@@ -56,6 +58,11 @@ namespace Crawler
             {
                 commands = _commands.Values.ToList();
                 _commands = new Dictionary<Guid, ICommand>();
+            }
+
+            foreach (var command in _mobCommandFetchingService.FetchCommands())
+            {
+                commands.Add(command.Value);
             }
 
             foreach (var command in commands)
