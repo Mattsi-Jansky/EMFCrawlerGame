@@ -22,11 +22,10 @@ namespace DungeonGeneratorTests
         public void PrintAscii()
         {
             DungeonGenerator dungeonGenerator = new DungeonGenerator(60, 30, 2, 4);
-            Tile[][] map;
 
             for (var i = 0; i < 1000; i++) {
-                map = dungeonGenerator.Generate();
-                PrintAsciiMap(map);
+                dungeonGenerator.Generate();
+                PrintAsciiMap(dungeonGenerator.Map);
             }
 
         }

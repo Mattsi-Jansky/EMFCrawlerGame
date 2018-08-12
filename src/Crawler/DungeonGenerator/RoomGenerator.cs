@@ -165,5 +165,18 @@ namespace DungeonGenerators
 
             return result;
         }
+
+        public void StripWalls(IList<Rectangle> rooms)
+        {
+            for(int i = 0; i < rooms.Count; i++)
+            {
+                var room = rooms[i];
+
+                room.Width -= 1;
+                room.Height -= 1;
+
+                rooms[i] = room;
+            }
+        }
     }
 }

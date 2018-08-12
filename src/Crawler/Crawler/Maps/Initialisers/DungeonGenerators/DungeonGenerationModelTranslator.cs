@@ -13,18 +13,19 @@ namespace Crawler.Services.DungeonGenerators
 {
     public class DungeonGenerationModelTranslator : BaseMapInitialiser
     {
-        private readonly IDungeonGenerator _dungeonGenerator;
+        private readonly DungeonGenerator _dungeonGenerator;
         private TileModel[][] _mapModel;
         private Map _map;
 
-        public DungeonGenerationModelTranslator(IDungeonGenerator dungeonGenerator)
+        public DungeonGenerationModelTranslator(DungeonGenerator dungeonGenerator)
         {
             _dungeonGenerator = dungeonGenerator;
         }
 
         public override IMap Initialise()
         {
-            _mapModel = _dungeonGenerator.Generate();
+            _dungeonGenerator.Generate();
+            _mapModel = _dungeonGenerator.Map;
             var size = new Point(_mapModel.Length, _mapModel[0].Length);
             _map = new Map(size);
 

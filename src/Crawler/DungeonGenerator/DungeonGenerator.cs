@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace DungeonGenerators
 {
-    public class DungeonGenerator : IDungeonGenerator
+    public class DungeonGenerator
     {
         private readonly int _xSize;
         private readonly int _ySize;
@@ -10,6 +12,9 @@ namespace DungeonGenerators
         private readonly int _minBufferSize;
         private readonly Random _random;
         private readonly int _minNoRooms;
+
+        public IList<Rectangle> Rooms;
+        public Tile[][] Map;
 
         public DungeonGenerator(int xSize, int ySize, int minRoomSize, int minBufferSize, int minNoRooms = 4)
         {
@@ -25,18 +30,19 @@ namespace DungeonGenerators
         {
         }
         
-        public Tile[][] Generate()
+        public void Generate()
         {
             var cartographer = new Cartographer(_xSize, _ySize);
             var roomGenerator = new RoomGenerator(_random, _xSize, _ySize, _minRoomSize, _minBufferSize, _minNoRooms);
 
-            var rooms = roomGenerator.GenerateRooms();
-            cartographer.DrawRooms(rooms);
-            new CoridoorGenerator(rooms, cartographer, _random).LinkRooms();
+            Rooms = roomGenerator.GenerateRooms();
+            cartographer.DrawRooms(Rooms);
+            new CoridoorGenerator(Rooms, cartographer, _random).LinkRooms();
             cartographer.DrawWalls();
-            new EntityPlacer(cartographer, _random).AddMobs(rooms);
+            roomGenerator.StripWalls(Rooms);
+            new EntityPlacer(cartographer, _random).AddMobs(Rooms);
 
-            return cartographer.tiles;
+            Map = cartographer.tiles;
         }
     }
 }
