@@ -40,7 +40,7 @@ namespace DungeonGenerators
             new CoridoorGenerator(Rooms, cartographer, _random).LinkRooms();
             cartographer.DrawWalls();
             roomGenerator.StripWalls(Rooms);
-            new EntityPlacer(cartographer, _random).AddMobs(Rooms);
+            //new EntityPlacer(cartographer, _random).AddMobs(Rooms);
 
             Map = cartographer.tiles;
         }
