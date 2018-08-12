@@ -12,6 +12,8 @@ let Application = PIXI.Application,
     Sprite = PIXI.Sprite,
     Rectangle = PIXI.Rectangle;
 
+var debug = true;
+
 game = {};
 game.menu = {};
 game.var = {};
@@ -24,7 +26,8 @@ game.var.colours.background = 0x000000;
 game.graphics.keys.envSheet = "env";
 game.graphics.keys.charSheet = "char";
 game.graphics.addRequest = [
-    { name: game.graphics.keys.envSheet, url: 'assets/graphics/env.png'}
+    { name: game.graphics.keys.envSheet, url: 'assets/graphics/env.png'},
+    { name: game.graphics.keys.charSheet, url: 'assets/graphics/characters.png'}
 ];
 
 game.var.init = function() {
@@ -37,10 +40,11 @@ game.var.init = function() {
 };
 
 game.graphics.init = function() {
-    PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
+    PIXI.scaleModes.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 
     game.graphics.sprites = [];
     game.graphics.init.environmentTiles();
+    game.graphics.init.characters();
 };
 
 game.graphics.init.environmentTiles = function() {
@@ -62,7 +66,7 @@ game.graphics.init.characters = function() {
         for(var x = 0; x < 13; x++) {
             var texture = TextureCache[game.graphics.keys.charSheet].clone();
             texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
-            game.graphics[start + (y * 31) + x] = texture;
+            game.graphics[start + (y * 13) + x] = texture;
         }
     }
 };
@@ -80,11 +84,11 @@ game.init = function() {
     game.var.init();
     game.menu.display.empty();
 
-    game.app = new PIXI.Application(game.menu.display.width() / 4, game.menu.display.height() / 4, {
+    game.app = new PIXI.Application(game.menu.display.width() / 2, game.menu.display.height() / 2, {
         backgroundColor : game.var.colours.background,
         transparent: true,
         clearBeforeRender: true,
-        resolution: 4,
+        resolution: 2,
         antialias: false,
         roundPixels: true
     });
@@ -121,6 +125,7 @@ game.render = function() {
             });
         }
     }
+    debug = false;
 };
 
 $( document ).ready(function() {
