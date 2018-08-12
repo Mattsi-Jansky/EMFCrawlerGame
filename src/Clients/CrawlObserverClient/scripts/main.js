@@ -35,7 +35,7 @@ game.graphics.addRequest = [
 game.var.init = function() {
     game.var.xSize = 900;
     game.var.ySize = 600;
-    game.var.scale = 8;
+    game.var.spriteSize = 8;
     game.var.resolution = 2;
     game.var.tiles = [];
     game.var.framerateCounter = 0;
@@ -57,7 +57,7 @@ game.graphics.init.environmentTiles = function() {
     for(var y = 0; y < 16; y++) {
         for(var x = 0; x < 16; x++) {
             var texture = TextureCache[game.graphics.keys.envSheet].clone();
-            texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
+            texture.frame = new Rectangle(x * 8, y * 8, game.var.spriteSize, game.var.spriteSize);
             game.graphics[start + (y * 16) + x] = texture;
         }
     }
@@ -69,7 +69,7 @@ game.graphics.init.characters = function() {
     for(var y = 0; y < 31; y++) {
         for(var x = 0; x < 13; x++) {
             var texture = TextureCache[game.graphics.keys.charSheet].clone();
-            texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
+            texture.frame = new Rectangle(x * 8, y * 8, game.var.spriteSize, game.var.spriteSize);
             game.graphics[start + (y * 13) + x] = texture;
         }
     }
@@ -81,7 +81,7 @@ game.graphics.init.mobs = function() {
     for(var y = 0; y < 15; y++) {
         for(var x = 0; x < 16; x++) {
             var texture = TextureCache[game.graphics.keys.mobSheet].clone();
-            texture.frame = new Rectangle(x * 8, y * 8, 8, 8);
+            texture.frame = new Rectangle(x * 8, y * 8, game.var.spriteSize, game.var.spriteSize);
             game.graphics[start + (y * 16) + x] = texture;
         }
     }
@@ -129,8 +129,8 @@ game.render = function() {
     for(x = 0; x < game.var.tiles.length; x++) {
         var row = game.var.tiles[x];
         for(y = 0; y < row.length; y++) {
-            var tilePositionX = (x * game.var.scale);
-            var tilePositionY = (y * game.var.scale);
+            var tilePositionX = (x * game.var.spriteSize);
+            var tilePositionY = (y * game.var.spriteSize);
             var tile = row[y];
 
             tile.Graphics.forEach(function(i) {
