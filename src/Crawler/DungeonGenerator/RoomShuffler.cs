@@ -44,18 +44,12 @@ namespace DungeonGenerators
             var oldRoom = room;
             int xDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;
             int yDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;
-            int widthDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;;
-            int heightDiff = _random.Next(_maxShuffleSize - _minShuffleSize + 1) + _minShuffleSize;;
-
+            
             int x = _random.Next(2) == 0 ? room.X + xDiff : room.X - xDiff;
             int y = _random.Next(2) == 0 ? room.Y + yDiff : room.Y - yDiff;
-            int width = _random.Next(2) == 0 ? room.Width + widthDiff : room.Width - widthDiff;
-            int height = _random.Next(2) == 0 ? room.Height + heightDiff : room.Height - heightDiff;
 
             room.X = x;
             room.Y = y;
-            room.Width = width;
-            room.Height = height; 
 
             if (!IsLegalRoom(room) || IntersectsAnExistingRoom(room, rooms))
             {
