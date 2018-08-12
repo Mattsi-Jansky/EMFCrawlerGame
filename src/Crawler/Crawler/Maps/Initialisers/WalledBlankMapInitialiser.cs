@@ -1,4 +1,5 @@
 ﻿using Crawler.Factories;
+using Crawler.Queryables.Entities;
 using Crawler.Services;
 
 namespace Crawler.Maps.Initialisers
@@ -12,7 +13,7 @@ namespace Crawler.Maps.Initialisers
             _size = size;
         }
 
-        public override IMap Initialise()
+        public override IMap Initialise(EntitiesCollection entitiesCollection)
         {
             Map map = new Map(_size);
 

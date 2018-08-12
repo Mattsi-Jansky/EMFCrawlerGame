@@ -19,14 +19,14 @@ namespace Crawler.ObjectResolvers
             
         }
 
-        public void Initialise(IMap map, IEntityPlacer entityPlacer)
+        public void Initialise(IMap map, IEntityPlacer entityPlacer, EntitiesCollection entitiesCollection)
         {
             _container?.Dispose();
 
             _container = new UnityContainer();
             _container.RegisterInstance(map);
             _container.RegisterInstance(entityPlacer);
-            _container.RegisterInstance(new EntitiesCollection());
+            _container.RegisterInstance(entitiesCollection);
 
             //todo should these be register instance?
             _container.RegisterType(typeof(PutEntityService));

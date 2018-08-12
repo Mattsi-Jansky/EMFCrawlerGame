@@ -13,7 +13,7 @@ namespace Crawler.Tests.Support
             this.entity = entity;
         }
 
-        public override IMap Initialise()
+        public override IMap Initialise(EntitiesCollection entitiesCollection)
         {
             Map map = new Map(new Point(10,10));
             map.Add(entity, new Point(5,5));

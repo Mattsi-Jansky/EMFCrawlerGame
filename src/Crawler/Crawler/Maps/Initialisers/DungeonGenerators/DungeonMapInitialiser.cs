@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Crawler.Factories;
+using Crawler.ObjectResolvers;
+using Crawler.Queryables.Entities;
 using Crawler.Services.DungeonGenerators;
 using DungeonGenerators;
 
@@ -16,25 +18,25 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators
             _random = random;
         }
 
-        public override IMap Initialise()
+        public override IMap Initialise(EntitiesCollection entitiesCollection)
         {
-            DungeonGenerator generator = new DungeonGenerator(120,60, 6, 6);
+            var generator = new DungeonGenerator(120,60, 6, 6);
             
             generator.Generate();
             var translator = new DungeonGenerationModelTranslator(generator.Map);
-            var map = translator.Initialise();
-            AddFeatures(generator, map);
+            var map = translator.Initialise(entitiesCollection);
+            AddFeatures(generator, map, entitiesCollection);
 
             return map;
         }
 
-        private void AddFeatures(DungeonGenerator generator, IMap map)
+        private void AddFeatures(DungeonGenerator generator, IMap map, EntitiesCollection entitiesCollection)
         {
             var featureFactory = new RoomFeatureFactory(_random);
             foreach (var room in generator.Rooms)
             {
                 var feature = featureFactory.GetAny();
-                feature.Apply(map, room);
+                feature.Apply(map, room, entitiesCollection);
             }
         }
     }

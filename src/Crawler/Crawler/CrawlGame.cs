@@ -8,6 +8,7 @@ using Crawler.Maps.EntityPlacers;
 using Crawler.Maps.Initialisers;
 using Crawler.ObjectResolvers;
 using Crawler.Observers;
+using Crawler.Queryables.Entities;
 using Crawler.Services;
 
 namespace Crawler
@@ -27,12 +28,13 @@ namespace Crawler
         public CrawlGame(BaseMapInitialiser mapInitialiser, IEntityPlacer entityPlacer)
         {
             _commands = new Dictionary<Guid, ICommand>();
-            _map = mapInitialiser.Initialise();
+            var entitiesCollection = new EntitiesCollection();
+            _map = mapInitialiser.Initialise(entitiesCollection);
             Observer = new ConcurrentCrawlObserverWrapper();
             Observer.Update(_map);
             _commandFactories = new Dictionary<Guid, CommandFactory>();
             _objectResolver = new ObjectResolver();
-            _objectResolver.Initialise(_map, entityPlacer);
+            _objectResolver.Initialise(_map, entityPlacer, entitiesCollection);
             AddCharactersService = _objectResolver.Resolve<AddCharactersService>();
         }
 

@@ -25,6 +25,6 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
             else AddEntityRandomly(entity, room, map);
         }
 
-        public abstract void Apply(IMap map, Rectangle room);
+        public abstract void Apply(IMap map, Rectangle room, EntitiesCollection entitiesCollection);
     }
 }

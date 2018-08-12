@@ -4,6 +4,7 @@ using System.Text;
 using Crawler.Factories;
 using Crawler.Maps;
 using Crawler.Maps.Initialisers;
+using Crawler.Queryables.Entities;
 using Crawler.Queryables.Tiles;
 using DungeonGenerators;
 using Tile = Crawler.Queryables.Tiles.Tile;
@@ -21,7 +22,7 @@ namespace Crawler.Services.DungeonGenerators
             _mapModel = map;
         }
 
-        public override IMap Initialise()
+        public override IMap Initialise(EntitiesCollection entitiesCollection)
         {
             var size = new Point(_mapModel.Length, _mapModel[0].Length);
             _map = new Map(size);

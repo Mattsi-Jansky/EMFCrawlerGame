@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Crawler.Factories;
 using Crawler.Models;
+using Crawler.Queryables.Entities;
 
 namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
 {
@@ -17,14 +18,16 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
             Random = random;
         }
 
-        public override void Apply(IMap map, Rectangle room)
+        public override void Apply(IMap map, Rectangle room, EntitiesCollection entitiesCollection)
         {
             var maxNumberOfMobsThatwillFitInRoom = (room.X)  * (room.Y);
             var numberOfMobs = Random.Next(GetSmallest(_maxNumberOfMobsPerRoom, maxNumberOfMobsThatwillFitInRoom));
             for (int i = 0; i < numberOfMobs; i++)
             {
                 var model = _mobModels[Random.Next(_mobModels.Count)];
-                AddEntityRandomly(MobFactory.GenerateMob(model), room, map);
+                var newMob = MobFactory.GenerateMob(model);
+                entitiesCollection.Add(newMob.Id, newMob);
+                AddEntityRandomly(newMob, room, map);
             }
         }
         
