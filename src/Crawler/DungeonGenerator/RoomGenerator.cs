@@ -174,6 +174,8 @@ namespace DungeonGenerators
 
                 room.Width -= 1;
                 room.Height -= 1;
+                room.X += 1;
+                room.Y += 1;
 
                 rooms[i] = room;
             }
