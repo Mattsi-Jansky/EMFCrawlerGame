@@ -50,6 +50,10 @@ namespace Crawler.Services.DungeonGenerators
                     var isNorthWall = this.IsNorthWall(to);
                     _map.Set(to, TileFactory.Wall(isNorthWall, 0));
                     break;
+                case TileModel.Mob:
+                    _map.Set(to, TileFactory.Floor());
+                    _map.Add(MobFactory.GenerateMob(), to);
+                    break;
                 default:
                     _map.Set(to, TileFactory.Wall(14, 0));
                     break;
