@@ -1,9 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Pathfinding">
       <HintPath>lib\Pathfinder\Pathfinding.dll</HintPath>
@@ -12,5 +10,4 @@
       <HintPath>lib\Pathfinder\Priority Queue.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 </Project>
