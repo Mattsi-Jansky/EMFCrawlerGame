@@ -1,5 +1,7 @@
-﻿using Crawler.Models;
+﻿using System;
+using Crawler.Models;
 using System.Collections.Generic;
+using Crawler.Commands;
 
 namespace Crawler.Queryables
 {
@@ -13,5 +15,6 @@ namespace Crawler.Queryables
         string GetName();
         void AttachParent(IQueryable parent);
         void DetatchParent();
+        ICommand GetCommand();
     }
 }

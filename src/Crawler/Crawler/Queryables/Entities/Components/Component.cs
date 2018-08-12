@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Crawler.Commands;
 using Crawler.Models;
 
 namespace Crawler.Queryables.Entities.Components
@@ -13,6 +14,7 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void SetPosition(Point position) { }
         public virtual string GetDisplayText() { return default(string); }
         public virtual string GetName() { return default(string); }
+        public ICommand GetCommand() { return default(ICommand); }
         public void AttachParent(IQueryable parent)
         {
             Parent = parent;
@@ -22,6 +24,5 @@ namespace Crawler.Queryables.Entities.Components
         {
             Parent = null;
         }
-
     }
 }

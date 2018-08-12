@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Crawler.Commands;
 using Crawler.Models;
 
 namespace Crawler.Queryables
@@ -106,6 +107,17 @@ namespace Crawler.Queryables
         public void DetatchParent()
         {
             Parent = null;
+        }
+
+        public ICommand GetCommand()
+        {
+            foreach (var queryable in _queryables)
+            {
+                var result = queryable.GetCommand();
+                if (result != null) return result;
+            }
+
+            return default(ICommand);
         }
     }
 }
