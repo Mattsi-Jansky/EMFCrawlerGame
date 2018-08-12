@@ -13,19 +13,16 @@ namespace Crawler.Services.DungeonGenerators
 {
     public class DungeonGenerationModelTranslator : BaseMapInitialiser
     {
-        private readonly DungeonGenerator _dungeonGenerator;
         private TileModel[][] _mapModel;
         private Map _map;
 
-        public DungeonGenerationModelTranslator(DungeonGenerator dungeonGenerator)
+        public DungeonGenerationModelTranslator(TileModel[][] map)
         {
-            _dungeonGenerator = dungeonGenerator;
+            _mapModel = map;
         }
 
         public override IMap Initialise()
         {
-            _dungeonGenerator.Generate();
-            _mapModel = _dungeonGenerator.Map;
             var size = new Point(_mapModel.Length, _mapModel[0].Length);
             _map = new Map(size);
 
@@ -50,10 +47,6 @@ namespace Crawler.Services.DungeonGenerators
                 case TileModel.Wall:
                     var isNorthWall = this.IsNorthWall(to);
                     _map.Set(to, TileFactory.Wall(isNorthWall, 0));
-                    break;
-                case TileModel.Mob:
-                    _map.Set(to, TileFactory.Floor());
-                    _map.Add(MobFactory.GenerateMob(), to);
                     break;
                 default:
                     _map.Set(to, TileFactory.Wall(14, 0));

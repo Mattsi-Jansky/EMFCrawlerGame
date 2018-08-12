@@ -24,7 +24,7 @@ namespace Crawler.Web.GameContainers
             _running = true;
             _timer = new Stopwatch();
             _timer.Start();
-            _game = new CrawlGame(new SimpleDungeonGenerator(), new RandomEntityPlacer());
+            _game = new CrawlGame(new DungeonMapInitialiser(new Random()), new RandomEntityPlacer());
             _gameLoop = new Thread(Loop);
             _gameLoop.Start();
         }
