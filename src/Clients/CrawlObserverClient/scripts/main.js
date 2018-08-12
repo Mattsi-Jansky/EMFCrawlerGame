@@ -35,16 +35,14 @@ game.graphics.addRequest = [
 game.var.init = function() {
     game.var.xSize = 900;
     game.var.ySize = 600;
-    game.var.spriteSize = 8;
-    game.var.resolution = 2;
+    game.var.spriteSize = 16;
+    game.var.resolution = 1;
     game.var.tiles = [];
     game.var.framerateCounter = 0;
     game.var.timeStep = 1000 / 30;
 };
 
 game.graphics.init = function() {
-    PIXI.scaleModes.DEFAULT = PIXI.SCALE_MODES.NEAREST;
-
     game.graphics.sprites = [];
     game.graphics.init.environmentTiles();
     game.graphics.init.characters();
@@ -57,7 +55,7 @@ game.graphics.init.environmentTiles = function() {
     for(var y = 0; y < 16; y++) {
         for(var x = 0; x < 16; x++) {
             var texture = TextureCache[game.graphics.keys.envSheet].clone();
-            texture.frame = new Rectangle(x * 8, y * 8, game.var.spriteSize, game.var.spriteSize);
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
             game.graphics[start + (y * 16) + x] = texture;
         }
     }
@@ -69,7 +67,7 @@ game.graphics.init.characters = function() {
     for(var y = 0; y < 31; y++) {
         for(var x = 0; x < 13; x++) {
             var texture = TextureCache[game.graphics.keys.charSheet].clone();
-            texture.frame = new Rectangle(x * 8, y * 8, game.var.spriteSize, game.var.spriteSize);
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
             game.graphics[start + (y * 13) + x] = texture;
         }
     }
@@ -81,7 +79,7 @@ game.graphics.init.mobs = function() {
     for(var y = 0; y < 15; y++) {
         for(var x = 0; x < 16; x++) {
             var texture = TextureCache[game.graphics.keys.mobSheet].clone();
-            texture.frame = new Rectangle(x * 8, y * 8, game.var.spriteSize, game.var.spriteSize);
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
             game.graphics[start + (y * 16) + x] = texture;
         }
     }
@@ -99,15 +97,20 @@ game.network.refresh = function(event) {
 game.init = function() {
     game.var.init();
     game.menu.display.empty();
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
-    game.app = new PIXI.Application(game.menu.display.width() / game.var.resolution, game.menu.display.height() / game.var.resolution, {
+    game.app = new PIXI.Application({
+        width: 1920,
+        height: 1080,
         backgroundColor : game.var.colours.background,
         transparent: true,
         clearBeforeRender: true,
-        resolution: game.var.resolution,
+        //resolution: game.var.resolution,
         antialias: false,
-        roundPixels: true
+        roundPixels: true,
+        view: document.getElementById("main")
     });
+    game.app.stage.scale.set(game.var.resolution, game.var.resolution);
     game.menu.display.append(game.app.view);
     game.network.init();
     game.graphics.init();
