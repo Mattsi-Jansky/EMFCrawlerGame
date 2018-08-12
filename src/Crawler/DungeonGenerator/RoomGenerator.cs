@@ -13,15 +13,17 @@ namespace DungeonGenerators
         private readonly int _minRoomSize;
         private readonly int _minTotalBufferSize;
         private readonly int _minSectorSizeToSplit;
+        private readonly int _minNoRooms;
         private readonly RoomShuffler _roomShuffler;
 
-        public RoomGenerator(Random random, int xSize, int ySize, int minRoomSize, int minTotalBufferSize)
+        public RoomGenerator(Random random, int xSize, int ySize, int minRoomSize, int minTotalBufferSize, int minNoRooms)
         {
             _random = random;
             _xSize = xSize;
             _ySize = ySize;
             _minRoomSize = minRoomSize;
             _minTotalBufferSize = minTotalBufferSize;
+            _minNoRooms = minNoRooms;
 
             _minSectorSizeToSplit = (_minRoomSize + _minTotalBufferSize) * 2;
             _roomShuffler = new RoomShuffler(_random, xSize, ySize);
@@ -35,7 +37,7 @@ namespace DungeonGenerators
             AddBufferToRooms(rooms);
             _roomShuffler.ShuffleRooms(rooms);
 
-            if (rooms.Any()) return rooms;
+            if (rooms.Count > _minNoRooms) return rooms;
             else return GenerateRooms();
         }
 

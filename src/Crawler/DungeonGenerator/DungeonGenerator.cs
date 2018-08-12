@@ -9,13 +9,15 @@ namespace DungeonGenerators
         private readonly int _minRoomSize;
         private readonly int _minBufferSize;
         private readonly Random _random;
+        private readonly int _minNoRooms;
 
-        public DungeonGenerator(int xSize, int ySize, int minRoomSize, int minBufferSize)
+        public DungeonGenerator(int xSize, int ySize, int minRoomSize, int minBufferSize, int minNoRooms = 4)
         {
             _xSize = xSize;
             _ySize = ySize;
             _minRoomSize = minRoomSize;
             _minBufferSize = minBufferSize;
+            _minNoRooms = minNoRooms;
             _random = new Random();
         }
 
@@ -26,7 +28,7 @@ namespace DungeonGenerators
         public Tile[][] Generate()
         {
             var cartographer = new Cartographer(_xSize, _ySize);
-            var roomGenerator = new RoomGenerator(_random, _xSize, _ySize, _minRoomSize, _minBufferSize);
+            var roomGenerator = new RoomGenerator(_random, _xSize, _ySize, _minRoomSize, _minBufferSize, _minNoRooms);
 
             var rooms = roomGenerator.GenerateRooms();
             cartographer.DrawRooms(rooms);
