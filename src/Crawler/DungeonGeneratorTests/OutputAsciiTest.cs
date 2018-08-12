@@ -21,9 +21,14 @@ namespace DungeonGeneratorTests
         [Fact]
         public void PrintAscii()
         {
-            DungeonGenerator dungeonGenerator = new DungeonGenerator(60, 30, 3, 8);
-            var map = dungeonGenerator.Generate();
-            PrintAsciiMap(map);
+            DungeonGenerator dungeonGenerator = new DungeonGenerator(60, 30, 2, 4);
+            Tile[][] map;
+
+            for (var i = 0; i < 1000; i++) {
+                map = dungeonGenerator.Generate();
+                PrintAsciiMap(map);
+            }
+
         }
 
         private void PrintAsciiMap(Tile[][] map)
@@ -48,6 +53,10 @@ namespace DungeonGeneratorTests
                     else if (map[x][y] == Tile.Wall)
                     {
                         charMap[x][y] = '#';
+                    }
+                    else if (map[x][y] == Tile.Mob)
+                    {
+                        charMap[x][y] = 'M';
                     }
                     else
                     {
