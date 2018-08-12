@@ -123,10 +123,10 @@ namespace DungeonGenerators
         private void DrawWallIfFloorHasNeighbouringNothing(int x, int y)
         {
             IList<Tile> surroundingTiles = new List<Tile>();
-            AddTileIfValid(surroundingTiles, x, y - 1);
-            AddTileIfValid(surroundingTiles, x, y + 1);
-            AddTileIfValid(surroundingTiles, x + 1, y);
-            AddTileIfValid(surroundingTiles, x - 1, y);
+            AddTileToListIfValid(surroundingTiles, x, y - 1);
+            AddTileToListIfValid(surroundingTiles, x, y + 1);
+            AddTileToListIfValid(surroundingTiles, x + 1, y);
+            AddTileToListIfValid(surroundingTiles, x - 1, y);
 
             if (surroundingTiles.Any(t => t == Tile.Nothing))
             {
@@ -134,7 +134,7 @@ namespace DungeonGenerators
             }
         }
 
-        private void AddTileIfValid(IList<Tile> list, int x, int y)
+        private void AddTileToListIfValid(IList<Tile> list, int x, int y)
         {
             if (x >= 0 && x < tiles.Length
                       && y >= 0 && y < tiles[x].Length)
