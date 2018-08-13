@@ -21,6 +21,7 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
             if (map.Get(point) != null) //todo change to .IsBlocking()
             {
                 map.Add(entity, point);
+                entity.SetPosition(point);
             }
             else AddEntityRandomly(entity, room, map);
         }
