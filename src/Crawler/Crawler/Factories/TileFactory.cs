@@ -48,7 +48,7 @@ namespace Crawler.Factories
         {
             var wall = new Entity();
             wall.Add(new GraphicComponent(GetEnvGraphic(tile, colour)));
-            //todo: add blocking component
+            wall.Add(new BlockingComponent());
             return wall;
         }
 

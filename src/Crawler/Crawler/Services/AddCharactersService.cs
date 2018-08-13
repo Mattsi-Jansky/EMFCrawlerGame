@@ -34,6 +34,7 @@ namespace Crawler.Services
             entity.Add(new PositionComponent());
             entity.Add(new CharacterComponent(newCharacterRequest.Name));
             entity.Add(new CharacterNameDisplayTextComponent());
+            entity.Add(new BlockingComponent());
 
             lock (_newCharactersLock)
             {

@@ -10,6 +10,8 @@ namespace Crawler.Commands
         private Point _direction;
         private EntitiesCollection _entitiesCollection;
         private readonly MoveEntityService _moveEntityService;
+        private Entity _entity;
+        private Point _targetPosition;
 
         public MoveCommand(Guid id, Point direction, EntitiesCollection entitiesCollection, 
             MoveEntityService moveEntityService)
@@ -22,15 +24,17 @@ namespace Crawler.Commands
 
         public bool IsValid()
         {
-            return _direction.AbsSum() == 1;
+            _entity = _entitiesCollection.Get(_id);
+            Point position = _entity.GetPosition();
+            _targetPosition = position.Add(_direction);
+            
+            return _direction.AbsSum() == 1
+                && _moveEntityService.IsLegalTileToOccupy(_targetPosition);
         }
         
         public void Resolve()
         {
-            var entity = _entitiesCollection.Get(_id);
-            Point position = entity.GetPosition();
-            var targetPosition = position.Add(_direction);
-            _moveEntityService.Move(entity, targetPosition);
+            _moveEntityService.Move(_entity, _targetPosition);
         }
     }
 }

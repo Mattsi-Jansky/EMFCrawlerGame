@@ -18,7 +18,7 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
             var point = new Point(room.X + Random.Next(room.Width),
                 room.Y + Random.Next(room.Height));
 
-            if (map.Get(point) != null) //todo change to .IsBlocking()
+            if (!map.Get(point).IsBlocked())
             {
                 map.Add(entity, point);
                 entity.SetPosition(point);
