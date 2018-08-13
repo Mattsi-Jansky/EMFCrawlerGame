@@ -1,7 +1,7 @@
-﻿using System;
-using Crawler.Models;
+﻿using Crawler.Models;
 using System.Collections.Generic;
 using Crawler.Commands;
+using Crawler.ObjectResolvers;
 
 namespace Crawler.Queryables
 {
@@ -16,5 +16,6 @@ namespace Crawler.Queryables
         void AttachParent(IQueryable parent);
         void DetatchParent();
         ICommand GetCommand();
+        void InitialiseController(ObjectResolver objectResolver);
     }
 }

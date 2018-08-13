@@ -38,6 +38,10 @@ namespace Crawler
             _objectResolver.Initialise(_map, entityPlacer, entitiesCollection);
             AddCharactersService = _objectResolver.Resolve<AddCharactersService>();
             _mobCommandFetchingService = _objectResolver.Resolve<MobCommandFetchingService>();
+            foreach (var entity in entitiesCollection.Get())
+            {
+                entity.InitialiseController(_objectResolver);
+            }
         }
 
         public void AddCommand(Guid id, ICommand command)

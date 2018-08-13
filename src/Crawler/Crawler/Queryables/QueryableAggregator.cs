@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Crawler.Commands;
+using Crawler.Factories;
 using Crawler.Models;
+using Crawler.ObjectResolvers;
 
 namespace Crawler.Queryables
 {
@@ -118,6 +120,14 @@ namespace Crawler.Queryables
             }
 
             return default(ICommand);
+        }
+
+        public void InitialiseController(ObjectResolver objectResolver)
+        {
+            foreach (var queryable in _queryables)
+            {
+                queryable.InitialiseController(objectResolver);
+            }
         }
     }
 }
