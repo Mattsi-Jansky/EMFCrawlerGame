@@ -1,7 +1,9 @@
-﻿using Crawler.Models;
+﻿using System;
+using Crawler.Models;
 using Crawler.Queryables.Entities;
 using Crawler.Queryables.Entities.Characters;
 using Crawler.Queryables.Entities.Components;
+using Crawler.Queryables.Entities.Components.Controllers;
 
 namespace Crawler.Factories
 {
@@ -14,6 +16,7 @@ namespace Crawler.Factories
             mob.Add(new GraphicComponent(model.Graphic));
             mob.Add(new PositionComponent());
             mob.Add(new CharacterComponent(model.Name));
+            mob.Add(new RandomMovementControllerComponent(new Random(), mob.Id));
             
             return mob;
         }
