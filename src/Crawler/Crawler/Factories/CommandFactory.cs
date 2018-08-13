@@ -16,7 +16,6 @@ namespace Crawler.Factories
             this._objectResolver = objectResolver;
         }
 
-
         public ICommand Move(Point targetPosition)
         {
             return _objectResolver.Resolve<MoveCommand>(new Dictionary<string, object>

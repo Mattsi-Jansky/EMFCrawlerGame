@@ -129,5 +129,17 @@ namespace Crawler.Queryables
                 queryable.InitialiseController(objectResolver);
             }
         }
+
+        public bool IsBlocked()
+        {
+            bool isBlocked = false;
+
+            foreach(IQueryable queryable in _queryables)
+            {
+                isBlocked = isBlocked || queryable.IsBlocked();
+            }
+
+            return isBlocked;
+        }
     }
 }

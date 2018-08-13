@@ -17,5 +17,6 @@ namespace Crawler.Queryables
         void DetatchParent();
         ICommand GetCommand();
         void InitialiseController(ObjectResolver objectResolver);
+        bool IsBlocked();
     }
 }
