@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crawl Player</title>
+        <link href="assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/bootstrap/bootstrap-grid.min.css" rel="stylesheet">
+        <link href="assets/bootstrap/bootstrap-reboot.min.css" rel="stylesheet">
+        <link href="assets/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <section id="main">
+            <div id="register">
+                <div class="container">
+                    <div class="row topgap">
+                        <div class="col=3">
+                            <input type="text" id="name"/>
+                            <label for="name">name</label>
+                            <button id="start">Connect</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col=3">
+                            <select id="race">
+                                <option value="0">Barbarian</option>
+                                <option value="1">Cyclops</option>
+                                <option value="2">DarkElf</option>
+                                <option value="3">Devilspawn</option>
+                                <option value="4">Drawconian</option>
+                                <option value="5">Dwarf</option>
+                                <option value="6">Elf</option>
+                                <option value="7">Gnome</option>
+                                <option value="8">Golem</option>
+                                <option value="9">HalfElf</option>
+                                <option value="10">HalfGiant</option>
+                                <option value="1">HalfOgre</option>
+                                <option value="12">HalfOrc</option>
+                                <option value="13">HalfTitan</option>
+                                <option value="14">HalfTroll</option>
+                                <option value="15">HighElf</option>
+                                <option value="16">Hobbit</option>
+                                <option value="17">Human</option>
+                                <option value="18">Imp</option>
+                                <option value="19">Klackon</option>
+                                <option value="20">Kobold</option>
+                                <option value="21">MindFlayer</option>
+                                <option value="22">Nephilim</option>
+                                <option value="23">Nibelung</option>
+                                <option value="24">Saracen</option>
+                                <option value="25">Skeleton</option>
+                                <option value="26">Sprite</option>
+                                <option value="27">Vampire</option>
+                                <option value="28">Yeek</option>
+                                <option value="29">Zombie</option>
+                            </select>
+                            <label for="race">race</label>
+                        </div>
+                        <div class="col=3">
+                            <select id="archetype">
+                                <option value="1">Warlock</option>
+                                <option value="2">HellKnight</option>
+                                <option value="3">Druid</option>
+                                <option value="4">HighMage</option>
+                                <option value="5">Mage</option>
+                                <option value="6">Mindcrafter</option>
+                                <option value="7">Mystic</option>
+                                <option value="8">Paladin</option>
+                                <option value="9">Priest</option>
+                                <option value="10">Ranger</option>
+                                <option value="11">Rogue</option>
+                                <option value="12">Warrior</option>
+                                <option value="13">WarriorMage</option>
+                            </select>
+                            <label for="archetype">archetype</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="main-interface">
+                <div class="container">
+                    <div class="row topgap">
+                        <div class="col=3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-1">
+                                        <button id="up">↑</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <button id="left">←</button>
+                                    </div>
+                                    <div class="col-1">
+                                        <button id="down">↓</button>
+                                    </div>
+                                    <div class="col-1">
+                                        <button id="right">→</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col=5">
+                            <textarea id="console"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script type="text/javascript" src="scripts/lib/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="scripts/main.js"></script>
+    </body>
+</html>
