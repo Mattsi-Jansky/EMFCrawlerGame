@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using Crawler.Commands;
+using Crawler.Factories;
 using Crawler.Maps.EntityPlacers;
-using Crawler.Maps.Initialisers;
 using Crawler.Maps.Initialisers.DungeonGenerators;
 using Crawler.Models;
+using Crawler.Web.Models;
+using Crawler.Web.Services;
 
 namespace Crawler.Web.GameContainers
 {
@@ -17,6 +20,7 @@ namespace Crawler.Web.GameContainers
         private readonly Stopwatch _timer;
         private readonly CrawlGame _game;
         private readonly Thread _gameLoop;
+        private readonly ClientTrackingService _clientTrackingService;
         private bool _running;
 
         private GameContainer()
@@ -27,6 +31,7 @@ namespace Crawler.Web.GameContainers
             _game = new CrawlGame(new DungeonMapInitialiser(new Random()), new RandomEntityPlacer());
             _gameLoop = new Thread(Loop);
             _gameLoop.Start();
+            _clientTrackingService = new ClientTrackingService(_game);
         }
 
         private void Loop()
@@ -37,6 +42,7 @@ namespace Crawler.Web.GameContainers
                 {
                     _timer.Reset();
                     _game.Tick();
+                    _clientTrackingService.RemoveOldClients();
                     _timer.Start();
                 }
             }
@@ -45,6 +51,35 @@ namespace Crawler.Web.GameContainers
         public TileGraphics[][] GetGraphicState()
         {
             return _game.Observer.Observe();
+        }
+
+        public CommandFactory GetCommandFactory(Guid id)
+        {
+            return _game.GetCommandFactory(id);
+        }
+
+        public void AddCommand(Guid id, ICommand command)
+        {
+            _game.AddCommand(id, command);
+            _clientTrackingService.UpdateTimeout(id);
+        }
+
+        public Guid AddCharater(NewCharacterRequest request)
+        {
+            var id = _game.PlayerCharactersService.Add(request);
+            _clientTrackingService.UpdateTimeout(id);
+            return id;
+        }
+
+        public bool CanAddCharacter()
+        {
+            return !_clientTrackingService.HasReachedMaxClients();
+        }
+
+        public PlayerStatusModel GetStatus(Guid id)
+        {
+            _clientTrackingService.UpdateTimeout(id);
+            return new PlayerStatusModel {Messages = new string[0]};
         }
 
         public void Dispose()

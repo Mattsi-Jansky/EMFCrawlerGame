@@ -14,5 +14,7 @@ namespace Crawler.Models
             Archetype = archetype;
             Name = name;
         }
+
+        public NewCharacterRequest() { }
     }
 }
