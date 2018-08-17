@@ -29,7 +29,7 @@ namespace Crawler.Tests.Support
 
         protected Guid AddCharacter(Race race, Archetype archetype)
         {
-            return Game.AddCharactersService.Add(new NewCharacterRequest(race, archetype, TestCharacterName));
+            return Game.PlayerCharactersService.Add(new NewCharacterRequest(race, archetype, TestCharacterName));
         }
 
         protected Guid AddCharacter()

@@ -24,7 +24,7 @@ namespace Crawler
         private readonly MobCommandFetchingService _mobCommandFetchingService;
         
         public ICrawlObserver Observer { get; }
-        public AddCharactersService AddCharactersService { get; }
+        public PlayerCharactersService PlayerCharactersService { get; }
 
         public CrawlGame(BaseMapInitialiser mapInitialiser, IEntityPlacer entityPlacer)
         {
@@ -36,7 +36,7 @@ namespace Crawler
             _commandFactories = new Dictionary<Guid, CommandFactory>();
             _objectResolver = new ObjectResolver();
             _objectResolver.Initialise(_map, entityPlacer, entitiesCollection);
-            AddCharactersService = _objectResolver.Resolve<AddCharactersService>();
+            PlayerCharactersService = _objectResolver.Resolve<PlayerCharactersService>();
             _mobCommandFetchingService = _objectResolver.Resolve<MobCommandFetchingService>();
             foreach (var entity in entitiesCollection.Get())
             {
@@ -54,7 +54,7 @@ namespace Crawler
 
         public void Tick()
         {
-            AddCharactersService.Update();
+            PlayerCharactersService.Update();
             Observer.Update(_map);
 
             IList<ICommand> commands;

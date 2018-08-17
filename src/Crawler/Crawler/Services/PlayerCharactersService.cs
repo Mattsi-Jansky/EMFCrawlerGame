@@ -9,22 +9,25 @@ using Crawler.Queryables.Entities.Components;
 
 namespace Crawler.Services
 {
-    public class AddCharactersService
+    public class PlayerCharactersService
     {
-        private readonly Object _newCharactersLock = new Object();
         private readonly Stack<Entity> _newCharacters;
+        private readonly Object _newCharactersLock = new Object();
+        private readonly Stack<Guid> _deleteRequestedCharacterIds;
+        private readonly Object _deleteRequestedCharacterIdsLock = new Object();
         private readonly PutEntityService _putEntityService;
         private readonly EntitiesCollection _entities;
         private readonly IEntityPlacer _entityPlacer;
         private readonly IMap _map;
 
-        public AddCharactersService(PutEntityService entityService, EntitiesCollection entities, IEntityPlacer entityPlacer, IMap map)
+        public PlayerCharactersService(PutEntityService entityService, EntitiesCollection entities, IEntityPlacer entityPlacer, IMap map)
         {
             _putEntityService = entityService;
             _entities = entities;
             _entityPlacer = entityPlacer;
             _map = map;
             _newCharacters = new Stack<Entity>();
+            _deleteRequestedCharacterIds = new Stack<Guid>();
         }
 
         public Guid Add(NewCharacterRequest newCharacterRequest)
@@ -43,6 +46,14 @@ namespace Crawler.Services
 
             return entity.Id;
         }
+        
+        public void Delete(Guid id)
+        {
+            lock (_deleteRequestedCharacterIdsLock)
+            {
+                _deleteRequestedCharacterIds.Push(id);
+            }
+        }
 
         public void Update()
         {
@@ -50,12 +61,31 @@ namespace Crawler.Services
             {
                 while (_newCharacters.Count > 0)
                 {
-                    var character = _newCharacters.Pop();
-                    var position = _entityPlacer.PlaceCharacter(_map, character);
-                    _putEntityService.Put(character, position);
-                    _entities.Add(character.Id, character);
+                    AddCharacter(_newCharacters.Pop());
                 }
             }
+
+            lock (_deleteRequestedCharacterIdsLock)
+            {
+                while (_deleteRequestedCharacterIds.Count > 0)
+                {
+                    DeleteCharacter(_deleteRequestedCharacterIds.Pop());
+                }
+            }
+        }
+
+        private void AddCharacter(Entity character)
+        {
+            var position = _entityPlacer.PlaceCharacter(_map, character);
+            _putEntityService.Put(character, position);
+            _entities.Add(character.Id, character);
+        }
+        
+        private void DeleteCharacter(Guid id)
+        {
+            var entity = _entities.Get(id);
+            _map.Remove(entity, entity.GetPosition());
+            _entities.Remove(id);
         }
     }
 }
