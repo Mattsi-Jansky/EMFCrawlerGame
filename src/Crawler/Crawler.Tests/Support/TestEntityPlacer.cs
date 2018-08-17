@@ -6,7 +6,7 @@ namespace Crawler.Tests.Support
 {
     public class TestEntityPlacer : IEntityPlacer
     {
-        public Point PlaceCharacter(IMap map, Entity entity)
+        public Point PlaceEntity(IMap map, Entity entity)
         {
             return new Point(5,5);
         }

@@ -76,7 +76,7 @@ namespace Crawler.Services
 
         private void AddCharacter(Entity character)
         {
-            var position = _entityPlacer.PlaceCharacter(_map, character);
+            var position = _entityPlacer.PlaceEntity(_map, character);
             _putEntityService.Put(character, position);
             _entities.Add(character.Id, character);
         }

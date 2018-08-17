@@ -4,6 +4,6 @@ namespace Crawler.Maps.EntityPlacers
 {
     public interface IEntityPlacer
     {
-        Point PlaceCharacter(IMap map, Entity entity);
+        Point PlaceEntity(IMap map, Entity entity);
     }
 }
