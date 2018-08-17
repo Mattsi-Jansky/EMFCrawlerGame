@@ -9,24 +9,24 @@ namespace Crawler.Queryables
 {
     public class QueryableAggregator<T> : IQueryable where T : IQueryable
     {
-        private readonly IList<IQueryable> _queryables;
+        private readonly IList<IQueryable> Queryables;
         protected IQueryable Parent { get; private set; }
 
         public QueryableAggregator()
         {
-            _queryables = new List<IQueryable>();
+            Queryables = new List<IQueryable>();
         }
 
         public QueryableAggregator<T> Add(T queryable)
         {
-            _queryables.Add(queryable);
+            Queryables.Add(queryable);
             queryable.AttachParent(this);
             return this;
         }
 
         public QueryableAggregator<T> Remove(T queryable)
         {
-            _queryables.Remove(queryable);
+            Queryables.Remove(queryable);
             queryable.DetatchParent();
             return this;
         }
@@ -35,7 +35,7 @@ namespace Crawler.Queryables
         {
             bool canMove = true;
 
-            foreach(IQueryable queryable in _queryables)
+            foreach(IQueryable queryable in Queryables)
             {
                 canMove = canMove && queryable.CanMove();
             }
@@ -45,7 +45,7 @@ namespace Crawler.Queryables
 
         public virtual void GetGraphics(ref IList<Graphic> graphics)
         {
-            foreach (IQueryable queryable in _queryables)
+            foreach (IQueryable queryable in Queryables)
             {
                 queryable.GetGraphics(ref graphics);
             }
@@ -53,7 +53,7 @@ namespace Crawler.Queryables
 
         public virtual void GetPosition(ref Point? position)
         {
-            foreach (IQueryable queryable in _queryables)
+            foreach (IQueryable queryable in Queryables)
             {
                 queryable.GetPosition(ref position);
                 if (position.HasValue) break;
@@ -73,7 +73,7 @@ namespace Crawler.Queryables
 
         public virtual void SetPosition(Point position)
         {
-            foreach (IQueryable queryable in _queryables)
+            foreach (IQueryable queryable in Queryables)
             {
                 queryable.SetPosition(position);
             }
@@ -81,7 +81,7 @@ namespace Crawler.Queryables
 
         public string GetDisplayText()
         {
-            foreach (IQueryable queryable in _queryables)
+            foreach (IQueryable queryable in Queryables)
             {
                 var result = queryable.GetDisplayText();
                 if (!string.IsNullOrEmpty(result)) return result;
@@ -92,7 +92,7 @@ namespace Crawler.Queryables
 
         public string GetName()
         {
-            foreach (var queryable in _queryables)
+            foreach (var queryable in Queryables)
             {
                 var result = queryable.GetName();
                 if (!string.IsNullOrEmpty(result)) return result;
@@ -113,7 +113,7 @@ namespace Crawler.Queryables
 
         public ICommand GetCommand()
         {
-            foreach (var queryable in _queryables)
+            foreach (var queryable in Queryables)
             {
                 var result = queryable.GetCommand();
                 if (result != null) return result;
@@ -124,7 +124,7 @@ namespace Crawler.Queryables
 
         public void InitialiseController(ObjectResolver objectResolver)
         {
-            foreach (var queryable in _queryables)
+            foreach (var queryable in Queryables)
             {
                 queryable.InitialiseController(objectResolver);
             }
@@ -134,7 +134,7 @@ namespace Crawler.Queryables
         {
             bool isBlocked = false;
 
-            foreach(IQueryable queryable in _queryables)
+            foreach(IQueryable queryable in Queryables)
             {
                 isBlocked = isBlocked || queryable.IsBlocked();
             }
