@@ -12,8 +12,6 @@ let Application = PIXI.Application,
     Sprite = PIXI.Sprite,
     Rectangle = PIXI.Rectangle;
 
-var debug = true;
-
 game = {};
 game.menu = {};
 game.var = {};
@@ -40,6 +38,7 @@ game.var.init = function() {
     game.var.tiles = [];
     game.var.framerateCounter = 0;
     game.var.timeStep = 1000 / 30;
+    game.var.address = "wss://localhost:44349/observe/";
 };
 
 game.graphics.init = function() {
@@ -86,7 +85,7 @@ game.graphics.init.mobs = function() {
 };
 
 game.network.init = function() {
-    game.network.socket = new WebSocket("wss://localhost:44349/observe/");
+    game.network.socket = new WebSocket(game.var.address);
     game.network.socket.onmessage = game.network.refresh;
 };
 
@@ -129,6 +128,8 @@ game.updateGame = function() {
 };
 
 game.render = function() {
+    var texts = [];
+
     for(x = 0; x < game.var.tiles.length; x++) {
         var row = game.var.tiles[x];
         for(y = 0; y < row.length; y++) {
@@ -142,9 +143,28 @@ game.render = function() {
                 graphic.y = tilePositionY;
                 game.app.stage.addChild(graphic);
             });
+
+            if(tile.Text) {
+                var text = new PIXI.Text(tile.Text, {
+                    fontSize: 15,
+                    fill: '#eeee',
+                    stroke: '#111111',
+                    strokeThickness: 3,
+                    fontWeight: 'bold',
+                    align: 'center',
+                    wordWrap: true,
+                    wordWrapWidth: game.var.spriteSize + game.var.spriteSize / 2
+                });
+                text.x = tilePositionX - game.var.spriteSize;
+                text.y = tilePositionY + game.var.spriteSize;
+                texts.push(text);
+            }
         }
     }
-    debug = false;
+
+    texts.forEach(function(text) {
+        game.app.stage.addChild(text);
+    });
 };
 
 $( document ).ready(function() {
