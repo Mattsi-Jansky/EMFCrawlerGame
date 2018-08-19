@@ -27,6 +27,8 @@ namespace Crawler.Web.Controllers
         [Route("[controller]/New")]
         public IActionResult AddCharacter([FromBody]NewCharacterRequest request)
         {
+            if (request == null) return BadRequest();
+            
             if (GameContainer.Instance.CanAddCharacter())
             {
                 var id = GameContainer.Instance.AddCharater(request);
