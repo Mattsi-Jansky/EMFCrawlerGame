@@ -21,11 +21,10 @@ game.var = {};
 
 game.var.address = "https://localhost:44349/Player";
 
-game.network.send = function(path, body, callback, type) {
-    if(!type) type = "POST";
+game.network.post = function(path, body, callback) {
     $.ajax({
         url:game.var.address + path,
-        type:type,
+        type: "POST",
         data: JSON.stringify(body),
         contentType:"application/json; charset=utf-8",
         dataType:"json",
@@ -33,8 +32,18 @@ game.network.send = function(path, body, callback, type) {
     });
 };
 
+game.network.get = function(path, callback) {
+    $.ajax({
+        url:game.var.address + path,
+        type:"GET",
+        contentType:"application/json; charset=utf-8",
+        dataType:"json",
+        success: callback
+    });
+};
+
 game.network.new = function(request) {
-    game.network.send("/New", request, function(result) {
+    game.network.post("/New", request, function(result) {
         game.var.id = result;
         game.menu.register.hide();
         game.menu.interface.show();
@@ -43,7 +52,7 @@ game.network.new = function(request) {
 };
 
 game.network.status = function() {
-    game.network.send("/Status/" + game.var.id, null, game.menu.updateStatus, "GET");
+    game.network.get("/Status/" + game.var.id, null, game.menu.updateStatus, "GET");
 };
 
 game.menu.updateStatus = function(newMessages) {
@@ -55,7 +64,7 @@ game.network.move = function(direction) {
         "Id": game.var.id,
         "Direction": direction
     };
-    game.network.send("/Move", body, function(result) {
+    game.network.post("/Move", body, function(result) {
 
     });
 };
