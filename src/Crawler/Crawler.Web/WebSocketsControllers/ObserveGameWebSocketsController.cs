@@ -28,7 +28,7 @@ namespace Crawler.Web.WebSocketsControllers
         protected override void Tick(Guid clientId, WebSocketReceiver receiver, WebSocket socket, CancellationToken cancellationToken)
         {
             var timer = _timers[clientId];
-            if (timer.ElapsedMilliseconds >= GameContainer.TickTime)
+            if (timer.ElapsedMilliseconds >= GameContainer.GameLoopTickTime)
             {
                 timer.Reset();
                 SendStringAsync(socket, JsonConvert.SerializeObject(GameContainer.Instance.GetGraphicState()), cancellationToken);

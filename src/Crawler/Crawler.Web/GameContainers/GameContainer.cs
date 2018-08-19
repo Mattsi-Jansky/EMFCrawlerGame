@@ -16,34 +16,52 @@ namespace Crawler.Web.GameContainers
         private static GameContainer _this;
         public static GameContainer Instance => _this ?? (_this = new GameContainer());
 
-        public const int TickTime = 250;
-        private readonly Stopwatch _timer;
+        public const int GameLoopTickTime = 250;
+        public const int CleanupClientsLoopTickTime = 30000;
+        private readonly Stopwatch _gameLoopTimer;
         private readonly CrawlGame _game;
         private readonly Thread _gameLoop;
+        private readonly Stopwatch _cleanupClientLoopTimer;
+        private readonly Thread _cleanupClientLoop;
         private readonly ClientTrackingService _clientTrackingService;
         private bool _running;
 
         private GameContainer()
         {
             _running = true;
-            _timer = new Stopwatch();
-            _timer.Start();
+            _gameLoopTimer = new Stopwatch();
+            _gameLoopTimer.Start();
             _game = new CrawlGame(new DungeonMapInitialiser(new Random()), new RandomEntityPlacer());
-            _gameLoop = new Thread(Loop);
+            _gameLoop = new Thread(GameLoop);
             _gameLoop.Start();
             _clientTrackingService = new ClientTrackingService(_game);
+            _cleanupClientLoopTimer = new Stopwatch();
+            _cleanupClientLoop = new Thread(CleanupClientsLoop);
+            _cleanupClientLoop.Start();
         }
 
-        private void Loop()
+        private void GameLoop()
         {
             while (_running)
             {
-                if(_timer.ElapsedMilliseconds >= TickTime)
+                if(_gameLoopTimer.ElapsedMilliseconds >= GameLoopTickTime)
                 {
-                    _timer.Reset();
+                    _gameLoopTimer.Reset();
                     _game.Tick();
+                    _gameLoopTimer.Start();
+                }
+            }
+        }
+
+        private void CleanupClientsLoop()
+        {
+            while (_running)
+            {
+                if (_cleanupClientLoopTimer.ElapsedMilliseconds >= CleanupClientsLoopTickTime)
+                {
+                    _cleanupClientLoopTimer.Reset();
                     _clientTrackingService.RemoveOldClients();
-                    _timer.Start();
+                    _cleanupClientLoopTimer.Start();
                 }
             }
         }
@@ -90,8 +108,8 @@ namespace Crawler.Web.GameContainers
         public void Dispose()
         {
             _running = false;
-            Thread.Sleep(GameContainer.TickTime * 2);
             _gameLoop.Join();
+            _cleanupClientLoop.Join();
         }
     }
 }
