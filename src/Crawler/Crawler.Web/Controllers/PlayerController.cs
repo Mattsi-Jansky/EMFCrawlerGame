@@ -17,9 +17,10 @@ namespace Crawler.Web.Controllers
 
         [HttpGet]
         [Route("[controller]/status/{id}")]
-        public PlayerStatusModel Status(Guid id)
+        public IActionResult Status(Guid id)
         {
-            return GameContainer.Instance.GetStatus(id);
+            if (!GameContainer.Instance.ValidateClientId(id)) return BadRequest("No such client");
+            return Ok(GameContainer.Instance.GetStatus(id));
         }
         
         [HttpPost]
@@ -39,10 +40,14 @@ namespace Crawler.Web.Controllers
         
         [HttpPost]
         [Route("[controller]/Move")]
-        public void Move(dynamic request)
+        public IActionResult Move([FromBody]MoveRequestModel request)
         {
+            if (!GameContainer.Instance.ValidateClientId(request.Id)) return BadRequest("No such client");
+            
             var command = GameContainer.Instance.GetCommandFactory(request.Id).Move(request.Direction);
             GameContainer.Instance.AddCommand(request.Id, command);
+            
+            return Ok();
         }
     }
 }

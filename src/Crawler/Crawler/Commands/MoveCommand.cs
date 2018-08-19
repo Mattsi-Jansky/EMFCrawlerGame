@@ -24,6 +24,8 @@ namespace Crawler.Commands
 
         public bool IsValid()
         {
+            if (!_entitiesCollection.Contains(_id)) return false;
+            
             _entity = _entitiesCollection.Get(_id);
             Point position = _entity.GetPosition();
             _targetPosition = position.Add(_direction);

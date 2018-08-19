@@ -46,6 +46,14 @@ namespace Crawler.Web.Services
             }
         }
 
+        public bool Contains(Guid id)
+        {
+            lock (_clientsLock)
+            {
+                return _clients.ContainsKey(id);
+            }
+        }
+
         public bool HasReachedMaxClients()
         {
             lock (_clientsLock)

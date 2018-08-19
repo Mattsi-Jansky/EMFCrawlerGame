@@ -82,6 +82,11 @@ namespace Crawler.Web.GameContainers
             return new PlayerStatusModel {Messages = new string[0]};
         }
 
+        public bool ValidateClientId(Guid id)
+        {
+            return _clientTrackingService.Contains(id);
+        }
+
         public void Dispose()
         {
             _running = false;
