@@ -4,9 +4,9 @@ namespace Crawler.Models
 {
     public class NewCharacterRequest
     {
-        public Race Race { get; }
-        public Archetype Archetype { get; }
-        public string Name { get; }
+        public Race Race { get; set; }
+        public Archetype Archetype { get; set; }
+        public string Name { get; set; }
 
         public NewCharacterRequest(Race race, Archetype archetype, string name)
         {

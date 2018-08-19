@@ -24,7 +24,7 @@ namespace Crawler.Web.Controllers
         
         [HttpPost]
         [Route("[controller]/New")]
-        public IActionResult AddCharacter(NewCharacterRequest request)
+        public IActionResult AddCharacter([FromBody]NewCharacterRequest request)
         {
             if (GameContainer.Instance.CanAddCharacter())
             {
