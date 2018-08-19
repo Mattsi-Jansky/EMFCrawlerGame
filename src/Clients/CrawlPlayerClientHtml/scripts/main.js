@@ -47,7 +47,7 @@ game.network.new = function(request) {
         game.var.id = result;
         game.menu.register.hide();
         game.menu.interface.show();
-        setInterval(game.network.status, 125);
+        setInterval(game.network.status, 1000);
     });
 };
 
