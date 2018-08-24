@@ -22,9 +22,10 @@ namespace Crawler
         private readonly Object _commandFactoriesLock = new Object();
         private readonly ObjectResolver _objectResolver;
         private readonly MobCommandFetchingService _mobCommandFetchingService;
-        
+
         public ICrawlObserver Observer { get; }
         public PlayerCharactersService PlayerCharactersService { get; }
+        public PlayerClientMessagesService PlayerClientMessagesService  { get; }
 
         public CrawlGame(BaseMapInitialiser mapInitialiser, IEntityPlacer entityPlacer)
         {
@@ -36,6 +37,7 @@ namespace Crawler
             _commandFactories = new Dictionary<Guid, CommandFactory>();
             _objectResolver = new ObjectResolver();
             _objectResolver.Initialise(_map, entityPlacer, entitiesCollection);
+            PlayerClientMessagesService = _objectResolver.Resolve<PlayerClientMessagesService>();
             PlayerCharactersService = _objectResolver.Resolve<PlayerCharactersService>();
             _mobCommandFetchingService = _objectResolver.Resolve<MobCommandFetchingService>();
             foreach (var entity in entitiesCollection.Get())
@@ -56,6 +58,7 @@ namespace Crawler
         {
             PlayerCharactersService.Update();
             Observer.Update(_map);
+            PlayerClientMessagesService.Update();
 
             IList<ICommand> commands;
             lock (_commandsLock)

@@ -19,8 +19,9 @@ namespace Crawler.Services
         private readonly EntitiesCollection _entities;
         private readonly IEntityPlacer _entityPlacer;
         private readonly IMap _map;
+        private readonly PlayerClientMessagesService _playerClientMessagesService;
 
-        public PlayerCharactersService(PutEntityService entityService, EntitiesCollection entities, IEntityPlacer entityPlacer, IMap map)
+        public PlayerCharactersService(PutEntityService entityService, EntitiesCollection entities, IEntityPlacer entityPlacer, IMap map, PlayerClientMessagesService playerClientMessagesService)
         {
             _putEntityService = entityService;
             _entities = entities;
@@ -28,6 +29,7 @@ namespace Crawler.Services
             _map = map;
             _newCharacters = new Stack<Entity>();
             _deleteRequestedCharacterIds = new Stack<Guid>();
+            _playerClientMessagesService = playerClientMessagesService;
         }
 
         public Guid Add(NewCharacterRequest newCharacterRequest)
@@ -79,6 +81,8 @@ namespace Crawler.Services
             var position = _entityPlacer.PlaceEntity(_map, character);
             _putEntityService.Put(character, position);
             _entities.Add(character.Id, character);
+            _playerClientMessagesService.Add(character.Id);
+
         }
         
         private void DeleteCharacter(Guid id)
@@ -86,6 +90,7 @@ namespace Crawler.Services
             var entity = _entities.Get(id);
             _map.Remove(entity, entity.GetPosition());
             _entities.Remove(id);
+            _playerClientMessagesService.Remove(id);
         }
     }
 }

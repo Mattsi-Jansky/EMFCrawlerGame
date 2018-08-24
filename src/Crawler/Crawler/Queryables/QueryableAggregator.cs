@@ -141,5 +141,25 @@ namespace Crawler.Queryables
 
             return isBlocked;
         }
+
+        public void RecieveMessage(string message)
+        {
+            foreach (IQueryable queryable in Queryables)
+            {
+                queryable.RecieveMessage(message);
+            }
+        }
+
+        public IList<string> GetMessages()
+        {
+            var messages = new List<string>();
+
+            foreach (IQueryable queryable in Queryables)
+            {
+                messages.AddRange(queryable.GetMessages());
+            }
+
+            return messages;
+        }
     }
 }

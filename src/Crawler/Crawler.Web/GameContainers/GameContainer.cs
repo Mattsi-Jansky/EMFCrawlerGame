@@ -97,7 +97,7 @@ namespace Crawler.Web.GameContainers
         public PlayerStatusModel GetStatus(Guid id)
         {
             _clientTrackingService.UpdateTimeout(id);
-            return new PlayerStatusModel {Messages = new string[0]};
+            return new PlayerStatusModel {Messages = _game.PlayerClientMessagesService.GetMessages(id)};
         }
 
         public bool ValidateClientId(Guid id)

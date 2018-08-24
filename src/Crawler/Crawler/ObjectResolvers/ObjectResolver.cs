@@ -27,6 +27,8 @@ namespace Crawler.ObjectResolvers
             _container.RegisterInstance(map);
             _container.RegisterInstance(entityPlacer);
             _container.RegisterInstance(entitiesCollection);
+            _container.RegisterType(typeof(PlayerClientMessagesService));
+            _container.RegisterInstance(_container.Resolve<PlayerClientMessagesService>());
 
             //todo should these be register instance?
             _container.RegisterType(typeof(PutEntityService));

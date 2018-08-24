@@ -1,8 +1,9 @@
-﻿namespace Crawler.Web.Models
+﻿using System.Collections.Generic;
+
+namespace Crawler.Web.Models
 {
     public class PlayerStatusModel
     {
-        public string[] Messages;
-        
+        public IList<string> Messages;
     }
 }

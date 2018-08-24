@@ -18,5 +18,7 @@ namespace Crawler.Queryables
         ICommand GetCommand();
         void InitialiseController(ObjectResolver objectResolver);
         bool IsBlocked();
+        void RecieveMessage(string message);
+        IList<string> GetMessages();
     }
 }
