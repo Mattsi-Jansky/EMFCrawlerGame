@@ -24,10 +24,18 @@ game.var.colours.background = 0x000000;
 game.graphics.keys.envSheet = "env";
 game.graphics.keys.charSheet = "char";
 game.graphics.keys.mobSheet = "mob";
+game.graphics.keys.hatsSheet = "hats";
+game.graphics.keys.objects1Sheet = "objects1";
+game.graphics.keys.objects3Sheet = "objects3";
+game.graphics.keys.objects4Sheet = "objects4";
 game.graphics.addRequest = [
     { name: game.graphics.keys.envSheet, url: 'assets/graphics/env.png'},
     { name: game.graphics.keys.charSheet, url: 'assets/graphics/characters.png'},
-    { name: game.graphics.keys.mobSheet, url: 'assets/graphics/mobs.png'}
+    { name: game.graphics.keys.mobSheet, url: 'assets/graphics/mobs.png'},
+    { name: game.graphics.keys.hatsSheet, url: 'assets/graphics/hats.png'}, //the most important sprite sheet by far
+    { name: game.graphics.keys.objects1Sheet, url: 'assets/graphics/objs.png'},
+    { name: game.graphics.keys.objects3Sheet, url: 'assets/graphics/objs3.png'},
+    { name: game.graphics.keys.objects4Sheet, url: 'assets/graphics/objs4.png'},
 ];
 
 game.var.init = function() {
@@ -46,6 +54,7 @@ game.graphics.init = function() {
     game.graphics.init.environmentTiles();
     game.graphics.init.characters();
     game.graphics.init.mobs();
+    game.graphics.init.objects();
 };
 
 game.graphics.init.environmentTiles = function() {
@@ -84,6 +93,47 @@ game.graphics.init.mobs = function() {
     }
 };
 
+game.graphics.init.objects = function() {
+    var start = 707;
+    var y = 0;
+    var x = 0;
+
+    for(y = 0; y < 2; y++) {
+        for(x = 0; x < 11; x++) {
+            var texture = TextureCache[game.graphics.keys.hatsSheet].clone();
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
+            game.graphics[start + (y * 11) + x] = texture;
+        }
+    }
+
+    start += x * y;
+    for(y = 0; y < 5; y++) {
+        for(x = 0; x < 16; x++) {
+            var texture = TextureCache[game.graphics.keys.objects1Sheet].clone();
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
+            game.graphics[start + (y * 16) + x] = texture;
+        }
+    }
+
+    start += x * y;
+    for(y = 0; y < 4; y++) {
+        for(x = 0; x < 9; x++) {
+            var texture = TextureCache[game.graphics.keys.objects3Sheet].clone();
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
+            game.graphics[start + (y * 9) + x] = texture;
+        }
+    }
+
+    start += x * y;
+    for(y = 0; y < 3; y++) {
+        for(x = 0; x < 12; x++) {
+            var texture = TextureCache[game.graphics.keys.objects4Sheet].clone();
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
+            game.graphics[start + (y * 12) + x] = texture;
+        }
+    }
+}
+
 game.network.init = function() {
     game.network.socket = new WebSocket(game.var.address);
     game.network.socket.onmessage = game.network.refresh;
@@ -104,7 +154,6 @@ game.init = function() {
         backgroundColor : game.var.colours.background,
         transparent: true,
         clearBeforeRender: true,
-        //resolution: game.var.resolution,
         antialias: false,
         roundPixels: true,
         view: document.getElementById("main")
