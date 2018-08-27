@@ -35,6 +35,7 @@ namespace Crawler.ObjectResolvers
             _container.RegisterType(typeof(MoveEntityService));
             _container.RegisterType(typeof(PlayerCharactersService));
             _container.RegisterType(typeof(MobCommandFetchingService));
+            _container.RegisterType(typeof(InteractionService));
 
             _container.RegisterType(typeof(MoveCommand));
         }

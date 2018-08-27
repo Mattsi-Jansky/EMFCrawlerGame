@@ -7,7 +7,7 @@ namespace Crawler.Queryables.Entities.Components
 {
     public abstract class Component : IQueryable
     {
-        protected IQueryable Parent { get; private set; }
+        public IQueryable Parent { get; private set; }
 
         public virtual bool CanMove() { return true; }
         public virtual void GetGraphics(ref IList<Graphic> graphics) { }
@@ -18,10 +18,13 @@ namespace Crawler.Queryables.Entities.Components
         public virtual ICommand GetCommand() { return default(ICommand); }
         public virtual void InitialiseController(ObjectResolver objectResolver) { }
         public virtual bool IsBlocked() { return default(bool); }
-        public void RecieveMessage(string message) { }
-        public IList<string> GetMessages() { return new List<string>(); }
+        public virtual void RecieveMessage(string message) { }
+        public virtual IList<string> GetMessages() { return new List<string>(); }
+        public virtual void GetInteractableEntities(ref IList<Entity> entities) {}
+        public virtual EquipableComponent GetEquipable(EquipableSlot slot) { return default(EquipableComponent); }
+        public virtual void GetEquipables(ref List<EquipableComponent> equipables) { }
 
-        public void AttachParent(IQueryable parent)
+        public virtual void AttachParent(IQueryable parent)
         {
             Parent = parent;
         }

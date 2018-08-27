@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Crawler.Queryables.Entities.Components
 {
-    public class CharacterComponent : Component
+    public class NameComponent : Component
     {
         private string _name;
 
-        public CharacterComponent(string name)
+        public NameComponent(string name)
         {
             _name = name;
         }

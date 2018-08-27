@@ -188,8 +188,15 @@ game.render = function() {
 
             tile.Graphics.forEach(function(i) {
                 var graphic = new PIXI.Sprite(game.graphics[i]);
-                graphic.x = tilePositionX;
-                graphic.y = tilePositionY;
+                if(i >= 707 && i <= 729) {
+                    //If graphic is a hat move it up ward slightly rather than cover character's eyes
+                    graphic.x = tilePositionX;
+                    graphic.y = tilePositionY - 6;
+                }
+                else {
+                    graphic.x = tilePositionX;
+                    graphic.y = tilePositionY;
+                }
                 game.app.stage.addChild(graphic);
             });
 

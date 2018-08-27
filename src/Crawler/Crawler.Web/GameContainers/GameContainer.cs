@@ -31,7 +31,8 @@ namespace Crawler.Web.GameContainers
             _running = true;
             _gameLoopTimer = new Stopwatch();
             _gameLoopTimer.Start();
-            _game = new CrawlGame(new DungeonMapInitialiser(new Random()), new RandomEntityPlacer());
+            var entityPlacer = new RandomEntityPlacer();
+            _game = new CrawlGame(new DungeonMapInitialiser(new Random(), entityPlacer), entityPlacer);
             _gameLoop = new Thread(GameLoop);
             _gameLoop.Start();
             _clientTrackingService = new ClientTrackingService(_game);

@@ -4,13 +4,14 @@ using Crawler.Commands;
 using Crawler.Factories;
 using Crawler.Models;
 using Crawler.ObjectResolvers;
+using Crawler.Queryables.Entities;
+using Crawler.Queryables.Entities.Components;
 
 namespace Crawler.Queryables
 {
-    public class QueryableAggregator<T> : IQueryable where T : IQueryable
+    public class QueryableAggregator<T> : Component where T : IQueryable
     {
-        private readonly IList<IQueryable> Queryables;
-        protected IQueryable Parent { get; private set; }
+        protected readonly IList<IQueryable> Queryables;
 
         public QueryableAggregator()
         {
@@ -31,7 +32,7 @@ namespace Crawler.Queryables
             return this;
         }
 
-        public virtual bool CanMove()
+        public override  bool CanMove()
         {
             bool canMove = true;
 
@@ -43,7 +44,7 @@ namespace Crawler.Queryables
             return canMove;
         }
 
-        public virtual void GetGraphics(ref IList<Graphic> graphics)
+        public override  void GetGraphics(ref IList<Graphic> graphics)
         {
             foreach (IQueryable queryable in Queryables)
             {
@@ -51,7 +52,7 @@ namespace Crawler.Queryables
             }
         }
 
-        public virtual void GetPosition(ref Point? position)
+        public override  void GetPosition(ref Point? position)
         {
             foreach (IQueryable queryable in Queryables)
             {
@@ -71,7 +72,7 @@ namespace Crawler.Queryables
             return position.Value;
         }
 
-        public virtual void SetPosition(Point position)
+        public override  void SetPosition(Point position)
         {
             foreach (IQueryable queryable in Queryables)
             {
@@ -79,7 +80,7 @@ namespace Crawler.Queryables
             }
         }
 
-        public string GetDisplayText()
+        public override string GetDisplayText()
         {
             foreach (IQueryable queryable in Queryables)
             {
@@ -90,7 +91,7 @@ namespace Crawler.Queryables
             return string.Empty;
         }
 
-        public string GetName()
+        public override string GetName()
         {
             foreach (var queryable in Queryables)
             {
@@ -101,17 +102,7 @@ namespace Crawler.Queryables
             return string.Empty;
         }
 
-        public void AttachParent(IQueryable parent)
-        {
-            Parent = parent;
-        }
-
-        public void DetatchParent()
-        {
-            Parent = null;
-        }
-
-        public ICommand GetCommand()
+        public override ICommand GetCommand()
         {
             foreach (var queryable in Queryables)
             {
@@ -122,7 +113,7 @@ namespace Crawler.Queryables
             return default(ICommand);
         }
 
-        public void InitialiseController(ObjectResolver objectResolver)
+        public override void InitialiseController(ObjectResolver objectResolver)
         {
             foreach (var queryable in Queryables)
             {
@@ -130,7 +121,7 @@ namespace Crawler.Queryables
             }
         }
 
-        public bool IsBlocked()
+        public override bool IsBlocked()
         {
             bool isBlocked = false;
 
@@ -142,7 +133,7 @@ namespace Crawler.Queryables
             return isBlocked;
         }
 
-        public void RecieveMessage(string message)
+        public override void RecieveMessage(string message)
         {
             foreach (IQueryable queryable in Queryables)
             {
@@ -150,7 +141,7 @@ namespace Crawler.Queryables
             }
         }
 
-        public IList<string> GetMessages()
+        public override IList<string> GetMessages()
         {
             var messages = new List<string>();
 
@@ -160,6 +151,33 @@ namespace Crawler.Queryables
             }
 
             return messages;
+        }
+
+        public override void GetInteractableEntities(ref IList<Entity> entities)
+        {
+            foreach (IQueryable queryable in Queryables)
+            {
+                queryable.GetInteractableEntities(ref entities);
+            }
+        }
+
+        public override EquipableComponent GetEquipable(EquipableSlot slot)
+        {
+            foreach (IQueryable queryable in Queryables)
+            {
+                var result = queryable.GetEquipable(slot);
+                if (result != null) return result;
+            }
+
+            return null;
+        }
+
+        public override void GetEquipables(ref List<EquipableComponent> equipables)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetEquipables(ref equipables);
+            }
         }
     }
 }

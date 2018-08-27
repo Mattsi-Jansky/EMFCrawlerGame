@@ -11,5 +11,10 @@ namespace Crawler.Queryables.Entities
         {
             Id = Guid.NewGuid();
         }
+
+        public Entity(Component component) : this()
+        {
+            Add(component);
+        }
     }
 }

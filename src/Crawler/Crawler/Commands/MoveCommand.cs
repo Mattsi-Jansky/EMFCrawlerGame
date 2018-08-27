@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Crawler.Queryables.Entities;
 using Crawler.Services;
 
@@ -12,14 +14,16 @@ namespace Crawler.Commands
         private readonly MoveEntityService _moveEntityService;
         private Entity _entity;
         private Point _targetPosition;
+        private InteractionService _interactionService;
 
         public MoveCommand(Guid id, Point direction, EntitiesCollection entitiesCollection, 
-            MoveEntityService moveEntityService)
+            MoveEntityService moveEntityService, InteractionService interactionService)
         {
             _id = id;
             _direction = direction;
             _entitiesCollection = entitiesCollection;
             _moveEntityService = moveEntityService;
+            _interactionService = interactionService;
         }
 
         public bool IsValid()
@@ -37,6 +41,7 @@ namespace Crawler.Commands
         public void Resolve()
         {
             _moveEntityService.Move(_entity, _targetPosition);
+            _interactionService.InteractWithEnititiesAtPosition(_entity);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Crawler.Services
             var entity = new Entity();
             entity.Add(new GraphicComponent(newCharacterRequest.Race.GetGraphic(newCharacterRequest.Archetype)));
             entity.Add(new PositionComponent());
-            entity.Add(new CharacterComponent(newCharacterRequest.Name));
+            entity.Add(new NameComponent(newCharacterRequest.Name));
             entity.Add(new CharacterNameDisplayTextComponent());
             entity.Add(new BlockingComponent());
 
