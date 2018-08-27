@@ -25,5 +25,7 @@ namespace Crawler.Queryables
         void GetInteractableEntities(ref IList<Entity> entities);
         EquipableComponent GetEquipable(EquipableSlot slot);
         void GetEquipables(ref List<EquipableComponent> equipables);
+        string GetPreTitle();
+        string GetPostTitle();
     }
 }

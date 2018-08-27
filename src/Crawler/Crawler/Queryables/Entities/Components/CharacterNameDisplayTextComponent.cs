@@ -8,7 +8,7 @@ namespace Crawler.Queryables.Entities.Components
     {
         public override string GetDisplayText()
         {
-            return Parent.GetName();
+            return $"{Parent.GetPreTitle()} {Parent.GetName()} {Parent.GetPostTitle()}";
         }
     }
 }

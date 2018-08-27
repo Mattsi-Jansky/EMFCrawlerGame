@@ -23,6 +23,8 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void GetInteractableEntities(ref IList<Entity> entities) {}
         public virtual EquipableComponent GetEquipable(EquipableSlot slot) { return default(EquipableComponent); }
         public virtual void GetEquipables(ref List<EquipableComponent> equipables) { }
+        public virtual string GetPreTitle() { return string.Empty; }
+        public virtual string GetPostTitle() { return string.Empty; }
 
         public virtual void AttachParent(IQueryable parent)
         {

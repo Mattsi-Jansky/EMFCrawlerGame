@@ -179,5 +179,27 @@ namespace Crawler.Queryables
                 queryable.GetEquipables(ref equipables);
             }
         }
+        
+        public override string GetPreTitle()
+        {
+            foreach (var queryable in Queryables)
+            {
+                var result = queryable.GetPreTitle();
+                if (!string.IsNullOrEmpty(result)) return result;
+            }
+
+            return string.Empty;
+        }
+        
+        public override string GetPostTitle()
+        {
+            foreach (var queryable in Queryables)
+            {
+                var result = queryable.GetPostTitle();
+                if (!string.IsNullOrEmpty(result)) return result;
+            }
+
+            return string.Empty;
+        }
     }
 }

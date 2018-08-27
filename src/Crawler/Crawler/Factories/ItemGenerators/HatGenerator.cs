@@ -49,7 +49,7 @@ namespace Crawler.Factories.ItemGenerators
             
             equipmentComponent.Add(new GraphicComponent(model.Graphic));
             equipmentComponent.Add(new PositionComponent());
-            equipmentComponent.Add(new NameComponent(model.Name));
+            equipmentComponent.Add(new NameComponent(model.Name, model.PreTitle, model.PostTitle));
             entity.Add(equipmentComponent);
 
             return entity;
