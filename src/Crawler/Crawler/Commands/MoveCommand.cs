@@ -40,8 +40,8 @@ namespace Crawler.Commands
         
         public void Resolve()
         {
+            _interactionService.InteractWithEnititiesAt(_entity, _targetPosition);
             _moveEntityService.Move(_entity, _targetPosition);
-            _interactionService.InteractWithEnititiesAtPosition(_entity);
         }
     }
 }

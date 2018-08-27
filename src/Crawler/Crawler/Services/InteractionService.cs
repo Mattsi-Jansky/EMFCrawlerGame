@@ -16,15 +16,14 @@ namespace Crawler.Services
             _moveEntityService = moveEntityService;
         }
 
-        public void InteractWithEnititiesAtPosition(Entity entity)
+        public void InteractWithEnititiesAt(Entity entity, Point location)
         {
-            InteractWithEquippables(entity);
+            InteractWithEquippables(entity, location);
         }
 
-        private void InteractWithEquippables(Entity entity)
+        private void InteractWithEquippables(Entity entity, Point location)
         {
-            var point = entity.GetPosition();
-            var tile = _map.Get(point);
+            var tile = _map.Get(location);
             var equipables = new List<EquipableComponent>();
             tile.GetEquipables(ref equipables);
 
@@ -34,12 +33,17 @@ namespace Crawler.Services
                 if (existingEquippable != null)
                 {
                     entity.Remove(existingEquippable);
-                    _map.Add(new Entity(existingEquippable), point);
+                    entity.RecieveMessage($"You remove the {existingEquippable.GetName()}");
+                    _map.Add(new Entity(existingEquippable), location);
+                    var droppedItemEntity = (Entity)new Entity(existingEquippable)
+                        .Add(new PositionComponent());
+                    _moveEntityService.Put(droppedItemEntity, location);
                 }
 
                 var equipableEntity = (Entity) equipable.Parent;
-                _map.Remove(equipableEntity, point);
+                _map.Remove(equipableEntity, location);
                 entity.Add(equipable);
+                entity.RecieveMessage($"You equip the {equipable.GetName()}");
             }
         }
     }

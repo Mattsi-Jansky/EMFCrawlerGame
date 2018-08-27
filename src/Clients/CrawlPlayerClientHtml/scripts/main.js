@@ -52,11 +52,13 @@ game.network.new = function(request) {
 };
 
 game.network.status = function() {
-    game.network.get("/Status/" + game.var.id, null, game.menu.updateStatus, "GET");
+    game.network.get("/Status/" + game.var.id, game.menu.updateStatus);
 };
 
 game.menu.updateStatus = function(newMessages) {
-
+    $.each(newMessages.messages, function(index, value) {
+        game.menu.console.val(game.menu.console.val() + "\n" + value);
+    });
 };
 
 game.network.move = function(direction) {
@@ -75,16 +77,15 @@ game.network.left = () => game.network.move({"X": -1, "Y": 0 });
 game.network.right = () => game.network.move({"X": 1, "Y": 0 });
 
 $( document ).ready(function() {
-   game.menu.start.click(function(e) {
-       var request = {
-           "Race": game.menu.race.val(),
-           "Archetype": game.menu.archetype.val(),
-           "Name": game.menu.name.val()
-       };
-       console.log(request);
-       game.network.new(request);
-   });
-   game.menu.up.click(game.network.up);
+    game.menu.start.click(function(e) {
+        var request = {
+            "Race": game.menu.race.val(),
+            "Archetype": game.menu.archetype.val(),
+            "Name": game.menu.name.val()
+        };
+        game.network.new(request);
+    });
+    game.menu.up.click(game.network.up);
     game.menu.down.click(game.network.down);
     game.menu.left.click(game.network.left);
     game.menu.right.click(game.network.right);

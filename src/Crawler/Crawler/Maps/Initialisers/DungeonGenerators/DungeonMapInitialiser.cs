@@ -30,7 +30,7 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators
             generator.Generate();
             var translator = new DungeonGenerationModelTranslator(generator.Map);
             var map = translator.Initialise(entitiesCollection);
-            AddFeatures(generator, map, entitiesCollection);
+            //AddFeatures(generator, map, entitiesCollection);
             AddItems(map, _entityPlacer);
 
             return map;
@@ -48,7 +48,7 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators
         
         private void AddItems(IMap map, IEntityPlacer entityPlacer)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
                 var item = _itemFactory.GetItem();
                 var point = entityPlacer.PlaceEntity(map, item);
