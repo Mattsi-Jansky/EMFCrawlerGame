@@ -21,21 +21,5 @@ namespace Crawler.Queryables.Entities.Components
         {
             equipables.Add(this);
         }
-
-        /*
-        public override void Interact(Entity entity)
-        {
-            var existingEquippable = entity.GetEquipable(_slot);
-
-            if (existingEquippable != null)
-            {
-                existingEquippable.DetatchParent();
-                var tile = (QueryableAggregator<Entity>) entity.Parent;
-                tile.Add(existingEquippable);
-            }
-            
-            Parent.DetatchParent();
-            entity.Add(this);
-        }*/
     }
 }
