@@ -19,7 +19,7 @@ namespace Crawler.Models
 
             for (int i = 0; i < _rolls; i++)
             {
-                int[i] = RollOne(random);
+                result[i] = RollOne(random);
             }
 
             return result;
