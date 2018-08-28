@@ -1,8 +1,8 @@
 namespace Crawler.Queryables.Entities.Components
 {
-    public class CharacterComponent
+    public class CharacterComponent : Component
     {
-        int str, dex, con, wis;
+        private int str, dex, con, wis;
 
         public CharacterComponent(int str, int dex, int con, int wis)
         {
@@ -10,6 +10,26 @@ namespace Crawler.Queryables.Entities.Components
             this.dex = 8 + dex;
             this.con = 8 + con;
             this.wis = 8 + wis;
+        }
+        
+        public override void GetStrength(ref int value)
+        {
+            value += str;
+        }
+
+        public override void GetDexterity(ref int value)
+        {
+            value += dex;
+        }
+
+        public override void GetConstitution(ref int value)
+        {
+            value += con;
+        }
+
+        public override void GetWisdom(ref int value)
+        {
+            value += wis;
         }
     }
 }
