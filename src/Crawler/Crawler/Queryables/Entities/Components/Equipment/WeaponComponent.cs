@@ -22,25 +22,20 @@ namespace Crawler.Queryables.Entities.Components
             {
                 int str = 0;
                 Parent.GetStrength(ref str);
-                value += GetAbilityModifier(str);
+                value += CharacterStats. GetAbilityModifier(str);
             }
             else if (_toHitAttribute == Attribute.Dex)
             {
                 int dex = 0;
                 Parent.GetDexterity(ref dex);
-                value += GetAbilityModifier(dex);
+                value += CharacterStats.GetAbilityModifier(dex);
             }
             else if (_toHitAttribute == Attribute.Wis)
             {
                 int wis = 0;
                 Parent.GetWisdom(ref wis);
-                value += GetAbilityModifier(wis);
+                value += CharacterStats.GetAbilityModifier(wis);
             }
-        }
-
-        private int GetAbilityModifier(int score)
-        {
-            return score - 10 / 2;
         }
 
         public override void GetDamageDice(ref Dice dice)
@@ -59,19 +54,19 @@ namespace Crawler.Queryables.Entities.Components
                 {
                     int str = 0;
                     Parent.GetStrength(ref str);
-                    value += GetAbilityModifier(str);
+                    value += CharacterStats.GetAbilityModifier(str);
                 }
                 else if (_damageBonus.Value == Attribute.Dex)
                 {
                     int dex = 0;
                     Parent.GetDexterity(ref dex);
-                    value += GetAbilityModifier(dex);
+                    value += CharacterStats.GetAbilityModifier(dex);
                 }
                 else if (_damageBonus.Value == Attribute.Wis)
                 {
                     int wis = 0;
                     Parent.GetWisdom(ref wis);
-                    value += GetAbilityModifier(wis);
+                    value += CharacterStats.GetAbilityModifier(wis);
                 }
             }
         }

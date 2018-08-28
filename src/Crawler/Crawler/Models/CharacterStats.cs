@@ -62,6 +62,11 @@ namespace Crawler.Models
             return RaceStats[race].Add(ArchetypeStats[archetype]);
         }
         
+        public static int GetAbilityModifier(int score)
+        {
+            return score - 10 / 2;
+        }
+        
         public int str, dex, con, wis;
 
         public CharacterStats(int str, int dex, int con, int wis)

@@ -265,5 +265,33 @@ namespace Crawler.Queryables
                 queryable.GetDamageBonus(ref value);
             }
         }
+
+        public override void TakeDamage(int damage)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.TakeDamage(damage);
+            }
+        }
+
+        public override bool IsDead()
+        {
+            foreach (var queryable in Queryables)
+            {
+                var result = queryable.IsDead();
+
+                if (result) return true;
+            }
+
+            return false;
+        }
+
+        public override void GetArmourClass(ref int ac)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetArmourClass(ref ac);
+            }
+        }
     }
 }

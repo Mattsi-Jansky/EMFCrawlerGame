@@ -35,5 +35,8 @@ namespace Crawler.Queryables
         void GetHitBonus(ref int value);
         void GetDamageDice(ref Dice dice);
         void GetDamageBonus(ref int value);
+        void TakeDamage(int damage);
+        bool IsDead();
+        void GetArmourClass(ref int ac);
     }
 }

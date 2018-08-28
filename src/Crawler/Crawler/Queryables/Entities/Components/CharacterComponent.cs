@@ -5,6 +5,8 @@ namespace Crawler.Queryables.Entities.Components
     public class CharacterComponent : Component
     {
         private int str, dex, con, wis;
+        private int hp;
+        private int baseAc;
         private Dice fisticuffsDamageDice = new Dice(1,4); 
 
         public CharacterComponent(int str, int dex, int con, int wis)
@@ -13,6 +15,8 @@ namespace Crawler.Queryables.Entities.Components
             this.dex = 8 + dex;
             this.con = 8 + con;
             this.wis = 8 + wis;
+            hp = con;
+            baseAc = 10 + CharacterStats.GetAbilityModifier(dex);
         }
 
         public CharacterComponent(CharacterStats stats) : this(stats.str, stats.dex, stats.con, stats.wis) { }
@@ -44,6 +48,16 @@ namespace Crawler.Queryables.Entities.Components
             {
                 dice = fisticuffsDamageDice;
             }
+        }
+
+        public override void TakeDamage(int damage)
+        {
+            hp -= damage;
+        }
+
+        public override bool IsDead()
+        {
+            return hp <= 0;
         }
     }
 }
