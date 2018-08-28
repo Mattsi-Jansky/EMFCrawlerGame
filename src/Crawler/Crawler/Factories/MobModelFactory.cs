@@ -44,7 +44,6 @@ namespace Crawler.Factories
             new List<MobModel> {Troll, TrollWarrior, RedTroll},
             new List<MobModel> {OgreWarrior, OgreWarriorGray, OgreWarriorArmoured, OgreWarriorArmouredGray},
             new List<MobModel> {GiantWarrior, GiantBarbarianFemale, GiantBarbarianMale, GiantMonk},
-            
         };
     }
 }
