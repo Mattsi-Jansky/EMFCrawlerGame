@@ -32,5 +32,8 @@ namespace Crawler.Queryables
         void GetDexterity(ref int value);
         void GetConstitution(ref int value);
         void GetWisdom(ref int value);
+        void GetHitBonus(ref int value);
+        void GetDamageDice(ref Dice dice);
+        void GetDamageBonus(ref int value);
     }
 }

@@ -2,6 +2,7 @@ namespace Crawler.Models
 {
     public enum EquipableSlot
     {
-        Hat
+        Hat,
+        Weapon
     }
 }

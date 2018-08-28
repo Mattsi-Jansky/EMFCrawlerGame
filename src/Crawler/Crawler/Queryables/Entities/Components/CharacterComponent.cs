@@ -5,6 +5,7 @@ namespace Crawler.Queryables.Entities.Components
     public class CharacterComponent : Component
     {
         private int str, dex, con, wis;
+        private Dice fisticuffsDamageDice = new Dice(1,4); 
 
         public CharacterComponent(int str, int dex, int con, int wis)
         {
@@ -34,6 +35,15 @@ namespace Crawler.Queryables.Entities.Components
         public override void GetWisdom(ref int value)
         {
             value += wis;
+        }
+        
+        public override void GetDamageDice(ref Dice dice)
+        {
+            //If no weapon equipped default to low damage for fists
+            if (dice != null && fisticuffsDamageDice.Greater(dice))
+            {
+                dice = fisticuffsDamageDice;
+            }
         }
     }
 }

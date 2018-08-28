@@ -241,5 +241,29 @@ namespace Crawler.Queryables
                 queryable.GetStrength(ref value);
             }
         }
+
+        public override void GetHitBonus(ref int value)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetHitBonus(ref value);
+            }
+        }
+
+        public override void GetDamageDice(ref Dice dice)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetDamageDice(ref dice);
+            }
+        }
+        
+        public override void GetDamageBonus(ref int value)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetDamageBonus(ref value);
+            }
+        }
     }
 }

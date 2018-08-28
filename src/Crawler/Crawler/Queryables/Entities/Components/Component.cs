@@ -20,7 +20,6 @@ namespace Crawler.Queryables.Entities.Components
         public virtual bool IsBlocked() { return default(bool); }
         public virtual void RecieveMessage(string message) { }
         public virtual IList<string> GetMessages() { return new List<string>(); }
-        public virtual void GetInteractableEntities(ref IList<Entity> entities) {}
         public virtual EquipableComponent GetEquipable(EquipableSlot slot) { return default(EquipableComponent); }
         public virtual void GetEquipables(ref List<EquipableComponent> equipables) { }
         public virtual string GetPreTitle() { return string.Empty; }
@@ -31,6 +30,9 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void GetDexterity(ref int value) { }
         public virtual void GetConstitution(ref int value) { }
         public virtual void GetWisdom(ref int value) { }
+        public virtual void GetHitBonus(ref int value) { }
+        public virtual void GetDamageDice(ref Dice dice) { }
+        public virtual void GetDamageBonus(ref int value) { }
 
         public virtual void AttachParent(IQueryable parent)
         {
