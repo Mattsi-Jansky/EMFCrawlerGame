@@ -153,14 +153,6 @@ namespace Crawler.Queryables
             return messages;
         }
 
-        public override void GetInteractableEntities(ref IList<Entity> entities)
-        {
-            foreach (IQueryable queryable in Queryables)
-            {
-                queryable.GetInteractableEntities(ref entities);
-            }
-        }
-
         public override EquipableComponent GetEquipable(EquipableSlot slot)
         {
             foreach (IQueryable queryable in Queryables)
@@ -200,6 +192,22 @@ namespace Crawler.Queryables
             }
 
             return string.Empty;
+        }
+
+        public override void GetGold(ref IList<GoldComponent> gold)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetGold(ref gold);
+            }
+        }
+
+        public override void GiveGold(int value)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GiveGold(value);
+            }
         }
     }
 }

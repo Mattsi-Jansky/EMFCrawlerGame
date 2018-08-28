@@ -16,7 +16,8 @@ namespace Crawler.Factories
             _itemGenerators = new List<IItemGenerator>
             {
                 new HatGenerator(_random),
-                new PotionGenerator(_random)
+                new PotionGenerator(_random),
+                new GoldGenerator()
             };
         }
 

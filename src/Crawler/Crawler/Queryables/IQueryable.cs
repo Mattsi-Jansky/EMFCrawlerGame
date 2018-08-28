@@ -22,10 +22,11 @@ namespace Crawler.Queryables
         bool IsBlocked();
         void RecieveMessage(string message);
         IList<string> GetMessages();
-        void GetInteractableEntities(ref IList<Entity> entities);
         EquipableComponent GetEquipable(EquipableSlot slot);
         void GetEquipables(ref List<EquipableComponent> equipables);
         string GetPreTitle();
         string GetPostTitle();
+        void GetGold(ref IList<GoldComponent> gold);
+        void GiveGold(int value);
     }
 }

@@ -25,6 +25,8 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void GetEquipables(ref List<EquipableComponent> equipables) { }
         public virtual string GetPreTitle() { return string.Empty; }
         public virtual string GetPostTitle() { return string.Empty; }
+        public virtual void GetGold(ref IList<GoldComponent> gold) { }
+        public virtual void GiveGold(int value) { }
 
         public virtual void AttachParent(IQueryable parent)
         {

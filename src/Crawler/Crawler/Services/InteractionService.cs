@@ -19,6 +19,21 @@ namespace Crawler.Services
         public void InteractWithEnititiesAt(Entity entity, Point location)
         {
             InteractWithEquippables(entity, location);
+            InteractWithGold(entity, location);
+        }
+
+        private void InteractWithGold(Entity entity, Point location)
+        {
+            IList<GoldComponent> goldOnTile = new List<GoldComponent>();
+            _map.Get(location).GetGold(ref goldOnTile);
+
+            foreach (var gold in goldOnTile)
+            {
+                entity.GiveGold(gold.Value);
+                entity.RecieveMessage($"You find {gold.Value} gold!");
+                _map.Remove((Entity)gold.Parent, location);
+                gold.Parent.DetatchParent();
+            }
         }
 
         private void InteractWithEquippables(Entity entity, Point location)
