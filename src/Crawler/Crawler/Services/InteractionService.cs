@@ -32,7 +32,6 @@ namespace Crawler.Services
                 entity.GiveGold(gold.Value);
                 entity.RecieveMessage($"You find {gold.Value} gold!");
                 _map.Remove((Entity)gold.Parent, location);
-                gold.Parent.DetatchParent();
             }
         }
 
