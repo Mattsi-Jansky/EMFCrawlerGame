@@ -209,5 +209,37 @@ namespace Crawler.Queryables
                 queryable.GiveGold(value);
             }
         }
+
+        public override void GetStrength(ref int value)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetStrength(ref value);
+            }
+        }
+
+        public override void GetDexterity(ref int value)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetStrength(ref value);
+            }
+        }
+
+        public override void GetConstitution(ref int value)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetStrength(ref value);
+            }
+        }
+
+        public override void GetWisdom(ref int value)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetStrength(ref value);
+            }
+        }
     }
 }

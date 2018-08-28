@@ -28,5 +28,9 @@ namespace Crawler.Queryables
         string GetPostTitle();
         void GetGold(ref IList<GoldComponent> gold);
         void GiveGold(int value);
+        void GetStrength(ref int value);
+        void GetDexterity(ref int value);
+        void GetConstitution(ref int value);
+        void GetWisdom(ref int value);
     }
 }
