@@ -41,6 +41,8 @@ namespace Crawler.Services
             entity.Add(new CharacterNameDisplayTextComponent());
             entity.Add(new BlockingComponent());
             entity.Add(new MessageTrackingComponent());
+            entity.Add(new CharacterComponent(
+                CharacterStats.GetStatsFor(newCharacterRequest.Race, newCharacterRequest.Archetype)));
 
             lock (_newCharactersLock)
             {

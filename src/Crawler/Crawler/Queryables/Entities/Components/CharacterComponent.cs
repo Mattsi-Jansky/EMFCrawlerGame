@@ -1,3 +1,5 @@
+using Crawler.Models;
+
 namespace Crawler.Queryables.Entities.Components
 {
     public class CharacterComponent : Component
@@ -11,7 +13,9 @@ namespace Crawler.Queryables.Entities.Components
             this.con = 8 + con;
             this.wis = 8 + wis;
         }
-        
+
+        public CharacterComponent(CharacterStats stats) : this(stats.str, stats.dex, stats.con, stats.wis) { }
+
         public override void GetStrength(ref int value)
         {
             value += str;

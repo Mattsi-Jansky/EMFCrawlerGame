@@ -5,37 +5,36 @@ namespace Crawler.Factories
 {
     public static class MobModelFactory
     {
-        private static readonly MobModel SkeletonWarrior = new MobModel("Skeleton Warrior", Graphic.SkeletonWarrior);
-        private static readonly MobModel SkeletonArcher = new MobModel("Skeleton Archer", Graphic.SkeletonRanger);
-        private static readonly MobModel SkeletonRogue = new MobModel("Skeleton Rogue", Graphic.SkeletonRogue);
-        private static readonly MobModel SkeletonKnight = new MobModel("Skeleton Knight", Graphic.SkeletonHellKnight);
-        private static readonly MobModel SkeletonWarlock = new MobModel("Skeleton Warlock", Graphic.SkeletonWarlock);
-        private static readonly MobModel Spider = new MobModel("Sneaky Spooder", Graphic.Spider);
-        private static readonly MobModel SpiderRed = new MobModel("Deadly Spooder", Graphic.SpiderRed);
-        private static readonly MobModel SpiderGreen = new MobModel("Toxic Spooder?", Graphic.SpiderGreen);
-        private static readonly MobModel CatBlack = new MobModel("Kitty", Graphic.CatBlack);
-        private static readonly MobModel SnakePurple = new MobModel("Snake", Graphic.SnakePurple);
-        private static readonly MobModel SnakeGreen = new MobModel("Snake", Graphic.SnakeGreen);
-        private static readonly MobModel ScorpionPale = new MobModel("Scorpion", Graphic.ScorpionPale);
-        private static readonly MobModel ScorpionBlack = new MobModel("Scorpion", Graphic.ScorpionBlack);
-        private static readonly MobModel Bat = new MobModel("Bat", Graphic.Bat);
-        private static readonly MobModel BatDark = new MobModel("Evil Bat", Graphic.BatDark);
-        private static readonly MobModel GoblinWarrior = new MobModel("Goblin", Graphic.GoblinWarrior);
-        private static readonly MobModel GoblingArmouredWarrior = new MobModel("Goblin", Graphic.GoblingArmouredWarrior);
-        private static readonly MobModel GoblinArmouredShieldedWarrior = new MobModel("Goblin", Graphic.GoblinArmouredShieldedWarrior);
-        private static readonly MobModel GoblinMage = new MobModel("Goblin Magicker", Graphic.GoblinMage);
-        private static readonly MobModel Troll = new MobModel("Troll", Graphic.Troll);
-        private static readonly MobModel TrollWarrior = new MobModel("Troll", Graphic.TrollWarrior);
-        private static readonly MobModel OgreWarrior = new MobModel("Ogre", Graphic.OgreWarrior);
-        private static readonly MobModel OgreWarriorGray = new MobModel("Ogre", Graphic.OgreWarriorGray);
-        private static readonly MobModel OgreWarriorArmoured = new MobModel("Ogre", Graphic.OgreWarriorArmoured);
-        private static readonly MobModel OgreWarriorArmouredGray = new MobModel("Ogre", Graphic.OgreWarriorArmouredGray);
-        private static readonly MobModel GiantWarrior = new MobModel("Giant", Graphic.GiantWarrior);
-        private static readonly MobModel GiantBarbarianMale = new MobModel("Giant", Graphic.GiantBarbarianMale);
-        private static readonly MobModel GiantBarbarianFemale = new MobModel("Giant", Graphic.GiantBarbarianFemale);
-        private static readonly MobModel GiantMonk = new MobModel("Giant", Graphic.GiantMonk);
-        
-        private static readonly MobModel RedTroll = new MobModel("Troll", Graphic.RedTroll);
+        private static readonly MobModel SkeletonWarrior = new MobModel("Skeleton Warrior", Graphic.SkeletonWarrior, new CharacterStats(8, 12, 5, 6));
+        private static readonly MobModel SkeletonArcher = new MobModel("Skeleton Archer", Graphic.SkeletonRanger, new CharacterStats(8, 12, 5, 6));
+        private static readonly MobModel SkeletonRogue = new MobModel("Skeleton Rogue", Graphic.SkeletonRogue, new CharacterStats(8, 12, 4, 6));
+        private static readonly MobModel SkeletonKnight = new MobModel("Skeleton Knight", Graphic.SkeletonHellKnight, new CharacterStats(8, 10, 10, 6));
+        private static readonly MobModel SkeletonWarlock = new MobModel("Skeleton Warlock", Graphic.SkeletonWarlock, new CharacterStats(8, 8, 4, 10));
+        private static readonly MobModel Spider = new MobModel("Sneaky Spooder", Graphic.Spider, new CharacterStats(10, 13, 9, 10));
+        private static readonly MobModel SpiderRed = new MobModel("Deadly Spooder", Graphic.SpiderRed, new CharacterStats(11, 13, 9, 10));
+        private static readonly MobModel SpiderGreen = new MobModel("Toxic Spooder?", Graphic.SpiderGreen, new CharacterStats(10, 13, 9, 10));
+        private static readonly MobModel CatBlack = new MobModel("Kitty", Graphic.CatBlack, new CharacterStats(9, 12, 9, 8));
+        private static readonly MobModel SnakePurple = new MobModel("Snake", Graphic.SnakePurple, new CharacterStats(7, 13, 7, 7));
+        private static readonly MobModel SnakeGreen = new MobModel("Snake", Graphic.SnakeGreen, new CharacterStats(7, 13, 7, 7));
+        private static readonly MobModel ScorpionPale = new MobModel("Scorpion", Graphic.ScorpionPale, new CharacterStats(7, 13, 6, 5));
+        private static readonly MobModel ScorpionBlack = new MobModel("Scorpion", Graphic.ScorpionBlack, new CharacterStats(7, 13, 6, 5));
+        private static readonly MobModel Bat = new MobModel("Bat", Graphic.Bat, new CharacterStats(10, 11, 7, 8));
+        private static readonly MobModel BatDark = new MobModel("Evil Bat", Graphic.BatDark, new CharacterStats(10, 11, 8, 9));
+        private static readonly MobModel GoblinWarrior = new MobModel("Goblin", Graphic.GoblinWarrior, new CharacterStats(9, 12, 8, 8));
+        private static readonly MobModel GoblingArmouredWarrior = new MobModel("Goblin", Graphic.GoblingArmouredWarrior, new CharacterStats(9, 11, 10, 8));
+        private static readonly MobModel GoblinArmouredShieldedWarrior = new MobModel("Goblin", Graphic.GoblinArmouredShieldedWarrior, new CharacterStats(9, 10, 12, 8));
+        private static readonly MobModel GoblinMage = new MobModel("Goblin Magicker", Graphic.GoblinMage, new CharacterStats(8, 11, 7, 12));
+        private static readonly MobModel Troll = new MobModel("Troll", Graphic.Troll, new CharacterStats(11, 9, 11, 9));
+        private static readonly MobModel TrollWarrior = new MobModel("Troll", Graphic.TrollWarrior, new CharacterStats(11, 9, 1, 9));
+        private static readonly MobModel OgreWarrior = new MobModel("Ogre", Graphic.OgreWarrior, new CharacterStats(11, 8, 13, 7));
+        private static readonly MobModel OgreWarriorGray = new MobModel("Ogre", Graphic.OgreWarriorGray, new CharacterStats(11, 8, 13, 7));
+        private static readonly MobModel OgreWarriorArmoured = new MobModel("Ogre", Graphic.OgreWarriorArmoured, new CharacterStats(11, 7, 14, 7));
+        private static readonly MobModel OgreWarriorArmouredGray = new MobModel("Ogre", Graphic.OgreWarriorArmouredGray, new CharacterStats(11, 7, 15, 7));
+        private static readonly MobModel GiantWarrior = new MobModel("Giant", Graphic.GiantWarrior, new CharacterStats(12, 8, 12, 8));
+        private static readonly MobModel GiantBarbarianMale = new MobModel("Giant", Graphic.GiantBarbarianMale, new CharacterStats(12, 8, 12, 8));
+        private static readonly MobModel GiantBarbarianFemale = new MobModel("Giant", Graphic.GiantBarbarianFemale, new CharacterStats(12, 8, 12, 8));
+        private static readonly MobModel GiantMonk = new MobModel("Giant", Graphic.GiantMonk, new CharacterStats(12, 10, 11, 8));
+        private static readonly MobModel RedTroll = new MobModel("Troll", Graphic.RedTroll, new CharacterStats(12, 12, 12, 10));
         
         public static readonly IList<IList<MobModel>> MobThemes = new List<IList<MobModel>>
         {
