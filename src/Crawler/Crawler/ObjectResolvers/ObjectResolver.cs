@@ -24,6 +24,7 @@ namespace Crawler.ObjectResolvers
             _container?.Dispose();
 
             _container = new UnityContainer();
+            _container.RegisterInstance(new Random());
             _container.RegisterInstance(map);
             _container.RegisterInstance(entityPlacer);
             _container.RegisterInstance(entitiesCollection);
@@ -36,6 +37,7 @@ namespace Crawler.ObjectResolvers
             _container.RegisterType(typeof(PlayerCharactersService));
             _container.RegisterType(typeof(MobCommandFetchingService));
             _container.RegisterType(typeof(InteractionService));
+            _container.RegisterType(typeof(CombatService));
 
             _container.RegisterType(typeof(MoveCommand));
         }

@@ -44,7 +44,7 @@ namespace Crawler.Queryables.Entities.Components
         public override void GetDamageDice(ref Dice dice)
         {
             //If no weapon equipped default to low damage for fists
-            if (dice != null && fisticuffsDamageDice.Greater(dice))
+            if (dice == null)
             {
                 dice = fisticuffsDamageDice;
             }

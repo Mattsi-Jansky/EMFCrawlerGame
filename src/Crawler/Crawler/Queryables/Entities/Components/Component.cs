@@ -34,7 +34,7 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void GetDamageDice(ref Dice dice) { }
         public virtual void GetDamageBonus(ref int value) { }
         public virtual void TakeDamage(int damage) { }
-        public virtual bool IsDead() { }
+        public virtual bool IsDead() { return default(bool); }
         public virtual void GetArmourClass(ref int ac) { }
 
         public virtual void AttachParent(IQueryable parent)

@@ -34,14 +34,16 @@ namespace Crawler.Commands
             Point position = _entity.GetPosition();
             _targetPosition = position.Add(_direction);
             
-            return _direction.AbsSum() == 1
-                && _moveEntityService.IsLegalTileToOccupy(_targetPosition);
+            return _direction.AbsSum() == 1;
         }
         
         public void Resolve()
         {
             _interactionService.InteractWithEnititiesAt(_entity, _targetPosition);
-            _moveEntityService.Move(_entity, _targetPosition);
+            if (_moveEntityService.IsLegalTileToOccupy(_targetPosition))
+            {
+                _moveEntityService.Move(_entity, _targetPosition);
+            }
         }
     }
 }

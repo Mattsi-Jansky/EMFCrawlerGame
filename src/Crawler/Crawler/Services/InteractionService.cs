@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Crawler.Maps;
+using Crawler.Models;
 using Crawler.Queryables.Entities;
 using Crawler.Queryables.Entities.Components;
+using Crawler.Queryables.Tiles;
 
 namespace Crawler.Services
 {
@@ -9,17 +13,30 @@ namespace Crawler.Services
     {
         private IMap _map;
         private readonly MoveEntityService _moveEntityService;
+        private readonly Random _random;
+        private readonly CombatService _combatService;
 
-        public InteractionService(IMap map, MoveEntityService moveEntityService)
+        public InteractionService(IMap map, MoveEntityService moveEntityService, Random random, CombatService combatService)
         {
             _map = map;
             _moveEntityService = moveEntityService;
+            _random = random;
+            _combatService = combatService;
         }
 
         public void InteractWithEnititiesAt(Entity entity, Point location)
         {
             InteractWithEquippables(entity, location);
             InteractWithGold(entity, location);
+            if (_map.Get(location).IsBlocked())
+            {
+                InteractWithBlockingObject(entity, location);
+            }
+        }
+
+        private void InteractWithBlockingObject(Entity entity, Point location)
+        {
+            _combatService.Attack(entity, location);
         }
 
         private void InteractWithGold(Entity entity, Point location)
