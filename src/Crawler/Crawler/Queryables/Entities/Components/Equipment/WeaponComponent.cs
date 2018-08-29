@@ -5,15 +5,19 @@ namespace Crawler.Queryables.Entities.Components
 {
     public class WeaponComponent : EquipableComponent
     {
-        private Dice _damageDice;
-        private Attribute _toHitAttribute;
-        private Attribute? _damageBonus;
+        public readonly Dice DamageDice;
+        private readonly Attribute _toHitAttribute;
+        private readonly Attribute? _damageBonus;
+        public readonly string Name;
+        public readonly Graphic Graphic;
 
-        public WeaponComponent(Dice damageDice, Attribute toHitAttribute, Attribute? damageBonus) : base(EquipableSlot.Weapon)
+        public WeaponComponent(Dice damageDice, Attribute toHitAttribute, Attribute? damageBonus, string name, Graphic graphic) : base(EquipableSlot.Weapon)
         {
-            _damageDice = damageDice;
+            DamageDice = damageDice;
             _toHitAttribute = toHitAttribute;
             _damageBonus = damageBonus;
+            Name = name;
+            Graphic = graphic;
         }
 
         public override void GetHitBonus(ref int value)
@@ -38,11 +42,11 @@ namespace Crawler.Queryables.Entities.Components
             }
         }
 
-        public override void GetDamageDice(ref Dice dice)
+        public override void GetWeapon(ref WeaponComponent weapon)
         {
-            if (dice == null || _damageDice.Greater(dice))
+            if (weapon == null || DamageDice.Greater(weapon.DamageDice))
             {
-                dice = _damageDice;
+                weapon = this;
             }
         }
 

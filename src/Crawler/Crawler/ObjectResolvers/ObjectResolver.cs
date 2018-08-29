@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Crawler.Commands;
+using Crawler.Factories;
 using Crawler.Maps;
 using Crawler.Maps.EntityPlacers;
 using Crawler.Queryables.Entities;
@@ -38,6 +39,7 @@ namespace Crawler.ObjectResolvers
             _container.RegisterType(typeof(MobCommandFetchingService));
             _container.RegisterType(typeof(InteractionService));
             _container.RegisterType(typeof(CombatService));
+            _container.RegisterType(typeof(WeaponFactory));
 
             _container.RegisterType(typeof(MoveCommand));
         }

@@ -33,7 +33,7 @@ namespace Crawler.Queryables
         void GetConstitution(ref int value);
         void GetWisdom(ref int value);
         void GetHitBonus(ref int value);
-        void GetDamageDice(ref Dice dice);
+        void GetWeapon(ref WeaponComponent weapon);
         void GetDamageBonus(ref int value);
         void TakeDamage(int damage);
         bool IsDead();

@@ -3,6 +3,7 @@ using System.Linq;
 using Crawler.Maps;
 using Crawler.Models;
 using Crawler.Queryables.Entities;
+using Crawler.Queryables.Entities.Components;
 using Crawler.Queryables.Tiles;
 
 namespace Crawler.Services
@@ -27,20 +28,22 @@ namespace Crawler.Services
             var hitBonus = GetHitBonus(attacker);
             var opponentName = targetTile.GetName();
             var attackerName = attacker.GetName();
+            WeaponComponent weapon = null;
+            attacker.GetWeapon(ref weapon);
             
             if (AttackHits(hitBonus, opponentAc))
             {
-                var damage = CalculateDamage(attacker, targetTile);
+                var damage = CalculateDamage(attacker, targetTile, weapon);
                 targetTile.TakeDamage(damage);
                 
-                attacker.RecieveMessage($"You attack {opponentName} for {damage} DMG!");
-                targetTile.RecieveMessage($"{attackerName} attacks you for {damage} DMG!");
+                attacker.RecieveMessage($"You attack {opponentName} with your {weapon.Name} for {damage} DMG!");
+                targetTile.RecieveMessage($"{attackerName} attacks you with their {weapon.Name} for {damage} DMG!");
                 RemoveTargetIfDead(targetTile);
             }
             else
             {
-                attacker.RecieveMessage($"You attack {opponentName} but miss!");
-                targetTile.RecieveMessage($"{attackerName} attacks you but misses!");
+                attacker.RecieveMessage($"You attack {opponentName} with your {weapon.Name} but miss!");
+                targetTile.RecieveMessage($"{attackerName} with their {weapon.Name} attacks you but misses!");
             }
         }
         
@@ -72,14 +75,13 @@ namespace Crawler.Services
             return opponentAc;
         }
 
-        public int CalculateDamage(Entity attacker, Tile tile)
+        public int CalculateDamage(Entity attacker, Tile tile, WeaponComponent weapon)
         {
-            Dice dice = null;
-            attacker.GetDamageDice(ref dice);
+            
             int damageBonus = 0;
             attacker.GetDamageBonus(ref damageBonus);
 
-            return dice.RollAll(_random).Sum() + damageBonus;
+            return weapon.DamageDice.RollAll(_random).Sum() + damageBonus;
         }
 
         private void RemoveEntity(Entity entity)

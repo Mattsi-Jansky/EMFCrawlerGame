@@ -26,11 +26,14 @@ namespace Crawler.Services
 
         public void InteractWithEnititiesAt(Entity entity, Point location)
         {
-            InteractWithEquippables(entity, location);
-            InteractWithGold(entity, location);
             if (_map.Get(location).IsBlocked())
             {
                 InteractWithBlockingObject(entity, location);
+            }
+            else
+            {
+                InteractWithEquippables(entity, location);
+                InteractWithGold(entity, location);
             }
         }
 

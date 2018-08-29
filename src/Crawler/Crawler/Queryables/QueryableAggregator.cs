@@ -250,11 +250,11 @@ namespace Crawler.Queryables
             }
         }
 
-        public override void GetDamageDice(ref Dice dice)
+        public override void GetWeapon(ref WeaponComponent weapon)
         {
             foreach (var queryable in Queryables)
             {
-                queryable.GetDamageDice(ref dice);
+                queryable.GetWeapon(ref weapon);
             }
         }
         

@@ -7,7 +7,7 @@ namespace Crawler.Queryables.Entities.Components
         private int str, dex, con, wis;
         private int hp;
         private int baseAc;
-        private Dice fisticuffsDamageDice = new Dice(1,4); 
+        private static WeaponComponent fisticuffs = new WeaponComponent(new Dice(1,4), Attribute.Str, null, "Fisticuffs", Graphic.Apple); 
 
         public CharacterComponent(int str, int dex, int con, int wis)
         {
@@ -41,12 +41,12 @@ namespace Crawler.Queryables.Entities.Components
             value += wis;
         }
         
-        public override void GetDamageDice(ref Dice dice)
+        public override void GetWeapon(ref WeaponComponent weapon)
         {
             //If no weapon equipped default to low damage for fists
-            if (dice == null)
+            if (weapon == null)
             {
-                dice = fisticuffsDamageDice;
+                weapon = fisticuffs;
             }
         }
 

@@ -31,7 +31,7 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void GetConstitution(ref int value) { }
         public virtual void GetWisdom(ref int value) { }
         public virtual void GetHitBonus(ref int value) { }
-        public virtual void GetDamageDice(ref Dice dice) { }
+        public virtual void GetWeapon(ref WeaponComponent weapon) { }
         public virtual void GetDamageBonus(ref int value) { }
         public virtual void TakeDamage(int damage) { }
         public virtual bool IsDead() { return default(bool); }

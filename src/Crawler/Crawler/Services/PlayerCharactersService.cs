@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Crawler.Factories;
 using Crawler.Maps;
 using Crawler.Maps.EntityPlacers;
 using Crawler.Models;
@@ -20,8 +21,9 @@ namespace Crawler.Services
         private readonly IEntityPlacer _entityPlacer;
         private readonly IMap _map;
         private readonly PlayerClientMessagesService _playerClientMessagesService;
+        private readonly WeaponFactory _weaponFactory;
 
-        public PlayerCharactersService(PutEntityService entityService, EntitiesCollection entities, IEntityPlacer entityPlacer, IMap map, PlayerClientMessagesService playerClientMessagesService)
+        public PlayerCharactersService(PutEntityService entityService, EntitiesCollection entities, IEntityPlacer entityPlacer, IMap map, PlayerClientMessagesService playerClientMessagesService, WeaponFactory weaponFactory)
         {
             _putEntityService = entityService;
             _entities = entities;
@@ -30,6 +32,7 @@ namespace Crawler.Services
             _newCharacters = new Stack<Entity>();
             _deleteRequestedCharacterIds = new Stack<Guid>();
             _playerClientMessagesService = playerClientMessagesService;
+            _weaponFactory = weaponFactory;
         }
 
         public Guid Add(NewCharacterRequest newCharacterRequest)
@@ -43,6 +46,7 @@ namespace Crawler.Services
             entity.Add(new MessageTrackingComponent());
             entity.Add(new CharacterComponent(
                 CharacterStats.GetStatsFor(newCharacterRequest.Race, newCharacterRequest.Archetype)));
+            entity.Add(_weaponFactory.Get(newCharacterRequest.Archetype));
 
             lock (_newCharactersLock)
             {
