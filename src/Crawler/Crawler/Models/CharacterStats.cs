@@ -64,7 +64,7 @@ namespace Crawler.Models
         
         public static int GetAbilityModifier(int score)
         {
-            return score - 10 / 2;
+            return (score - 10) / 2;
         }
         
         public int str, dex, con, wis;
