@@ -29,6 +29,7 @@ namespace Crawler.Factories
         private Dictionary<Weapon, Func<WeaponComponent>> weaponGenerators =
             new Dictionary<Weapon, Func<WeaponComponent>>
             {
+                {Weapon.Fisticuffs, () => new WeaponComponent(new Dice(1,4), Attribute.Str, null, "Fisticuffs", Graphic.Apple)},
                 {Weapon.ShortSword, () => new WeaponComponent(new Dice(1,6), Attribute.Dex, Attribute.Str, "Short Sword", Graphic.Sword)},
                 {Weapon.LongSword, () => new WeaponComponent(new Dice(1,8), Attribute.Str, Attribute.Str, "Long Sword", Graphic.Sword_goldhilt)},
                 {Weapon.GreatSword, () => new WeaponComponent(new Dice(2,6), Attribute.Str, Attribute.Str, "Great Sword", Graphic.Sword_goldfull)},
@@ -40,7 +41,9 @@ namespace Crawler.Factories
                 {Weapon.StoneStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Stone Stave", Graphic.Wand_plain)},
                 {Weapon.GemStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Gem Stave", Graphic.Wand_blue)},
                 {Weapon.SapphireStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Sapphire Stave", Graphic.Wand_red)},
-                {Weapon.DiamondStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Diamond Stave", Graphic.Wand_green)},                
+                {Weapon.Claws, () => new WeaponComponent(new Dice(1,6), Attribute.Dex, null, "Claws", Graphic.CatBlack)},
+                {Weapon.Teeth, () => new WeaponComponent(new Dice(1,6), Attribute.Wis, Attribute.Str, "Teeth", Graphic.DemonDogRed)},
+                {Weapon.Tail, () => new WeaponComponent(new Dice(1,4), Attribute.Dex, null, "Tail", Graphic.ScorpionBlack)},
             };
 
         public WeaponComponent Get(Weapon weapon)

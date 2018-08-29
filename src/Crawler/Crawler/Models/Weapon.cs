@@ -2,6 +2,7 @@ namespace Crawler.Models
 {
     public enum Weapon
     {
+        Fisticuffs,
         ShortSword,
         LongSword,
         GreatSword,
@@ -13,6 +14,9 @@ namespace Crawler.Models
         StoneStave,
         GemStave,
         SapphireStave,
-        DiamondStave
+        DiamondStave,
+        Claws,
+        Teeth,
+        Tail
     }
 }

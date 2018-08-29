@@ -25,7 +25,7 @@ namespace Crawler.Factories
             _roomFeatures = new List<IRoomFeature>();
             foreach (var theme in MobModelFactory.MobThemes)
             {
-                _roomFeatures.Add(new ThemedMobRoomFeature(theme, _random));
+                _roomFeatures.Add(new ThemedMobRoomFeature(theme, _random, new WeaponFactory()));
             }
         }
     }

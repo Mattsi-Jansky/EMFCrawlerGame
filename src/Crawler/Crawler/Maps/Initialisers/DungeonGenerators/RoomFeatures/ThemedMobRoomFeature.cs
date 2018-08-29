@@ -11,10 +11,12 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
     {
         private readonly IList<MobModel> _mobModels;
         private readonly int _maxNumberOfMobsPerRoom = 10;
+        private readonly WeaponFactory _weaponFactory; 
 
-        public ThemedMobRoomFeature(IList<MobModel> mobModels, Random random) : base(random)
+        public ThemedMobRoomFeature(IList<MobModel> mobModels, Random random, WeaponFactory weaponFactory) : base(random)
         {
             _mobModels = mobModels;
+            _weaponFactory = weaponFactory;
             Random = random;
         }
 
@@ -25,7 +27,7 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
             for (int i = 0; i < numberOfMobs; i++)
             {
                 var model = _mobModels[Random.Next(_mobModels.Count)];
-                var newMob = MobFactory.GenerateMob(model);
+                var newMob = MobFactory.GenerateMob(model, _weaponFactory);
                 entitiesCollection.Add(newMob.Id, newMob);
                 AddEntityRandomly(newMob, room, map);
             }

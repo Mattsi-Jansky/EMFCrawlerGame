@@ -9,7 +9,7 @@ namespace Crawler.Factories
 {
     public static class MobFactory
     {
-        public static Entity GenerateMob(MobModel model)
+        public static Entity GenerateMob(MobModel model, WeaponFactory weaponFactory)
         {
             var mob = new Entity();
             
@@ -19,6 +19,7 @@ namespace Crawler.Factories
             mob.Add(new RandomMovementControllerComponent(new Random(), mob.Id));
             mob.Add(new BlockingComponent());
             mob.Add(new CharacterComponent(model.Stats.str, model.Stats.dex, model.Stats.con, model.Stats.wis));
+            mob.Add(weaponFactory.Get(model.Weapon));
             
             return mob;
         }

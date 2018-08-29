@@ -1,3 +1,4 @@
+using Crawler.Factories;
 using Crawler.Models;
 
 namespace Crawler.Queryables.Entities.Components
@@ -7,7 +8,7 @@ namespace Crawler.Queryables.Entities.Components
         private int _str, _dex, _con, _wis;
         private int hp;
         private int baseAc;
-        private static WeaponComponent fisticuffs = new WeaponComponent(new Dice(1,4), Attribute.Str, null, "Fisticuffs", Graphic.Apple); 
+        private WeaponComponent fisticuffs; 
 
         public CharacterComponent(int str, int dex, int con, int wis)
         {
@@ -17,6 +18,7 @@ namespace Crawler.Queryables.Entities.Components
             _wis = 8 + wis;
             hp = _con;
             baseAc = 10 + CharacterStats.GetAbilityModifier(_dex);
+            fisticuffs = new WeaponFactory().Get(Weapon.Fisticuffs);
         }
 
         public CharacterComponent(CharacterStats stats) : this(stats.str, stats.dex, stats.con, stats.wis) { }
