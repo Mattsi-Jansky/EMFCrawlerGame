@@ -26,6 +26,7 @@ namespace Crawler.Factories
             foreach (var theme in MobModelFactory.MobThemes)
             {
                 _roomFeatures.Add(new ThemedMobRoomFeature(theme, _random, new WeaponFactory()));
+                _roomFeatures.Add(new NothingFeature());
             }
         }
     }
