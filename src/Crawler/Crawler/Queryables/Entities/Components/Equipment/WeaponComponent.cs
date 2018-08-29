@@ -74,5 +74,13 @@ namespace Crawler.Queryables.Entities.Components
                 }
             }
         }
+
+        public Entity AsEntity()
+        {
+            var entity = new Entity(this);
+            entity.Add(new GraphicComponent(Graphic));
+            entity.Add(new NameComponent(Name));
+            return entity;
+        }
     }
 }

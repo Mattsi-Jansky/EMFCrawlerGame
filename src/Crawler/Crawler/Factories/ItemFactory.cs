@@ -17,7 +17,8 @@ namespace Crawler.Factories
             {
                 new HatGenerator(_random),
                 new PotionGenerator(_random),
-                new GoldGenerator()
+                new GoldGenerator(),
+                new WeaponGenerator(_random)
             };
         }
 
