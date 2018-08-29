@@ -13,6 +13,20 @@ namespace Crawler.Factories
         {
             return Floor(5, colour);
         }
+
+        public static Tile Water()
+        {
+            var water = new Entity();
+            
+            water.Add(new AnimatedGraphicComponent(
+                new Graphic[]
+                {
+                    Graphic.WaterTile,
+                    Graphic.WaterFrame2
+                }));
+            
+            return new Tile(water);
+        }
         
         public static Tile Floor()
         {
