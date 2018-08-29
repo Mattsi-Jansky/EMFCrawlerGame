@@ -31,6 +31,8 @@ namespace Crawler.Services
         {
             lock(_messagesLock)
             {
+                var deadEntities = new List<Entity>();
+                
                 foreach(var entity in _entitiesManager.Get())
                 {
                     if (_messages.ContainsKey(entity.Id))
@@ -38,6 +40,14 @@ namespace Crawler.Services
                         var messages = entity.GetMessages();
                         _messages[entity.Id].AddRange(messages);
                     }
+                    if(entity.IsDead()) deadEntities.Add(entity);
+                }
+                
+                //This is done here because entities need to receive their final death message
+                //before being removed
+                foreach (var deadEntity in deadEntities)
+                {
+                    _entitiesManager.Remove(deadEntity.Id);
                 }
             }
         }

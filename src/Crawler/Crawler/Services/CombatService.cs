@@ -38,20 +38,23 @@ namespace Crawler.Services
                 
                 attacker.RecieveMessage($"You attack {opponentName} with your {weapon.Name} for {damage} DMG!");
                 targetTile.RecieveMessage($"{attackerName} attacks you with their {weapon.Name} for {damage} DMG!");
-                RemoveTargetIfDead(targetTile);
+                HandleTargetDeath(targetTile);
             }
             else
             {
                 attacker.RecieveMessage($"You attack {opponentName} with your {weapon.Name} but miss!");
-                targetTile.RecieveMessage($"{attackerName} with their {weapon.Name} attacks you but misses!");
+                targetTile.RecieveMessage($"{attackerName} attacks with their {weapon.Name} you but misses!");
             }
         }
         
-        private void RemoveTargetIfDead(Tile targetTile)
+        private void HandleTargetDeath(Tile targetTile)
         {
             if (targetTile.IsDead())
             {
-                RemoveEntity(null);
+                var entity = targetTile.GetDeadEntity();
+                //todo add score to death message
+                entity.RecieveMessage("You have died!");
+                _map.Remove(entity, entity.GetPosition());
             }
         }
 
@@ -82,11 +85,6 @@ namespace Crawler.Services
             attacker.GetDamageBonus(ref damageBonus);
 
             return weapon.DamageDice.RollAll(_random).Sum() + damageBonus;
-        }
-
-        private void RemoveEntity(Entity entity)
-        {
-            
         }
     }
 }

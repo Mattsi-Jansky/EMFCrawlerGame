@@ -11,11 +11,11 @@ namespace Crawler.Queryables
 {
     public class QueryableAggregator<T> : Component where T : IQueryable
     {
-        protected readonly IList<IQueryable> Queryables;
+        protected readonly IList<T> Queryables;
 
         public QueryableAggregator()
         {
-            Queryables = new List<IQueryable>();
+            Queryables = new List<T>();
         }
 
         public QueryableAggregator<T> Add(T queryable)

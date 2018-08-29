@@ -8,5 +8,18 @@ namespace Crawler.Queryables.Tiles
         {
             Add(entity);
         }
+
+        public Entity GetDeadEntity()
+        {
+            foreach (var entity in Queryables)
+            {
+                if (entity.IsDead())
+                {
+                    return entity;
+                }
+            }
+
+            return null;
+        }
     }
 }

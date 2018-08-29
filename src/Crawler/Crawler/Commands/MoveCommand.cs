@@ -31,6 +31,7 @@ namespace Crawler.Commands
             if (!_entitiesCollection.Contains(_id)) return false;
             
             _entity = _entitiesCollection.Get(_id);
+            if (_entity.IsDead()) return false;
             Point position = _entity.GetPosition();
             _targetPosition = position.Add(_direction);
             

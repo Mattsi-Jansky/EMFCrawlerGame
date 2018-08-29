@@ -4,41 +4,41 @@ namespace Crawler.Queryables.Entities.Components
 {
     public class CharacterComponent : Component
     {
-        private int str, dex, con, wis;
+        private int _str, _dex, _con, _wis;
         private int hp;
         private int baseAc;
         private static WeaponComponent fisticuffs = new WeaponComponent(new Dice(1,4), Attribute.Str, null, "Fisticuffs", Graphic.Apple); 
 
         public CharacterComponent(int str, int dex, int con, int wis)
         {
-            this.str = 8 + str;
-            this.dex = 8 + dex;
-            this.con = 8 + con;
-            this.wis = 8 + wis;
-            hp = con;
-            baseAc = 10 + CharacterStats.GetAbilityModifier(dex);
+            _str = 8 + str;
+            _dex = 8 + dex;
+            _con = 8 + con;
+            _wis = 8 + wis;
+            hp = _con;
+            baseAc = 10 + CharacterStats.GetAbilityModifier(_dex);
         }
 
         public CharacterComponent(CharacterStats stats) : this(stats.str, stats.dex, stats.con, stats.wis) { }
 
         public override void GetStrength(ref int value)
         {
-            value += str;
+            value += _str;
         }
 
         public override void GetDexterity(ref int value)
         {
-            value += dex;
+            value += _dex;
         }
 
         public override void GetConstitution(ref int value)
         {
-            value += con;
+            value += _con;
         }
 
         public override void GetWisdom(ref int value)
         {
-            value += wis;
+            value += _wis;
         }
         
         public override void GetWeapon(ref WeaponComponent weapon)
