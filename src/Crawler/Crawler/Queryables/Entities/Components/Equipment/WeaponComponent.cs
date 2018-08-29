@@ -40,7 +40,7 @@ namespace Crawler.Queryables.Entities.Components
 
         public override void GetDamageDice(ref Dice dice)
         {
-            if (dice != null && _damageDice.Greater(dice))
+            if (dice == null || _damageDice.Greater(dice))
             {
                 dice = _damageDice;
             }
