@@ -41,6 +41,26 @@ objects = ['Chest_full','Chest_empty','Chest_closed','Diamond_red','Diamond_purp
 'Bookshelf_dupe','Bed1','Bed2']
 objectsStart = 729
 
+altEnvTiles = ['BlueLines','BlueSquare','GreenLines','GreenSquare','DarkBlueLines','DarkBlueSquare','Grass','Sand','DarkSand','SimpleTree','YellowSimpleTree','DeadSimpleTree',
+'BlankNothing','BigTree','TinyTree','AnotherTree','BlackBox','GrayBox','BrownBox','YellowBox','DarkPurpleBox','PurpleBox','DarkGrass','BlueGrass','BlackBoxDupe','GrayBoulder',
+'YellowBoulder','BigStoneDoor','StoneDoor','BigStoneFortDoor','SmallerStoneDoor','Stones','StoneGround','GrayCircleFloorTile','YellowStoneGround','YellowCircleFloorTile',
+'PurpleStoneGround','GrayCircleFloorTileDupe','KitchenTile','GrayKitchenTile','YellowKitchenTile','SmallBoulder','GrayTriangle','WeirdGridTile','SmallMushroom','BigMushroom',
+'WhiteFlowers','PinkFlowers','Lava','GrassDupeDupe','Water','Stars','RedStone','StarStreaks','MoreStars','CloseBracket','LiterallyJustASquare','StoneHenge','SmallStoneHenge',
+'GrayDoorway','WoodenDoorway','GrayLockedDoorway','Lilipods','MoreLilipods','LavaDupe','GrassDupe','WaterDupe','StarsDupe','RedStoneDupe','StarStreaksDupe','MoreStarsDupe',
+'BedDupeEast','BedDupeWest','ChairDupeEast','ChairDupeWest','ChairDupeNorth','TableDupe','BookshelfDupeNorth','BookshelfDupeEast','BookshelfDupeWest','CircleThingy1',
+'CircleThingy2','CircleThingy3','CircleThingy4','CircleThingy5','WeirdTinySquareGrid','WeirdTinySquareTriangleEast','WeirdTinySquareTriangleWest',
+'WeirdTinySquareTriangleEastInverted','WeirdTinySquareTriangleWestInverted','LiterallyJustABiggerSquare','LiterallyJustAnEmbossedSquare','GrayButton','BlueButton',
+'YellowButton','RedButton','CircleThingy6','CircleThingy7','CircleThingy8','CircleThingy9','CircleThingy10','WeirdTinySquareGridDupe','WeirdTinySquareTriangleEastDupe',
+'WeirdTinySquareTriangleWestDupe','WeirdTinySquareTriangleEastInvertedDupe','WeirdTinySquareTriangleWestInvertedDupe','DiagonalGrayLines','DiagonalPurpleLines',
+'DiagonalBronLines','DiagonalBlueLines','Tiny3dBox','Tiny3dBoxDupe','NorthPlatform','NorthPlatformWithTorch','NorthPlatformWithTorchAlt','NorthPlatformDestroyed',
+'NorthPlatformAlt','NorthPlatformAltWithTorch','NorthPlatformAltWithTorchAlt','NorthPlatformAltDestroyed','NorthPlatformPlain','NorthPlatformPlainWithCorners',
+'NorthPlatformPlainWithCornersAndSquare','BrownNorthPlatformPlainWithCorners','WaterTile','SandTile','DarkSandTile','AnotherBlankNothingTile','Platform','PlatformWithTorch',
+'PlatformWithTorchAlt','PlatformDestroyed','PlatformAlt','PlatformAltWithTorch','PlatformAltWithTorchAlt','PlatformAltDestroyed','PlatformPlain','PlatformPlainWithCorners',
+'PlatformPlainWithCornersAndSquare','BrownPlatformPlainWithCorners','WaterFrame2','BittySand','StoneBricks','AnotherBlankNothingTileDupe','WideDoorWooden','WideDoorWoodenOpen',
+'WideDoorStone','WideDoorStoneOpen','WideDoorSteelBars','WideDoorSteelBarsOpen','WideDoorSand','WideDoorSandOpen','WideDoorOrange','WideDoorOrangeOpen',
+'AnotherBlankNothingDupeDupe','SignEast','SignWest','SignLines','AnotherBlankNothingDupeDupeDupe','AnotherBlankNothingDupeDupeDupeDupe']
+altEnvTilesStart = 881
+
 print "found %s races" % (len(races))
 print "found %s classes" % (len(classes))
 
@@ -94,6 +114,11 @@ for o in range(len(objects)):
     print("(%s, '%s')" % (objectsStart + o, objects[o]))
 
 print ""
+print "Alt env tiles"
+for t in range(len(altEnvTiles)):
+    print("(%s, '%s')" % (altEnvTilesStart + t, altEnvTiles[t]))
+
+print ""
 print "Enum entries"
 for r in range(len(races)):
     for c in range(len(classes)):
@@ -107,3 +132,5 @@ for h in range(len(hats)):
     print("        %s," % (hats[h]))
 for o in range(len(objects)):
     print("        %s," % (objects[o]))
+for t in range(len(altEnvTiles)):
+    print("        %s," % (altEnvTiles[t]))

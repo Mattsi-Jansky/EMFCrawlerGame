@@ -55,12 +55,13 @@ game.graphics.init = function() {
     game.graphics.init.characters();
     game.graphics.init.mobs();
     game.graphics.init.objects();
+    game.graphics.init.altEnvironmentTiles();
 };
 
 game.graphics.init.environmentTiles = function() {
     var start = 403;
 
-    for(var y = 0; y < 16; y++) {
+    for(var y = 0; y < 4; y++) {
         for(var x = 0; x < 16; x++) {
             var texture = TextureCache[game.graphics.keys.envSheet].clone();
             texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
@@ -68,6 +69,18 @@ game.graphics.init.environmentTiles = function() {
         }
     }
 };
+
+game.graphics.init.altEnvironmentTiles = function() {
+    start = 881;
+
+    for(var y = 4; y < 16; y++) {
+        for(var x = 0; x < 16; x++) {
+            var texture = TextureCache[game.graphics.keys.envSheet].clone();
+            texture.frame = new Rectangle(x * game.var.spriteSize, y * game.var.spriteSize, game.var.spriteSize, game.var.spriteSize);
+            game.graphics[start + ((y - 4) * 16) + x] = texture;
+        }
+    }
+}
 
 game.graphics.init.characters = function() {
     var start = 0;
