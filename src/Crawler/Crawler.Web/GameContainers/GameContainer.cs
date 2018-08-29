@@ -16,7 +16,7 @@ namespace Crawler.Web.GameContainers
         private static GameContainer _this;
         public static GameContainer Instance => _this ?? (_this = new GameContainer());
 
-        public const int GameLoopTickTime = 250;
+        public const int GameLoopTickTime = 1000;
         public const int CleanupClientsLoopTickTime = 30000;
         private readonly Stopwatch _gameLoopTimer;
         private readonly CrawlGame _game;
