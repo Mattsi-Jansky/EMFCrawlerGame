@@ -26,28 +26,30 @@ namespace Crawler.Services.DungeonGenerators
         {
             var size = new Point(_mapModel.Length, _mapModel[0].Length);
             _map = new Map(size);
+            Random random = new Random();
+            int colour = random.Next(4);
 
             for (int x = 0; x < size.X; x++)
             {
                 for (int y = 0; y < size.Y; y++)
                 {
-                    TranslateTile(new Point(x, y), _mapModel[x][y]);
+                    TranslateTile(new Point(x, y), _mapModel[x][y], colour);
                 }
             }
 
             return _map;
         }
 
-        private void TranslateTile(Point to, TileModel from)
+        private void TranslateTile(Point to, TileModel from, int colour)
         {
             switch (from)
             {
                 case TileModel.Floor:
-                    _map.Set(to, TileFactory.Floor());
+                    _map.Set(to, TileFactory.Floor(colour));
                     break;
                 case TileModel.Wall:
                     var isNorthWall = this.IsNorthWall(to);
-                    _map.Set(to, TileFactory.Wall(isNorthWall, 0));
+                    _map.Set(to, TileFactory.Wall(isNorthWall, colour));
                     break;
                 default:
                     _map.Set(to, TileFactory.Wall(14, 0));

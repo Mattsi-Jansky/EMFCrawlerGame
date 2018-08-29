@@ -9,6 +9,11 @@ namespace Crawler.Factories
     {
         private static int envTileStart = 403;
 
+        public static Tile Floor(int colour)
+        {
+            return Floor(5, colour);
+        }
+        
         public static Tile Floor()
         {
             return Floor(5, 0);
