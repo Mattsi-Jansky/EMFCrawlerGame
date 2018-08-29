@@ -16,7 +16,7 @@ namespace Crawler.Queryables.Entities.Components
             _dex = 8 + dex;
             _con = 8 + con;
             _wis = 8 + wis;
-            hp = _con;
+            hp = _con * 3;
             baseAc = 10 + CharacterStats.GetAbilityModifier(_dex);
             fisticuffs = new WeaponFactory().Get(Weapon.Fisticuffs);
         }
