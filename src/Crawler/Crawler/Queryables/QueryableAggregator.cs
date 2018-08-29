@@ -293,5 +293,13 @@ namespace Crawler.Queryables
                 queryable.GetArmourClass(ref ac);
             }
         }
+
+        public override void GetDrops(ref List<Entity> drops)
+        {
+            foreach (var queryable in Queryables)
+            {
+                queryable.GetDrops(ref drops);
+            }
+        }
     }
 }

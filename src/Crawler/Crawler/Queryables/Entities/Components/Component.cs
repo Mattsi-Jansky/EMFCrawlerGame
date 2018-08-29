@@ -36,6 +36,7 @@ namespace Crawler.Queryables.Entities.Components
         public virtual void TakeDamage(int damage) { }
         public virtual bool IsDead() { return default(bool); }
         public virtual void GetArmourClass(ref int ac) { }
+        public virtual void GetDrops(ref List<Entity> drops) { }
 
         public virtual void AttachParent(IQueryable parent)
         {

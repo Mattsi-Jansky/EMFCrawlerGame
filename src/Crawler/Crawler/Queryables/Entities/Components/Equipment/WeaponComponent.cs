@@ -10,6 +10,7 @@ namespace Crawler.Queryables.Entities.Components
         private readonly Attribute? _damageBonus;
         public readonly string Name;
         public readonly Graphic Graphic;
+        public bool Droppable { get; set; }
 
         public WeaponComponent(Dice damageDice, Attribute toHitAttribute, Attribute? damageBonus, string name, Graphic graphic) : base(EquipableSlot.Weapon)
         {
@@ -81,6 +82,11 @@ namespace Crawler.Queryables.Entities.Components
             entity.Add(new GraphicComponent(Graphic));
             entity.Add(new NameComponent(Name));
             return entity;
+        }
+
+        public override void GetDrops(ref List<Entity> drops)
+        {
+            if(Droppable) drops.Add(AsEntity());
         }
     }
 }

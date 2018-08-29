@@ -38,5 +38,6 @@ namespace Crawler.Queryables
         void TakeDamage(int damage);
         bool IsDead();
         void GetArmourClass(ref int ac);
+        void GetDrops(ref List<Entity> drops);
     }
 }

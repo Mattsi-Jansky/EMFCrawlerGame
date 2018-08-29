@@ -18,7 +18,9 @@ namespace Crawler.Factories.ItemGenerators
         public Entity Generate()
         {
             Weapon weapon = (Weapon) random.Next(12) + 1;
-            return _factory.Get(weapon).AsEntity();
+            var component =_factory.Get(weapon);
+            component.Droppable = true;
+            return component.AsEntity();
         }
     }
 }

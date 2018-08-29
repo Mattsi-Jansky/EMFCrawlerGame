@@ -12,17 +12,17 @@ namespace Crawler.Factories
         private Dictionary<Archetype, Weapon> weaponsForArchetypes = new Dictionary<Archetype, Weapon>
         {
             {Archetype.Warlock, Weapon.GemStave},
-            {Archetype.HellKnight, Weapon.GreatSword},
+            {Archetype.HellKnight, Weapon.LongSword},
             {Archetype.Druid, Weapon.GemStave},
             {Archetype.HighMage, Weapon.GemStave},
             {Archetype.Mage, Weapon.ShortSword},
             {Archetype.Mindcrafter, Weapon.GemStave},
             {Archetype.Mystic, Weapon.GemStave},
-            {Archetype.Paladin, Weapon.GreatSword},
+            {Archetype.Paladin, Weapon.LongSword},
             {Archetype.Priest, Weapon.ShortSword},
             {Archetype.Ranger, Weapon.Longbow},
             {Archetype.Rogue, Weapon.ShortSword},
-            {Archetype.Warrior, Weapon.GreatSword},
+            {Archetype.Warrior, Weapon.LongSword},
             {Archetype.WarriorMage, Weapon.ShortSword},
         };
         
@@ -41,6 +41,7 @@ namespace Crawler.Factories
                 {Weapon.StoneStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Stone Stave", Graphic.Wand_plain)},
                 {Weapon.GemStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Gem Stave", Graphic.Wand_blue)},
                 {Weapon.SapphireStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Sapphire Stave", Graphic.Wand_red)},
+                {Weapon.DiamondStave, () => new WeaponComponent(new Dice(2,6), Attribute.Wis, Attribute.Wis, "Diamond Stave", Graphic.Wand_green)},
                 {Weapon.Claws, () => new WeaponComponent(new Dice(1,6), Attribute.Dex, null, "Claws", Graphic.CatBlack)},
                 {Weapon.Teeth, () => new WeaponComponent(new Dice(1,6), Attribute.Wis, Attribute.Str, "Teeth", Graphic.DemonDogRed)},
                 {Weapon.Tail, () => new WeaponComponent(new Dice(1,4), Attribute.Dex, null, "Tail", Graphic.ScorpionBlack)},

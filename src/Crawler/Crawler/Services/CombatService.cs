@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Crawler.Maps;
 using Crawler.Models;
@@ -55,6 +56,13 @@ namespace Crawler.Services
                 //todo add score to death message
                 entity.RecieveMessage("You have died!");
                 _map.Remove(entity, entity.GetPosition());
+                
+                var drops = new List<Entity>();
+                entity.GetDrops(ref drops);
+                foreach (var drop in drops)
+                {
+                    _map.Add(drop, entity.GetPosition());
+                }
             }
         }
 
