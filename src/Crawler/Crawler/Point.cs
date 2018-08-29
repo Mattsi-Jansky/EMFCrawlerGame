@@ -23,9 +23,24 @@ namespace Crawler
             return Math.Abs(X + Y);
         }
 
+        public Point North()
+        {
+            return new Point(X, Y - 1);
+        }
+
         public Point South()
         {
             return new Point(X, Y + 1);
+        }
+
+        public Point East()
+        {
+            return new Point(X + 1, Y);
+        }
+
+        public Point West()
+        {
+            return new Point(X - 1, Y);
         }
     }
 }

@@ -3,18 +3,23 @@ using Crawler.Commands;
 
 namespace Crawler.Queryables.Entities.Components.Controllers
 {
-    public class RandomMovementControllerComponent : ControllerComponent
+    public class RandomMovementAndAttackAdjacentEnemiesControllerComponent : ControllerComponent
     {
         private Random _random;
 
-        public RandomMovementControllerComponent(Random random, Guid id) : base(id)
+        public RandomMovementAndAttackAdjacentEnemiesControllerComponent(Random random, Guid id) : base(id)
         {
             this._random = random;
         }
 
         public override ICommand GetCommand()
         {
-            if (ShouldMove())
+            var opponentDirection = MobQueryService.GetNearbyOpponentDirection();
+            if (opponentDirection.HasValue)
+            {
+                return CommandFactory.Move(new Point(opponentDirection.Value.X, opponentDirection.Value.Y));
+            }
+            else if (ShouldMove())
             {
                 bool isVertical = _random.Next(2) == 0;
 

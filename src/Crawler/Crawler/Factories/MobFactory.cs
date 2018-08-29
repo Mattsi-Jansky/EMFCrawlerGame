@@ -16,7 +16,7 @@ namespace Crawler.Factories
             mob.Add(new GraphicComponent(model.Graphic));
             mob.Add(new PositionComponent());
             mob.Add(new NameComponent(model.Name));
-            mob.Add(new RandomMovementControllerComponent(new Random(), mob.Id));
+            mob.Add(new RandomMovementAndAttackAdjacentEnemiesControllerComponent(new Random(), mob.Id));
             mob.Add(new BlockingComponent());
             mob.Add(new CharacterComponent(model.Stats.str, model.Stats.dex, model.Stats.con, model.Stats.wis));
             mob.Add(weaponFactory.Get(model.Weapon));

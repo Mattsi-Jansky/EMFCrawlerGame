@@ -40,6 +40,7 @@ namespace Crawler.ObjectResolvers
             _container.RegisterType(typeof(InteractionService));
             _container.RegisterType(typeof(CombatService));
             _container.RegisterType(typeof(WeaponFactory));
+            _container.RegisterType(typeof(MobQueryService));
 
             _container.RegisterType(typeof(MoveCommand));
         }
