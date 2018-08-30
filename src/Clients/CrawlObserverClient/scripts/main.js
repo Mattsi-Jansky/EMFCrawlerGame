@@ -46,7 +46,7 @@ game.var.init = function() {
     game.var.tiles = [];
     game.var.framerateCounter = 0;
     game.var.timeStep = 1000 / 30;
-    game.var.address = "wss://localhost:44349/observe/";
+    game.var.address = "wss://18.188.162.122/observe/";
 };
 
 game.graphics.init = function() {

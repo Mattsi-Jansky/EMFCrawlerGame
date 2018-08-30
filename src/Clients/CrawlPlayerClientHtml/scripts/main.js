@@ -19,7 +19,7 @@ game.menu.register = $('#register');
 game.network = {};
 game.var = {};
 
-game.var.address = "https://localhost:44349/Player";
+game.var.address = "https://18.188.162.122/Player";
 
 game.network.post = function(path, body, callback) {
     $.ajax({
