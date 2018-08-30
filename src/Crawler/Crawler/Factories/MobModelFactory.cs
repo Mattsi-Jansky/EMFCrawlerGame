@@ -35,12 +35,15 @@ namespace Crawler.Factories
         private static readonly MobModel GiantBarbarianFemale = new MobModel("Giant", Graphic.GiantBarbarianFemale, new CharacterStats(12, 8, 12, 8), Weapon.ShortSword);
         private static readonly MobModel GiantMonk = new MobModel("Giant", Graphic.GiantMonk, new CharacterStats(12, 10, 11, 8), Weapon.Fisticuffs);
         private static readonly MobModel RedTroll = new MobModel("Troll", Graphic.RedTroll, new CharacterStats(12, 12, 12, 10), Weapon.LongSword);
-        private static readonly MobModel WaterElemental = new MobModel("Water Elemental", Graphic.ElementalWater, new CharacterStats(10, 13, 8, 13), Weapon.GemStave);
-        private static readonly MobModel IceElemental = new MobModel("Ice Elemental", Graphic.ElementalIce, new CharacterStats(10, 13, 8, 13), Weapon.GemStave);
-        private static readonly MobModel WaterColossus = new MobModel("Water Colossus", Graphic.WaterColossus, new CharacterStats(14, 12, 10, 13), Weapon.ColossalFist);
-        private static readonly MobModel IceColossus = new MobModel("Ice Colossus", Graphic.IceColossus, new CharacterStats(14, 9, 14, 13), Weapon.ColossalFist);
+        private static readonly MobModel WaterElemental = new MobModel("Water Elemental", Graphic.ElementalWater, new CharacterStats(10, 13, 8, 13), Weapon.ElementalBreath);
+        private static readonly MobModel IceElemental = new MobModel("Ice Elemental", Graphic.ElementalIce, new CharacterStats(10, 13, 8, 13), Weapon.ElementalBreath);
+        private static readonly MobModel WaterColossus = new MobModel("Water Colossus", Graphic.WaterColossus, new CharacterStats(13, 12, 10, 13), Weapon.ColossalFist);
+        private static readonly MobModel IceColossus = new MobModel("Ice Colossus", Graphic.IceColossus, new CharacterStats(13, 9, 14, 13), Weapon.ColossalFist);
         private static readonly MobModel IceSpectre = new MobModel("Ice Spectre", Graphic.IceSpectre, new CharacterStats(8, 14, 12, 11), Weapon.ElementalBreath);
-        private static readonly MobModel IceSkull = new MobModel("Ice Skull", Graphic.IceSkull, new CharacterStats(8, 15, 9, 15), Weapon.ElementalBreath);
+        private static readonly MobModel IceSkull = new MobModel("Ice Skull", Graphic.IceSkull, new CharacterStats(8, 15, 9, 14), Weapon.ElementalBreath);
+        private static readonly MobModel FireSkull = new MobModel("Fire Skull", Graphic.FlameSkull, new CharacterStats(8, 14, 9, 15), Weapon.ElementalBreath);
+        private static readonly MobModel FireElemental = new MobModel("Fire Elemental", Graphic.ElementalFire, new CharacterStats(10, 12, 8, 14), Weapon.ElementalBreath);
+        private static readonly MobModel FireColossus = new MobModel("Fire Colossus", Graphic.FireColossus, new CharacterStats(14, 10, 10, 13), Weapon.ColossalFist);
         
         public static readonly IList<IList<MobModel>> MobThemes = new List<IList<MobModel>>
         {
@@ -55,6 +58,11 @@ namespace Crawler.Factories
         public static readonly IList<MobModel> WaterThemedMobs = new List<MobModel>
         {
             WaterElemental, IceElemental, WaterColossus, IceColossus, IceSpectre, IceSkull
+        };
+
+        public static readonly IList<MobModel> FireThemedMobs = new List<MobModel>
+        {
+            FireSkull, FireElemental, FireColossus
         };
     }
 }
