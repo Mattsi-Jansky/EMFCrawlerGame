@@ -1,18 +1,24 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Crawler.Factories;
 using Crawler.Models;
 using Crawler.Queryables.Entities;
+using Crawler.Queryables.Tiles;
 
 namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
 {
-    public class WaterPoolRoomFeature : BaseRoomFeature
+    public class PoolRoomFeature : BaseRoomFeature
     {
-        private readonly WeaponFactory _weaponFactory; 
+        private readonly WeaponFactory _weaponFactory;
+        private Func<Tile> GetPoolTile;
+        private IList<MobModel> mobList;
         
-        public WaterPoolRoomFeature(Random random, WeaponFactory weaponFactory) : base(random)
+        public PoolRoomFeature(Random random, WeaponFactory weaponFactory, Func<Tile> getPoolTile, IList<MobModel> mobList) : base(random)
         {
             _weaponFactory = weaponFactory;
+            GetPoolTile = getPoolTile;
+            this.mobList = mobList;
         }
 
         public override void Apply(IMap map, Rectangle room, EntitiesCollection entitiesCollection)
