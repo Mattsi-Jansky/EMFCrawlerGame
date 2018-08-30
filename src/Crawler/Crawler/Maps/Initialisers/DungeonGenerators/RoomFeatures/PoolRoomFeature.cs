@@ -11,14 +11,14 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
     public class PoolRoomFeature : BaseRoomFeature
     {
         private readonly WeaponFactory _weaponFactory;
-        private Func<Tile> GetPoolTile;
-        private IList<MobModel> mobList;
+        private readonly Func<Tile> _getPoolTile;
+        private readonly IList<MobModel> _mobList;
         
         public PoolRoomFeature(Random random, WeaponFactory weaponFactory, Func<Tile> getPoolTile, IList<MobModel> mobList) : base(random)
         {
             _weaponFactory = weaponFactory;
-            GetPoolTile = getPoolTile;
-            this.mobList = mobList;
+            _getPoolTile = getPoolTile;
+            this._mobList = mobList;
         }
 
         public override void Apply(IMap map, Rectangle room, EntitiesCollection entitiesCollection)
@@ -41,13 +41,12 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
                     }
                     else
                     {
-                        map.Set(position, TileFactory.Water());
+                        map.Set(position, _getPoolTile());
                     }
                 }
             }
 
-            var mobList = MobModelFactory.WaterThemedMobs;
-            var model = mobList[Random.Next(mobList.Count)];
+            var model = _mobList[Random.Next(_mobList.Count)];
             var newMob = MobFactory.GenerateMob(model, _weaponFactory);
             entitiesCollection.Add(newMob.Id, newMob);
             AddEntityToMiddleOfRoom(newMob, room, map);
