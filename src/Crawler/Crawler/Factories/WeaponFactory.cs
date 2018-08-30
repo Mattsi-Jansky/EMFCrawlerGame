@@ -45,6 +45,8 @@ namespace Crawler.Factories
                 {Weapon.Claws, () => new WeaponComponent(new Dice(1,6), Attribute.Dex, null, "Claws", Graphic.CatBlack)},
                 {Weapon.Teeth, () => new WeaponComponent(new Dice(1,6), Attribute.Wis, Attribute.Str, "Teeth", Graphic.DemonDogRed)},
                 {Weapon.Tail, () => new WeaponComponent(new Dice(1,4), Attribute.Dex, null, "Tail", Graphic.ScorpionBlack)},
+                {Weapon.ColossalFist, () => new WeaponComponent(new Dice(2,6), Attribute.Str, Attribute.Str, "Colossal Fist", Graphic.Apple)},
+                {Weapon.ElementalBreath, () => new WeaponComponent(new Dice(2,6), Attribute.Dex, Attribute.Wis, "Elemental Breath", Graphic.Wand_red)},
             };
 
         public WeaponComponent Get(Weapon weapon)

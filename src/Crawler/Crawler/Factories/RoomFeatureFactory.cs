@@ -8,10 +8,12 @@ namespace Crawler.Factories
     {
         private Random _random;
         private static IList<IRoomFeature> _roomFeatures = null;
+        private WeaponFactory _weaponFactory;
 
         public RoomFeatureFactory(Random random)
         {
             _random = random;
+            _weaponFactory = new WeaponFactory();
             if(_roomFeatures == null) Initiate();
         }
 
@@ -25,8 +27,9 @@ namespace Crawler.Factories
             _roomFeatures = new List<IRoomFeature>();
             foreach (var theme in MobModelFactory.MobThemes)
             {
-                _roomFeatures.Add(new ThemedMobRoomFeature(theme, _random, new WeaponFactory()));
+                _roomFeatures.Add(new ThemedMobRoomFeature(theme, _random, _weaponFactory));
                 _roomFeatures.Add(new NothingFeature());
+                _roomFeatures.Add(new WaterPoolRoomFeature(_random, _weaponFactory));
             }
         }
     }

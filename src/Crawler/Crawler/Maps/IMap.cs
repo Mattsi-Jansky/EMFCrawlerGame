@@ -9,5 +9,6 @@ namespace Crawler.Maps
         void Add(Entity entity, Point point);
         void Remove(Entity entity, Point point);
         Tile Get(Point point);
+        void Set(Point point, Tile tile);
     }
 }

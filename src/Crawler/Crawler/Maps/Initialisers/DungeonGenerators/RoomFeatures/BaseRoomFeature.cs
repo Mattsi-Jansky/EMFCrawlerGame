@@ -26,6 +26,15 @@ namespace Crawler.Maps.Initialisers.DungeonGenerators.RoomFeatures
             else AddEntityRandomly(entity, room, map);
         }
 
+        public void AddEntityToMiddleOfRoom(Entity entity, Rectangle room, IMap map)
+        {
+            var point = new Point(room.X + room.Width / 2,
+                room.Y + room.Height / 2);
+            
+            map.Add(entity, point);
+            entity.SetPosition(point);
+        }
+
         public abstract void Apply(IMap map, Rectangle room, EntitiesCollection entitiesCollection);
     }
 }

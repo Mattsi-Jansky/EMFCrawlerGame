@@ -39,6 +39,11 @@ namespace Crawler.Factories
             return new Tile(floor);
         }
 
+        public static Tile Floor(Graphic graphic)
+        {
+            return new Tile(CreateFloor(graphic));
+        }
+
         private static Entity CreateFloor(Graphic graphic)
         {
             var floor = new Entity();

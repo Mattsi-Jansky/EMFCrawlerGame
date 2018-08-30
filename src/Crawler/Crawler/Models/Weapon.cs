@@ -17,6 +17,8 @@ namespace Crawler.Models
         DiamondStave,
         Claws,
         Teeth,
-        Tail
+        Tail,
+        ColossalFist,
+        ElementalBreath
     }
 }
