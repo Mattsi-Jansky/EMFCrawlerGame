@@ -27,6 +27,20 @@ namespace Crawler.Factories
             
             return new Tile(water);
         }
+
+        public static Tile Lava()
+        {
+            var lava = new Entity();
+            
+            lava.Add(new AnimatedGraphicComponent(
+                new Graphic[]
+                {
+                    Graphic.Lava,
+                    Graphic.LavaDupe
+                }));
+            
+            return new Tile(lava);
+        }
         
         public static Tile Floor()
         {
