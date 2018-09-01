@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Threading;
@@ -11,11 +12,11 @@ namespace Crawler.Web.WebSocketsControllers
 {
     public class ObserveGameWebSocketsController : WebSocketsController
     {
-        private readonly ConcurrentDictionary<Guid, Stopwatch> _timers;
+        private readonly IDictionary<Guid, Stopwatch> _timers;
 
         public ObserveGameWebSocketsController(RequestDelegate next) : base(next, "/observe/")
         {
-            _timers = new ConcurrentDictionary<Guid, Stopwatch>();
+            _timers = new Dictionary<Guid, Stopwatch>();
         }
 
         protected override void Add(Guid clientId)
