@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.WebSockets;
@@ -12,23 +11,21 @@ namespace Crawler.Web.WebSocketsControllers
 {
     public class ObserveGameWebSocketsController : WebSocketsController
     {
-        private readonly IDictionary<Guid, Stopwatch> _timers;
+        ThreadLocal<Stopwatch> _localStopwatch = new ThreadLocal<Stopwatch>(() => new Stopwatch());
 
         public ObserveGameWebSocketsController(RequestDelegate next) : base(next, "/observe/")
         {
-            _timers = new Dictionary<Guid, Stopwatch>();
+            _localStopwatch = new ThreadLocal<Stopwatch>();
         }
 
         protected override void Add(Guid clientId)
         {
-            var timer = new Stopwatch();
-            timer.Start();
-            _timers[clientId] = timer;
+            _localStopwatch.Value.Start();
         }
 
         protected override void Tick(Guid clientId, WebSocketReceiver receiver, WebSocket socket, CancellationToken cancellationToken)
         {
-            var timer = _timers[clientId];
+            var timer = _localStopwatch.Value;
             if (timer.ElapsedMilliseconds >= GameContainer.GameLoopTickTime)
             {
                 timer.Reset();
