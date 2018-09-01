@@ -15,7 +15,7 @@ namespace Crawler.Web.WebSocketsControllers
 
         public ObserveGameWebSocketsController(RequestDelegate next) : base(next, "/observe/")
         {
-            _localStopwatch = new ThreadLocal<Stopwatch>();
+            _localStopwatch = new ThreadLocal<Stopwatch>(() => new Stopwatch());
         }
 
         protected override void Add(Guid clientId)
